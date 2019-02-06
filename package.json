@@ -61,9 +61,9 @@
     "solium-plugin-zeppelin": "^0.0.2"
   },
   "dependencies": {
-    "openzeppelin-solidity": "git://github.com/OpenZeppelin/openzeppelin-solidity#06e265b38d3e9daeaa7b33f9035c700d6bc0c6a0",
-    "truffle": "^4.1.14",
-    "truffle-hdwallet-provider": "0.0.6"
+    "openzeppelin-solidity": "^2.1.2",
+    "truffle": "^5.0.3",
+    "truffle-hdwallet-provider": "^1.0.3"
   },
   "husky": {
     "hooks": {
