@@ -30,11 +30,8 @@ develop: start-ganache
 
 stop-develop: stop-ganache
 
-start-remixd:
-	@yarn run remixd
-
 open-remix-ide:
-	@xdg-open http://localhost:8080
+	@python -mwebbrowser http://localhost:8080
 
 remix:
 	@yarn run remix
