@@ -23,7 +23,6 @@
     "url": "https://gitlab.com/ConsenSys/mesh/boilerplates/solidity/boilerplate-solidity.git"
   },
   "keywords": [
-    "boilerplate",
     "solidity",
     "ethereum",
     "smart",
@@ -62,9 +61,9 @@
     "solium-plugin-zeppelin": "^0.0.2"
   },
   "dependencies": {
-    "openzeppelin-solidity": "^2.1.2",
-    "truffle": "^5.0.3",
-    "truffle-hdwallet-provider": "^1.0.3"
+    "openzeppelin-solidity": "git://github.com/OpenZeppelin/openzeppelin-solidity#77d569d8fafe7f39d44386e0083bda26968e534c",
+    "truffle": "^5.0.7",
+    "truffle-hdwallet-provider": "^1.0.5"
   },
   "husky": {
     "hooks": {
