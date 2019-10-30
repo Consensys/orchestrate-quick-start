@@ -13,7 +13,7 @@ contract Counter {
   /**
     * @dev increment counter of `value`
     */
-  function increment(uint value) public {
+  function incrementBonjour(uint value) public {
     counter += value;
     emit Incremented(msg.sender, value);
   }

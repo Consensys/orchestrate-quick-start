@@ -1,12 +1,12 @@
-const CoreStackSDK = require('core-stack-sdk');
+const Orchestrate = require('pegasys-orchestrate');
 
 const ropstenChainID = '3';
-const ropstenAccount = '';
-const ropstenCounter = '';
+const ropstenAccount = '0x007dc4cc8c18868b0e7bdf34a0b246645f50038f';
+const ropstenCounter = '0x22949b08ebf94f631f06039f1a0554d839ecc760';
 
 const rinkebyChainID = '4';
-const rinkebyAccount = '';
-const rinkebyCounter = '';
+const rinkebyAccount = '0xa80bb001e3b24b6f7455f07772e0a1433ae321d2';
+const rinkebyCounter = '0x5b85937efa526ec3e779c4ab6d7b0c6509be42a2';
 
 // Count of transactions to send
 const txCount = 20;
@@ -19,7 +19,7 @@ const produce = async broker => {
         chainId: i % 2 ? ropstenChainID : rinkebyChainID,
         call: {
           contract: 'Counter',
-          method: 'increment(uint256)',
+          method: 'incrementBonjour(uint256)',
           args: ['0x5'],
         },
         gas: 2000000,
@@ -57,8 +57,8 @@ const consume = async broker => {
 
 (async () => {
   try {
-    const CoreStack = new CoreStackSDK();
-    const broker = CoreStack.broker('localhost:9092');
+    const orch = new Orchestrate();
+    const broker = orch.broker('localhost:9092');
 
     consume(broker);
     produce(broker);

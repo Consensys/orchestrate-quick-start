@@ -1,4 +1,4 @@
-const CoreStackSDK = require('core-stack-sdk');
+const Orchestrate = require('pegasys-orchestrate');
 
 const produce = async broker => {
   try {
@@ -6,7 +6,7 @@ const produce = async broker => {
 
     try {
       const tx = await producer.send({
-        chainId: '4',
+        chainId: '3',
         call: {
           contract: 'Counter',
           method: 'constructor()',
@@ -47,8 +47,8 @@ const consume = async broker => {
 
 (async () => {
   try {
-    const CoreStack = new CoreStackSDK();
-    const broker = CoreStack.broker('localhost:9092');
+    const orch = new Orchestrate();
+    const broker = orch.broker('localhost:9092');
 
     consume(broker);
     produce(broker);
