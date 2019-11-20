@@ -8,7 +8,10 @@ const produce = async broker => {
       const tx = await producer.send({
         chainId: '3',
         call: {
-          contract: 'Counter',
+          contract: {
+            name: 'Counter',
+            tag: 'v0.1.0',
+          },
           method: 'constructor()',
         },
         gas: 2000000,

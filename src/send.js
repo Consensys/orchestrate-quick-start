@@ -1,12 +1,12 @@
 const Orchestrate = require('pegasys-orchestrate');
 
 const ropstenChainID = '3';
-const ropstenAccount = '0x007dc4cc8c18868b0e7bdf34a0b246645f50038f';
-const ropstenCounter = '0x22949b08ebf94f631f06039f1a0554d839ecc760';
+const ropstenAccount = '';
+const ropstenCounter = '';
 
 const rinkebyChainID = '4';
-const rinkebyAccount = '0xa80bb001e3b24b6f7455f07772e0a1433ae321d2';
-const rinkebyCounter = '0x5b85937efa526ec3e779c4ab6d7b0c6509be42a2';
+const rinkebyAccount = '';
+const rinkebyCounter = '';
 
 // Count of transactions to send
 const txCount = 20;
@@ -18,8 +18,11 @@ const produce = async broker => {
       const tx = await producer.send({
         chainId: i % 2 ? ropstenChainID : rinkebyChainID,
         call: {
-          contract: 'Counter',
-          method: 'incrementBonjour(uint256)',
+          contract: {
+            name: 'Counter',
+            tag: 'v0.1.0',
+          },
+          method: 'increment(uint256)',
           args: ['0x5'],
         },
         gas: 2000000,
