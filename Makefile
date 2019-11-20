@@ -1,52 +1,44 @@
-# Installation commands
-.PHONY: yarn docker-start docker-stop init develop
+GOFILES := $(shell find . -name '*.go' | egrep -v "^\./\.go" | grep -v _test.go)
+PACKAGES ?= $(shell go list ./... | go list ./... | grep -Fv -e e2e -e examples )
+CMD_RUN = tx-crafter tx-nonce tx-signer tx-sender tx-listener tx-decoder contract-registry envelope-store
+CMD_MIGRATE = contract-registry envelope-store
 
-# Commands to use remix
-.PHONY: remix
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	OPEN = xdg-open
+endif
+ifeq ($(UNAME_S),Darwin)
+	OPEN = open
+endif
 
-# Test commands
-.PHONY: test coverage
+.PHONY: all
 
-# Linting commands
-.PHONY: test-lint lint
+run-e2e:
+	@docker-compose up e2e
 
-# Executables
-NODE_MODULES=./node_modules
-BIN=$(NODE_MODULES)/.bin
-TRUFFLE=$(BIN)/truffle
+# Help
+help: ## Display this help screen
+	@grep -h -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-yarn:
-	@yarn install
+# Create kafka topics
+topics:
+	@bash scripts/kafka/initTopics.sh
 
-start-ganache:
-	docker run -p 7545:8545 --name ganache-cli --rm -d trufflesuite/ganache-cli:latest -d -e 1000 -g 0xfffffffffff
+orchestrate:
+	@docker-compose up -d $(CMD_RUN)
 
-stop-ganache:
-	docker stop ganache-cli
+stop-orchestrate:
+	@docker-compose stop $(CMD_RUN)
 
-init: yarn start-ganache
+down-orchestrate:
+	@docker-compose down --volumes --timeout 0
 
-develop: start-ganache
+deps:
+	@docker-compose -f scripts/deps/docker-compose.yml up -d
 
-stop-develop: stop-ganache
+down-deps:
+	@docker-compose -f scripts/deps/docker-compose.yml down --volumes --timeout 0
 
-open-remix-ide:
-	@python -mwebbrowser http://localhost:8080
+up: deps orchestrate
 
-remix:
-	@yarn run remix
-
-test:
-	@$(TRUFFLE) test --network development
-
-run-coverage:
-	@yarn run coverage
-
-coverage: run-coverage
-	@python -mwebbrowser coverage/index.html
-
-test-lint:
-	@yarn run lint:all
-
-lint:
-	@yarn run lint:all:fix
+down: down-orchestrate down-deps

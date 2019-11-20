@@ -1,0 +1,180 @@
+version: '3.7'
+
+x-default-variables: &default-variables
+  ENVELOPE_STORE_URL: ${ENVELOPE_STORE_URL-envelope-store:8080}
+  CONTRACT_REGISTRY_URL: ${CONTRACT_REGISTRY_URL-contract-registry:8080}
+  KAFKA_URL: ${KAFKA_URL-kafka:29092}
+  ETH_CLIENT_URL: ${ETH_CLIENT_URL-http://geth:8545}
+  ETH_CLIENT_RETRY_MAX_ELAPSED_TIME: 5s
+  LOG_LEVEL: ${LOG_LEVEL-info}
+  LOG_FORMAT: ${LOG_FORMAT-json}
+  JAEGER_AGENT_HOST: ${JAEGER_AGENT_HOST-jaeger}
+  JAEGER_AGENT_PORT: ${JAEGER_AGENT_PORT-6831}
+  NONCE_MANAGER_TYPE: ${NONCE_MANAGER_TYPE-}
+  REDIS_URL: ${REDIS_URL-redis:6379}
+  VAULT_ADDR: ${VAULT_ADDR-http://vault:8200}
+  FAUCET_CREDITOR_ADDRESS: ${FAUCET_CREDITOR_ADDRESS-}
+  FAUCET_CREDIT_AMOUNT: ${FAUCET_CREDIT_AMOUNT-}
+  DISABLE_EXTERNAL_TX: 1
+  ABI: ${ABI-}
+
+x-container-common: &container-common
+  restart: ${CONTAINER_RESTART-on-failure}
+  image: ${DOCKER_REGISTRY}:${ORCHESTRATE_VERSION-latest}
+  networks:
+    - orchestrate
+
+x-contract-registry-common: &contract-registry-common
+  CONTRACT_REGISTRY_TYPE: ${CONTRACT_REGISTRY_TYPE-}
+  DB_HOST: postgres-contract-registry
+
+x-envelope-store-common: &envelope-store-common
+  ENVELOPE_STORE_TYPE: ${ENVELOPE_STORE_TYPE-}
+  DB_HOST: postgres-envelope-store
+
+services:
+  contract-registry-migration-init:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      <<: *contract-registry-common
+    restart: "no"
+    command: contract-registry migrate init
+
+  contract-registry-migration:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      <<: *contract-registry-common
+    restart: "no"
+    depends_on:
+      - contract-registry-migration-init
+    command: contract-registry migrate
+
+  contract-registry:
+    <<: *container-common
+    ports:
+      - 8080:8080
+    environment:
+      <<: *default-variables
+      <<: *contract-registry-common
+    depends_on:
+      - contract-registry-migration
+    command: contract-registry run
+
+  envelope-store-migration-init:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      <<: *envelope-store-common
+    restart: "no"
+    command: envelope-store migrate init
+
+  envelope-store-migration:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      <<: *envelope-store-common
+    restart: "no"
+    depends_on:
+      - envelope-store-migration-init
+    command: envelope-store migrate
+
+  envelope-store:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      <<: *envelope-store-common
+    depends_on:
+      - envelope-store-migration
+    command: envelope-store run
+
+  tx-crafter:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      JAEGER_SERVICE_NAME: TX-CRAFTER
+    depends_on:
+      - contract-registry
+    command: tx-crafter run
+
+  tx-nonce:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      JAEGER_SERVICE_NAME: TX-NONCE
+    command: tx-nonce run
+
+  tx-signer-init:
+    <<: *container-common
+    image: alpine:3.10
+    environment:
+      <<: *default-variables
+    restart: "no"
+    working_dir: /scripts
+    volumes:
+      - ./scripts/hashicorp:/scripts
+      - vault-token:/vault/token
+    entrypoint: /bin/sh
+    command: ./init.sh
+
+  tx-signer:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      JAEGER_SERVICE_NAME: TX-SIGNER
+      SECRET_PKEY: ${SECRET_PKEY-}
+      SECRET_STORE: in-memory
+    volumes:
+      - vault-token:/vault/token:ro
+    depends_on:
+      - tx-signer-init
+    command: tx-signer run
+
+  tx-sender:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      JAEGER_SERVICE_NAME: TX-SENDER
+    command: tx-sender run
+
+  tx-listener:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      LISTENER_START_DEFAULT: latest
+      JAEGER_SERVICE_NAME: TX-LISTENER
+    depends_on:
+      - envelope-store
+    command: tx-listener run
+
+  tx-decoder:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      JAEGER_SERVICE_NAME: TX-DECODER
+    depends_on:
+      - contract-registry
+    command: tx-decoder run
+
+  e2e:
+    <<: *container-common
+    image: ${DOCKER_REGISTRY}/e2e:${E2E_VERSION-latest}
+    environment:
+      <<: *default-variables
+      CUCUMBER_OUTPUTPATH: "/report/output/report.json"
+      CUCUMBER_PATHS: "/features"
+      CUCUMBER_FORMAT: "cucumber"
+      CUCUMBER_ALIAS: "chain.primary:888"
+      CUCUMBER_TAGS: "@public-tx,@wallet"
+    restart: "no"
+    command: e2e run
+
+volumes:
+  vault-token:
+    driver: local
+
+networks:
+  orchestrate:
+    external:
+      name: deps_orchestrate

@@ -1,5 +1,4 @@
 .idea/
-*.env
 
 # Dependency directory
 node_modules
