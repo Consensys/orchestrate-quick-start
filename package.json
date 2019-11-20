@@ -69,12 +69,6 @@
     "truffle": "^5.0.7",
     "truffle-hdwallet-provider": "^1.0.5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "truffle test"
-    }
-  },
   "lint-staged": {
     "*.js": [
       "eslint ./test ./migrations --fix",
