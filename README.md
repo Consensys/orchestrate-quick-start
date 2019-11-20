@@ -9,98 +9,98 @@ During this quickstart you will
 3. Manipulate Wallet-Generator CLI
 4. Manipulate Orchestrate SDK
 
-# Requirements
+## Requirements
 
 - Have `docker` and `docker-compose` installed
-  
-# Demo
+- Have `yarn` installed
 
-## Start Orchestrate
+## Demo
 
-### Start dependencies
+### Start Orchestrate
+
+1. Start dependencies
+
+Start dependencies
 
 ```
 make deps
 ``` 
 
-### Start Orchestrate
+2. Start Orchestrate
+
+First update values in `.env`
+
+Start orchestrate microservices by running
 
 ```
 make orchestrate
 ```
 
-If running Orchestrate you will need to first login on GitLab registry in order to pull Orchestrate docker images
+*Note*: If running Orchestrate for the 1st you will first need to login on Orchestrate Docker registry.
 
 ```
 docker login -u <username> -p <gitlab-ssh-token> registry.gitlab.com/consensys/client/fr/core-stack/orchestrate
 ```
 
-### Run e2e module
+3. Run e2e module
+
+Run end-to-end test module to make sure Orchestrate is properly running
 
 ```
 make run-e2e
 ```
 
-## Install yarn project
+### Manipulate Orchestrate Contract-Registry CLI
 
-In order to
-
-```
-yarn install
-```
-
-## Manipulate Contract-Registry CLI
-
-### Get catalog of registered contracts
+1. Get catalog of contracts
 
 ```
 yarn contract-registry get-catalog -e localhost:8080
 ```
 
-### Compile demo contract
-
+2. Compile contract using Truffle
 
 ```
 yarn truffle compile
 ```
 
-### Register contract
+3. Register contract artifacts
 
 ```
 yarn contract-registry add-contract -e localhost:8080 -f build/contracts/Counter.json -n Counter -t v0.1.0
 ```
 
-## Manipulate Wallet generator CLI
+### Manipulate Orchestrate Wallet generator CLI
 
-Generate wallet on Ropsten
+1. Generate wallet and get it prefunded on Ropsten
 
 ```
 yarn wallet generate-wallet -e localhost:9092 -c 3 -v 10000000000000000
 ```
 
-Generate wallet on Rinkeby
+2. Generate wallet and get it prefunded Rinkeby
 
 ```
 yarn wallet generate-wallet -e localhost:9092 -c 4 -v 10000000000000000
 ```
 
-## Manipulate SDK
+### Manipulate SDK
 
-### Deploy contracts on Ropsten and Rinkeby
+1. Deploy contracts on Ropsten and Rinkeby
 
-Have a look to and possibly update chain ID in `src/deploy.js`.
+Have a look to the script and possibly update chain ID in `src/deploy.js`.
 
-Then you can run 
+Then you can run it by entering command
 
 ```
 yarn deploy
 ```
 
-### Send a batch of transaction
+2. Send a batch of transaction
 
-Have a look to and possibly update chain ID in `src/send.js`
+Have a look to the script `src/send.js`
 
-Then you can run 
+Then you can run it by entering command
 
 ```
 yarn send
