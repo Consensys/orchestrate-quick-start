@@ -39,7 +39,7 @@ make orchestrate
 *Note*: If running Orchestrate for the 1st you will first need to login on Orchestrate Docker registry.
 
 ```
-docker login -u <username> -p <gitlab-ssh-token> registry.gitlab.com/consensys/client/fr/core-stack/orchestrate
+docker login -u <username> -p <password> consensys-docker-pegasys-orchestrate.bintray.io
 ```
 
 3. Run e2e module
