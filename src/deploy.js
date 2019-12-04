@@ -14,8 +14,9 @@ const produce = async broker => {
           },
           method: 'constructor()',
         },
+        // TODO: replace with <FAUCET_ADDRESS> with the same address set in .env
+        from: '<FAUCET_ADDRESS>',
         gas: 2000000,
-        from: '0x7e654d251da770a068413677967f6d3ea2fea9e4',
       });
       console.log('Message sent: ', tx);
     } catch (e) {
