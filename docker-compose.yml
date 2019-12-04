@@ -157,19 +157,6 @@ services:
       - contract-registry
     command: tx-decoder run
 
-  e2e:
-    <<: *container-common
-    image: ${DOCKER_REGISTRY}/e2e:${E2E_VERSION-latest}
-    environment:
-      <<: *default-variables
-      CUCUMBER_OUTPUTPATH: "/report/output/report.json"
-      CUCUMBER_PATHS: "/features"
-      CUCUMBER_FORMAT: "cucumber"
-      CUCUMBER_ALIAS: "chain.primary:888"
-      CUCUMBER_TAGS: "@public-tx,@wallet"
-    restart: "no"
-    command: e2e run
-
 volumes:
   vault-token:
     driver: local
