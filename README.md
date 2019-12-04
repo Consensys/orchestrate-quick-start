@@ -88,9 +88,12 @@ yarn wallet generate-wallet -e localhost:9092 -c 4 -v 10000000000000000
 
 1. Deploy contracts on Ropsten and Rinkeby
 
-Have a look to the script and possibly update chain ID in `src/deploy.js`.
+Have a look to script `src/deploy.js`
 
-Then you can run it by entering command
+- Set `<FAUCET_ADDRESS>` placeholder
+- Set `chainId` to `3` or `4` to deploy either on Ropsten or Rinkeby 
+
+Then you can run script by entering command
 
 ```
 yarn deploy
@@ -99,6 +102,8 @@ yarn deploy
 2. Send a batch of transaction
 
 Have a look to the script `src/send.js`
+
+- Set variables indicated with placeholder 
 
 Then you can run it by entering command
 

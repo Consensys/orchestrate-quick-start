@@ -1,12 +1,16 @@
 const Orchestrate = require('pegasys-orchestrate');
 
 const ropstenChainID = '3';
-const ropstenAccount = '';
-const ropstenCounter = '';
+// TODO: set with an Orchestrate account pre-funded with Ether on Ropsten
+const ropstenAccount = '<ROPSTEN_ACCOUNT_ADDRESS>';
+// TODO: set with an address of Counter Smart Contract instance on Ropsten
+const ropstenCounter = '<ROPSTEN_COUNTER_ADDRESS>';
 
 const rinkebyChainID = '4';
-const rinkebyAccount = '';
-const rinkebyCounter = '';
+// TODO: set with an Orchestrate account pre-funded with Ether on Rinkeby
+const rinkebyAccount = '<RINKEBY_ACCOUNT_ADDRESS>';
+// TODO: set with an address of Counter Smart Contract instance on Rinkeby
+const rinkebyCounter = '<RINKEBY_COUNTER_ADDRESS>';
 
 // Count of transactions to send
 const txCount = 20;
