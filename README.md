@@ -12,7 +12,7 @@ During this quickstart you will
 ## Requirements
 
 - Have `docker` and `docker-compose` installed
-- Have `yarn` installed
+- Have `yarn` installed (we recommend using a version of `node>v10`)
 
 ## Demo
 
@@ -26,9 +26,17 @@ Start dependencies
 make deps
 ``` 
 
-2. Start Orchestrate
+Then configure Kafka topics
 
-First update values in `.env`
+```
+make topics
+```
+
+2. Update Orchestrate configuration in `.env`
+
+Follow the TODOs documented in `.env`
+
+3. Start Orchestrate
 
 Start orchestrate microservices by running
 
@@ -40,14 +48,6 @@ make orchestrate
 
 ```
 docker login -u <username> -p <password> consensys-docker-pegasys-orchestrate.bintray.io
-```
-
-3. Run e2e module
-
-Run end-to-end test module to make sure Orchestrate is properly running
-
-```
-make run-e2e
 ```
 
 ### Manipulate Orchestrate Contract-Registry CLI
