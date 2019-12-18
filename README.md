@@ -6,7 +6,7 @@ During this quickstart you will
 
 1. Start PegaSys Orchestrate locally using `docker-compose`
 2. Manipulate Contract-Registry CLI
-3. Manipulate Wallet-Generator CLI
+3. Manipulate Account-Generator CLI
 4. Manipulate Orchestrate SDK
 
 ## Requirements
@@ -70,7 +70,7 @@ yarn truffle compile
 yarn contract-registry add-contract -e localhost:8080 -f build/contracts/Counter.json -n Counter -t v0.1.0
 ```
 
-### Manipulate Orchestrate Wallet generator CLI
+### Manipulate Orchestrate Account generator CLI
 
 1. Generate wallet and get it prefunded on Ropsten
 
