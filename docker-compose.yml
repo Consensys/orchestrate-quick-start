@@ -20,7 +20,7 @@ x-default-variables: &default-variables
 
 x-container-common: &container-common
   restart: ${CONTAINER_RESTART-on-failure}
-  image: ${DOCKER_REGISTRY}/orchestrate:${ORCHESTRATE_VERSION-latest}
+  image: ${DOCKER_REGISTRY}:${ORCHESTRATE_VERSION-latest}
   networks:
     - orchestrate
 
