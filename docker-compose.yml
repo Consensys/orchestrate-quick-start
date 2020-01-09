@@ -105,30 +105,17 @@ services:
       JAEGER_SERVICE_NAME: TX-NONCE
     command: tx-nonce run
 
-  tx-signer-init:
-    <<: *container-common
-    image: alpine:3.10
-    environment:
-      <<: *default-variables
-    restart: "no"
-    working_dir: /scripts
-    volumes:
-      - ./scripts/hashicorp:/scripts
-      - vault-token:/vault/token
-    entrypoint: /bin/sh
-    command: ./init.sh
-
   tx-signer:
     <<: *container-common
     environment:
       <<: *default-variables
       JAEGER_SERVICE_NAME: TX-SIGNER
+      TESSERA_URL: ${TESSERA_URL}
       SECRET_PKEY: ${SECRET_PKEY-}
       SECRET_STORE: in-memory
     volumes:
       - vault-token:/vault/token:ro
-    depends_on:
-      - tx-signer-init
+      - ./build/bin/orchestrate:/bin/main
     command: tx-signer run
 
   tx-sender:
@@ -159,7 +146,8 @@ services:
 
 volumes:
   vault-token:
-    driver: local
+    external:
+      name: deps_vault-token
 
 networks:
   orchestrate:
