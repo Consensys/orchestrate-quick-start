@@ -61,12 +61,15 @@ services:
     tty: true
     cap_add:
       - IPC_LOCK
+    ports:
+      - 9999:8200
     volumes:
       - ./config/hashicorp/config.hcl:/vault/config.hcl:ro
     entrypoint: vault server -config=/vault
 
   vault-init:
     <<: *container-common
+    # image: library/vault:1.1.1
     build: ./config/hashicorp
     environment:
       VAULT_ADDR: ${VAULT_ADDR-http://vault:8200}
@@ -75,7 +78,9 @@ services:
       - vault
     volumes:
       - vault-token:/vault/token
-      
+      - ./config/hashicorp/init.sh:/init.sh
+    command: sh /init.sh
+
   jaeger:
     <<: *container-common
     image: jaegertracing/all-in-one:1.8

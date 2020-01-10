@@ -8,6 +8,7 @@ During this quickstart you will
 2. Manipulate Contract-Registry CLI
 3. Manipulate Account-Generator CLI
 4. Manipulate Orchestrate SDK
+5. Inspect Ethereum Accounts stored in Hashicorp Vault
 
 ## Requirements
 
@@ -109,4 +110,12 @@ Then you can run it by entering command
 
 ```
 yarn send
+```
+
+### Inspect Accounts stored in Hashicorp Vault
+
+You can inspect Ethereum accounts that have been stored in Hashicorp Vault by running
+
+```
+make hashicorp-list-accounts
 ```

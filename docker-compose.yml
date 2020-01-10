@@ -112,7 +112,8 @@ services:
       JAEGER_SERVICE_NAME: TX-SIGNER
       TESSERA_URL: ${TESSERA_URL}
       SECRET_PKEY: ${SECRET_PKEY-}
-      SECRET_STORE: in-memory
+      SECRET_STORE: hashicorp
+      LOG_LEVEL: debug
     volumes:
       - vault-token:/vault/token:ro
       - ./build/bin/orchestrate:/bin/main

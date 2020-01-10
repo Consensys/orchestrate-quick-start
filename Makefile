@@ -1,3 +1,5 @@
+VAULT_TOKEN := 
+
 .PHONY: all
 
 run-e2e:
@@ -29,3 +31,9 @@ down-deps:
 up: deps orchestrate
 
 down: down-orchestrate down-deps
+
+hashicorp-accounts:
+	@bash scripts/deps/config/hashicorp/vault.sh kv list secret/default
+
+hashicorp-token-lookup:
+	@bash scripts/deps/config/hashicorp/vault.sh token lookup

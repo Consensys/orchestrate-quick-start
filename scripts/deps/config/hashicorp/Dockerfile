@@ -2,10 +2,10 @@ FROM alpine:3.10
 
 RUN apk add jq curl
 
-RUN mkdir /scripts
+# RUN mkdir /scripts
 
-WORKDIR /scripts
+# WORKDIR /scripts
 
-COPY ./init.sh .
+# COPY ./init.sh .
 
-CMD ./init.sh
+# CMD ./init.sh
