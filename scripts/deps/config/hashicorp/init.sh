@@ -2,7 +2,7 @@
 curl --request POST --data '{"secret_shares": 1, "secret_threshold": 1}' ${VAULT_ADDR}/v1/sys/init > init.json
 
 # Retrieve root token and unseal key
-root_token=$(cat init.json | jq .root_token | tr -d '"')
+token=$(cat init.json | jq .root_token | tr -d '"')
 unseal_key=$(cat init.json | jq .keys | jq .[0])
 rm init.json
 
@@ -17,4 +17,4 @@ curl --header "X-Vault-Token: ${token}" --request POST \
 # Store root token in a file so it can be shared with other services throug volume
 mkdir -p /vault/token
 touch /vault/token/.vault-token
-echo $root_token > /vault/token/.vault-token
+echo $token > /vault/token/.vault-token
