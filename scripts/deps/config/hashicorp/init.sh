@@ -15,17 +15,7 @@ curl --header "X-Vault-Token: ${token}" --request POST \
 
 rm init.json
 
-# # Create a token
-# curl --header "X-Vault-Token: ${ROOT_TOKEN}" \
-#      --request POST \
-#      --data '{"ttl": "718h", "renewable": true, "no_parent": true, "policies": ["root"]}' \
-#     ${VAULT_ADDR}/v1/auth/token/create > token.json
-
-# token=$(cat token.json | jq .auth | jq .client_token | tr -d '"')
-
 # Store root Token in a file (/vault/token should be shared volume with the tx-signer)
 mkdir -p /vault/token
 touch /vault/token/.vault-token
 echo $token > /vault/token/.vault-token
-
-# rm token.json
