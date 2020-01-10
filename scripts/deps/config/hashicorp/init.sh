@@ -17,4 +17,4 @@ curl --header "X-Vault-Token: ${token}" --request POST \
 # Store root token in a file so it can be shared with other services throug volume
 mkdir -p /vault/token
 touch /vault/token/.vault-token
-echo $token > /vault/token/.vault-token
+echo $root_token > /vault/token/.vault-token
