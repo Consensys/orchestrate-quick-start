@@ -37,3 +37,6 @@ hashicorp-accounts:
 
 hashicorp-token-lookup:
 	@bash scripts/deps/config/hashicorp/vault.sh token lookup
+
+hashicorp-vault:
+	@bash scripts/deps/config/hashicorp/vault.sh $(COMMAND)

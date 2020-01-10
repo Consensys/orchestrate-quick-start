@@ -114,8 +114,47 @@ yarn send
 
 ### Inspect Accounts stored in Hashicorp Vault
 
-You can inspect Ethereum accounts that have been stored in Hashicorp Vault by running
+1. You can inspect Ethereum accounts that have been stored in Hashicorp Vault by running
+
+```bash
+make hashicorp-list-accounts
+```
+
+That will return list of addresses
 
 ```
-make hashicorp-list-accounts
+Keys
+----
+0x05a34cE77Ea9fc49E4E5C7c4bC0E9aB2447AB6f0
+0x67689FDDecD92938932B21D566D089cc45A62769
+0x7E654d251Da770A068413677967F6d3Ea2FeA9E4
+```
+
+2. You can run any hashicorp Vault CLI command (c.f. https://www.vaultproject.io/docs/commands/) by running
+
+```bash
+make hashicorp-vault COMMAND="<command>"
+```
+
+For example
+
+```bash
+make hashicorp-vault COMMAND="token lookup"
+Key                 Value
+---                 -----
+accessor            ZxDozUcdrwEFENpialO3AvWi
+creation_time       1578672722
+creation_ttl        0s
+display_name        root
+entity_id           n/a
+expire_time         <nil>
+explicit_max_ttl    0s
+id                  s.LjlIldnulzUvUgZpVnrPy6Qb
+meta                <nil>
+num_uses            0
+orphan              true
+path                auth/token/root
+policies            [root]
+ttl                 0s
+type                service
 ```
