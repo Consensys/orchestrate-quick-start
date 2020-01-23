@@ -117,7 +117,7 @@ yarn send
 1. You can inspect Ethereum accounts that have been stored in Hashicorp Vault by running
 
 ```bash
-make hashicorp-list-accounts
+make hashicorp-accounts
 ```
 
 That will return list of addresses
