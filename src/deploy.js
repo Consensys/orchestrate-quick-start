@@ -1,12 +1,11 @@
 const Orchestrate = require('pegasys-orchestrate');
 
 const produce = async broker => {
-  try {
-    const producer = await broker.producer();
-
+  const producer = await broker.producer();
+  for (var i = 0; i < 2; i++) {
     try {
       const tx = await producer.send({
-        chainId: '3',
+        chainId: i % 2 ? '3' : '4',
         call: {
           contract: {
             name: 'Counter',
@@ -15,18 +14,15 @@ const produce = async broker => {
           method: 'constructor()',
         },
         // TODO: replace with <FAUCET_ADDRESS> with the same address set in .env
-        from: '<FAUCET_ADDRESS>',
+        from: '<FAUCET_ADDRESS>:q',
         gas: 2000000,
       });
       console.log('Message sent: ', tx);
     } catch (e) {
       console.error(e);
     }
-  } catch (e) {
-    console.error(e);
   }
 };
-
 const consume = async broker => {
   try {
     const consumer = await broker.consumer();
