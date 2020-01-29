@@ -56,7 +56,7 @@ docker login -u <username> -p <password> consensys-docker-pegasys-orchestrate.bi
 1. Get catalog of contracts
 
 ```
-yarn contract-registry get-catalog -e localhost:8080
+yarn contracts-catalog
 ```
 
 2. Compile contract using Truffle
@@ -68,7 +68,7 @@ yarn truffle compile
 3. Register contract artifacts
 
 ```
-yarn contract-registry add-contract -e localhost:8080 -f build/contracts/Counter.json -n Counter -t v0.1.0
+yarn contracts-add -f build/contracts/Counter.json -n Counter -t v0.1.0
 ```
 
 ### Manipulate Orchestrate Account generator CLI
@@ -76,13 +76,13 @@ yarn contract-registry add-contract -e localhost:8080 -f build/contracts/Counter
 1. Generate wallet and get it prefunded on Ropsten
 
 ```
-yarn wallet generate-wallet -e localhost:9092 -c 3 -v 10000000000000000
+yarn accounts-generate -c 3 -v 10000000000000000
 ```
 
 2. Generate wallet and get it prefunded Rinkeby
 
 ```
-yarn wallet generate-wallet -e localhost:9092 -c 4 -v 10000000000000000
+yarn accounts-generate -c 4 -v 10000000000000000
 ```
 
 ### Manipulate SDK

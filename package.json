@@ -19,7 +19,10 @@
     "version": "scripts/version.js",
     "remix": "python -mwebbrowser http://localhost:8080 && ./node_modules/remix-ide/bin/remix-ide",
     "deploy": "node src/deploy.js",
-    "send": "node src/send.js"
+    "send": "node src/send.js",
+    "contracts-catalog": "contract-registry get-catalog -e localhost:8080",
+    "contracts-add": "contract-registry add-contract -e localhost:8080",
+    "accounts-generate":"wallet generate-wallet -e localhost:9092"
   },
   "repository": {
     "type": "git",
