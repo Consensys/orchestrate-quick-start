@@ -1,13 +1,18 @@
-.idea/
+# IDE & OS specific
+.DS_Store
+.idea
 
-# Dependency directory
+# Logs
+logs
+*.log
+
+# Dependencies
 node_modules
-package-lock.json
+.env
+yarn.lock
 
-# Generated files
+# Contracts build
 build
+
+# Compiled JS
 dist
-coverage
-coverage.json
-coverageEnv
-allFiredEvents
