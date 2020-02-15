@@ -1,84 +1,71 @@
 {
-  "name": "boilerplate-solidity",
-  "version": "0.1.0-dev",
-  "description": "Solidity Smart-Contract-Boilerplate",
-  "files": [
-    "contracts",
-    "tests"
-  ],
+  "name": "pegasys-orchestrate-quick-start",
+  "version": "2.0.0",
+  "description": "PegaSys Orchestrate Quick start",
   "scripts": {
-    "coverage": "solidity-coverage",
-    "lint": "eslint ./migrations ./test ",
-    "lint:fix": "eslint ./test ./migrations --fix",
-    "lint:sol": "solium -d .",
-    "lint:sol:fix": "solium -d . --fix",
-    "lint:all": "npm run lint && npm run lint:sol",
-    "lint:all:fix": "npm run lint:fix && npm run lint:sol:fix",
-    "console": "truffle console",
-    "truffle": "truffle",
-    "version": "scripts/version.js",
-    "remix": "python -mwebbrowser http://localhost:8080 && ./node_modules/remix-ide/bin/remix-ide",
-    "deploy": "node src/deploy.js",
-    "send": "node src/send.js",
-    "contracts-catalog": "contract-registry get-catalog -e localhost:8080",
-    "contracts-add": "contract-registry add-contract -e localhost:8080",
-    "accounts-generate":"wallet generate-wallet -e localhost:9092"
+    "lint": "tslint -p . -c tslint.json",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write 'src/**/*.{ts,js,json}'",
+    "check-formatting": "prettier --list-different 'src/**/*.{ts,js,json}'",
+    "clean": "rimraf ./dist ./build",
+    "compile": "truffle compile",
+    "register-smart-contract": "orchestrate contracts register -e localhost:8020 -n Counter -f build/contracts/Counter.json -t v0.1.0",
+    "details-smart-contract": "orchestrate contracts contract -e localhost:8020 -n Counter -t v0.1.0",
+    "get-catalog": "orchestrate contracts catalog --endpoint localhost:8020",
+    "generate-account": "orchestrate accounts generate --endpoint localhost:9092",
+    "consume": "ts-node src/consume",
+    "deploy": "ts-node src/deploy-contract",
+    "send-tx": "ts-node src/send-tx",
+    "orchestrate": "orchestrate",
+    "orch-help": "orchestrate help"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/ConsenSys/mesh/boilerplates/solidity/boilerplate-solidity.git"
+    "url": "https://gitlab.com/ConsenSys/client/fr/core-stack/quick-start.git"
   },
   "keywords": [
-    "solidity",
-    "ethereum",
-    "smart",
-    "contracts",
-    "security"
+    "Blockchain",
+    "Ethereum",
+    "Pegasys",
+    "Orchestrate",
+    "Transaction"
   ],
-  "author": "Nicolas Maurice <nicolas.maurice@consensys.net>",
-  "license": "MIT",
+  "author": "ConsenSys PegaSys Engineering",
+  "contributors": [
+    "Dario Anongba Varela <dario.varela@consensys.net>",
+    "Nicolas Maurice <nicolas.maurice@consensys.net>"
+  ],
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://gitlab.com/ConsenSys/mesh/boilerplates/solidity/boilerplate-solidity/issues"
+    "url": "https://gitlab.com/ConsenSys/client/fr/core-stack/quick-start/issues"
   },
-  "homepage": "https://gitlab.com/ConsenSys/mesh/boilerplates/solidity/boilerplate-solidity",
+  "homepage": "https://gitlab.com/ConsenSys/client/fr/core-stack/quick-start",
   "devDependencies": {
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-2": "^6.18.0",
-    "babel-preset-stage-3": "^6.17.0",
-    "babel-register": "~6.23.0",
-    "chai": "^4.0.2",
-    "chai-as-promised": "^7.0.0",
-    "chai-bignumber": "^2.0.0",
-    "dotenv": "^4.0.0",
-    "eslint": "^4.11.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "ethereumjs-util": "^5.1.2",
-    "husky": "^1.1.3",
-    "lint-staged": "^8.0.4",
-    "openzeppelin-test-helpers": "^0.1.2",
-    "remix-ide": "^0.7.4",
-    "solidity-coverage": "^0.5.11",
-    "solium": "^1.1.8",
-    "solium-plugin-zeppelin": "^0.0.2"
+    "dotenv": "^8.2.0",
+    "husky": "~4.0.1",
+    "lint-staged": "~9.5.0",
+    "pegasys-orchestrate": "^2.0.0-rc5",
+    "prettier": "~1.19.1",
+    "rimraf": "^3.0.2",
+    "truffle": "^5.1.13",
+    "ts-node": "~8.6.2",
+    "tslint": "~5.20.1",
+    "tslint-config-prettier": "~1.18.0",
+    "typescript": "~3.7.4"
   },
-  "dependencies": {
-    "pegasys-orchestrate": "^1.0.0-rc1",
-    "openzeppelin-solidity": "git://github.com/OpenZeppelin/openzeppelin-solidity#77d569d8fafe7f39d44386e0083bda26968e534c",
-    "truffle": "^5.0.7",
-    "truffle-hdwallet-provider": "^1.0.5"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "*.js": [
-      "eslint ./test ./migrations --fix",
+    "*.{json,md}": [
+      "prettier --write",
       "git add"
     ],
-    "*.sol": [
-      "solium -d . --fix",
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "tslint",
       "git add"
     ]
   }

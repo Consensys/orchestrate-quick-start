@@ -34,7 +34,7 @@ services:
     <<: *container-common
     image: redis:5.0-alpine
     command: redis-server /usr/local/etc/redis/redis.conf
-    ports: 
+    ports:
       - 6379:6379
     volumes:
       - ./config/redis/redis.conf:/usr/local/etc/redis/redis.conf
@@ -55,6 +55,14 @@ services:
     volumes:
       - db-data-envelope-store:/var/lib/postgresql/data
 
+  postgres-chain-registry:
+    <<: *container-common
+    image: postgres:10-alpine
+    volumes:
+      - db-data-chain-registry:/var/lib/postgresql/data
+    ports:
+      - 5432
+
   vault:
     <<: *container-common
     image: library/vault:1.1.1
@@ -73,7 +81,7 @@ services:
     build: ./config/hashicorp
     environment:
       VAULT_ADDR: ${VAULT_ADDR-http://vault:8200}
-    restart: "no"
+    restart: 'no'
     depends_on:
       - vault
     volumes:
@@ -95,17 +103,17 @@ services:
       - 14268:14268
       - 9411:9411
 
-
 volumes:
   db-data-contract-registry:
     driver: local
   db-data-envelope-store:
     driver: local
+  db-data-chain-registry:
+    driver: local
   chain-data:
     driver: local
   vault-token:
     driver: local
-
 
 networks:
   orchestrate:
