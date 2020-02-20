@@ -8,7 +8,7 @@ export const deploy = async () => {
   const producer = new Producer(['localhost:9092'])
   await producer.connect()
 
-  // Deploy a new SimpleToken contract and returns the ID of the request
+  // Deploy a new Counter contract and returns the ID of the request
   const requestId = await producer.sendTransaction({
     chainName: 'rinkeby',
     contractName: 'Counter',
