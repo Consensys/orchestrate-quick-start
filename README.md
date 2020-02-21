@@ -39,10 +39,10 @@ ORCHESTRATE_VERSION=<ORCHESTRATE_VERSION>
 For the quickstart we will connect to Rinkeby through Infura
 
 - Replace the <INFURA_KEY> placeholders with your Infura key below
-- Add the block number <BlockNumber> from which to read
+- Add the block number <START_BLOCK_NUMBER> from which to start reading
 
 ```.env
-CHAIN_REGISTRY_INIT={"name":"rinkeby","urls":["https://rinkeby.infura.io/v3/<INFURA_KEY>"], "listener": {"blockPosition": "<START_BLOCK_NUMBER>"} }
+CHAIN_DATA={"name":"rinkeby","urls":["https://rinkeby.infura.io/v3/<INFURA_KEY>"],"listener":{"blockPosition":"<START_BLOCK_NUMBER>"}}
 ```
 
 ## Start Orchestrate
@@ -90,6 +90,18 @@ npm run orchestrate [cmd] [arg] --help
 ```
 
 > To ease the use of this Quick start, some shortcut commands have been defined and can be seen in the `package.json` file.
+
+### Registering a new chain in the Chain Registry
+
+To add a new chain to the chain registry and start listening to transactions coming from that chain, run the following command:
+
+```bash
+npm run register-chain
+```
+
+by doing that, we connect Orchestrate to the Rinkeby tesnet though Infura.
+
+> Have a look at the script `src/register-chain/register.ts` for reference
 
 ### Account generator
 

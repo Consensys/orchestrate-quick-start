@@ -9,6 +9,7 @@
     "check-formatting": "prettier --list-different 'src/**/*.{ts,js,json}'",
     "clean": "rimraf ./dist ./build",
     "compile": "truffle compile",
+    "register-chain": "ts-node src/register-chain",
     "register-contract": "orchestrate contracts register -e localhost:8020 -n Counter -f build/contracts/Counter.json -t v0.1.0",
     "get-contract": "orchestrate contracts contract -e localhost:8020 -n Counter -t v0.1.0",
     "get-catalog": "orchestrate contracts catalog --endpoint localhost:8020",
@@ -40,6 +41,7 @@
   },
   "homepage": "https://gitlab.com/ConsenSys/client/fr/core-stack/quick-start",
   "devDependencies": {
+    "axios": "~0.19.2",
     "dotenv": "~8.2.0",
     "husky": "~4.0.1",
     "lint-staged": "~9.5.0",
