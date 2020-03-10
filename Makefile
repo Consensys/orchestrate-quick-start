@@ -2,10 +2,6 @@ VAULT_TOKEN :=
 
 .PHONY: all
 
-# Create kafka topics
-topics:
-	@bash scripts/kafka/initTopics.sh
-
 orchestrate:
 	@docker-compose up -d $(CMD_RUN)
 
@@ -21,7 +17,7 @@ deps:
 down-deps:
 	@docker-compose -f scripts/deps/docker-compose.yml down --volumes --timeout 0
 
-up: deps topics orchestrate
+up: deps orchestrate
 
 down: down-orchestrate down-deps
 

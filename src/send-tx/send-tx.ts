@@ -8,7 +8,7 @@ export const sendTx = async () => {
   const producer = new Producer(['localhost:9092'])
   await producer.connect()
 
-  await producer.sendTransaction({
+  const requestId = await producer.sendTransaction({
     chainName: 'rinkeby',
     contractName: 'Counter',
     methodSignature: 'increment(uint256)',
@@ -16,6 +16,8 @@ export const sendTx = async () => {
     to: process.env.COUNTER_CONTRACT_ADDRESS,
     from: process.env.ETH_ACCOUNT!
   })
+
+  console.log('Transaction request sent with id', requestId)
 
   await producer.disconnect()
 }

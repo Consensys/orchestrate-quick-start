@@ -10,10 +10,10 @@ export const consume = async () => {
       console.error('Transaction failed with error: ', value.errors)
       return
     } else {
+      await responseMessage.commit()
+      console.log('Transaction ID:', value.id)
       console.log('Transaction receipt: ', value.receipt)
     }
-
-    await consumer.disconnect()
   })
 
   await consumer.consume()

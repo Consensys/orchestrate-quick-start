@@ -5,6 +5,10 @@ x-container-common: &container-common
   networks:
     - orchestrate
 
+x-postgres-common: &postgres-common
+  environment:
+    POSTGRES_PASSWORD: postgres
+
 services:
   zookeeper:
     <<: *container-common
@@ -41,7 +45,8 @@ services:
 
   postgres-contract-registry:
     <<: *container-common
-    image: postgres:10-alpine
+    <<: *postgres-common
+    image: postgres:10.12-alpine
     ports:
       - 5432
     volumes:
@@ -49,7 +54,8 @@ services:
 
   postgres-envelope-store:
     <<: *container-common
-    image: postgres:10-alpine
+    <<: *postgres-common
+    image: postgres:10.12-alpine
     ports:
       - 5432
     volumes:
@@ -57,7 +63,8 @@ services:
 
   postgres-chain-registry:
     <<: *container-common
-    image: postgres:10-alpine
+    <<: *postgres-common
+    image: postgres:10.12-alpine
     volumes:
       - db-data-chain-registry:/var/lib/postgresql/data
     ports:
