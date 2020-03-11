@@ -1,6 +1,6 @@
 # PegaSys Orchestrate Quickstart
 
-![Image basic](./static/orchestrate-logo.png)
+<img src="static/orchestrate-logo.png" width="200px" alt="Orchestrate Logo"/>
 
 PegaSys Orchestrate Quickstart
 
