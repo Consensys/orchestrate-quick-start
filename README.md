@@ -68,7 +68,7 @@ Create a `.env` file following template and guidelines in `.env.example`.
 make up
 ```
 
-<img src="static/make-up.png" width="500px" alt="Make up"/>
+<img src="static/make-up.png" width="900px" alt="Make up"/>
 
 In particular it started
 
@@ -107,7 +107,7 @@ npm run orchestrate [cmd] help
 npm run generate-account
 ```
 
-<img src="static/generate-account.png" width="500px" alt="Generate Account"/>
+<img src="static/generate-account.png" width="900px" alt="Generate Account"/>
 
 > Note: save the address of the generated account for later usage.
 
@@ -119,7 +119,7 @@ npm run generate-account
 make hashicorp-accounts
 ```
 
-<img src="static/hashicorp-accounts.png" width="500px" alt="Hashicorp accounts"/>
+<img src="static/hashicorp-accounts.png" width="900px" alt="Hashicorp accounts"/>
 
 You can run any hashicorp Vault CLI command (c.f. https://www.vaultproject.io/docs/commands/) by running
 
@@ -148,7 +148,7 @@ Use Orchestrate API to add a blockchain network, you should provide
 curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<INFURA_PROJECT_ID>"]}' localhost:8081/chains
 ```
 
-<img src="static/post-chain.png" width="500px" alt="Create Chain"/>
+<img src="static/post-chain.png" width="900px" alt="Create Chain"/>
 
 > Note: In the response you will find the unique identifier `uuid` of the chain, save it for later usage
 
@@ -158,7 +158,7 @@ You can verify JSON-RPC endpoint is now properly proxied by Orchestrate
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", false],"id":1}' localhost:8081/<CHAIN_UUID>
 ```
 
-<img src="static/json-rpc-proxy.png" width="500px" alt="JSON-RPC Response"/>
+<img src="static/json-rpc-proxy.png" width="900px" alt="JSON-RPC Response"/>
 
 ### Configure network
 
@@ -181,7 +181,7 @@ Use Orchestrate API to add a Faucet the network, you should provide
 curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUNT>","chainRule":"<CHAIN_UUID>","cooldown":"10s","amount":"60000000000000000","maxBalance":"100000000000000000"}' localhost:8081/faucets
 ```
 
-<img src="static/post-faucet.png" width="500px" alt="Create Faucet"/>
+<img src="static/post-faucet.png" width="900px" alt="Create Faucet"/>
 
 ## Register a Smart Contract
 
@@ -193,7 +193,7 @@ curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUN
 npm run compile
 ```
 
-<img src="static/compile-contract.png" width="500px" alt="Compile contract"/>
+<img src="static/compile-contract.png" width="900px" alt="Compile contract"/>
 
 2. Register Smart Contract on Orchestrate
 
@@ -201,7 +201,7 @@ npm run compile
 npm run register-contract
 ```
 
-<img src="static/register-contract.png" width="500px" alt="Register contract"/>
+<img src="static/register-contract.png" width="900px" alt="Register contract"/>
 
 3. Verify that the contract has been successfully registered
 
@@ -209,7 +209,7 @@ npm run register-contract
 npm run get-catalog
 ```
 
-<img src="static/get-catalog.png" width="500px" alt="Get catalog"/>
+<img src="static/get-catalog.png" width="900px" alt="Get catalog"/>
 
 4. You can get details about the registered contract
 
@@ -217,7 +217,7 @@ npm run get-catalog
 npm run get-contract
 ```
 
-<img src="static/get-contract.png" width="500px" alt="Get contract"/>
+<img src="static/get-contract.png" width="900px" alt="Get contract"/>
 
 ## Send Transactions
 
@@ -229,11 +229,11 @@ Generate a new account passing name of the chain to prefund the account on
 npm run generate-account --chain <CHAIN_NAME>
 ```
 
-<img src="static/generate-account-faucet.png" width="500px" alt="Get catalog"/>
+<img src="static/generate-account-faucet.png" width="900px" alt="Get catalog"/>
 
 If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
 
-<img src="static/etherscan-account.png" width="500px" alt="Get catalog"/>
+<img src="static/etherscan-account.png" width="900px" alt="Get catalog"/>
 
 > Important: set `FROM_ACCOUNT` in `.env` with the address just created
 
@@ -249,7 +249,7 @@ To do so, open two tabs on your terminal. In first tab start the consumer
 npm run consume
 ```
 
-<img src="static/npm-consume.png" width="500px" alt="Get catalog"/>
+<img src="static/npm-consume.png" width="900px" alt="Get catalog"/>
 
 > Have a look to [script](`src/consume/consume.ts`) for reference
 
@@ -265,11 +265,11 @@ npm run deploy
 
 After a few seconds (depending on blocktime) you you should see the transaction receipt appearing in the consumer tab
 
-<img src="static/npm-deploy.png" width="500px" alt="Get catalog"/>
+<img src="static/npm-deploy.png" width="900px" alt="Get catalog"/>
 
 If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
 
-<img src="static/etherscan-deploy.png" width="500px" alt="Get catalog"/>
+<img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
 > Have a look to [script](`src/deploy-contract/deploy.ts`) for reference
 
@@ -287,8 +287,8 @@ npm run send-tx
 
 After a few seconds (depending on blocktime) you you should see the transaction receipt appearing in the consumer tab
 
-<img src="static/npm-send-tx.png" width="500px" alt="Send Tx"/>
+<img src="static/npm-send-tx.png" width="900px" alt="Send Tx"/>
 
 If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
 
-<img src="static/etherscan-send-tx.png" width="500px" alt="Get catalog"/>
+<img src="static/etherscan-send-tx.png" width="900px" alt="Get catalog"/>
