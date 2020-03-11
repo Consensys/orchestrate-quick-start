@@ -52,7 +52,7 @@ During the quick-start you will manipulate
 
 ### Login on Orchestrate Docker registry
 
-> _Note_: If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry in order to be able to pull Orchestrate docker images. If you do not have credentials, please contact support@pegasys.net.
+If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry. If you do not have credentials yet, please contact support@pegasys.tech
 
 ```
 docker login -u <username> -p <password or API key> consensys-docker-pegasys-orchestrate.bintray.io
@@ -75,7 +75,7 @@ In particular it started
 - Orchestrate external dependencies (Kafka, Redis, Postgres, Hashicorp Vault). See `scripts/deps/docker-compose.yml`)
 - Orchestrate Microservices
 
-> Note: Run `make down` to stop all Orchestrate containers and remove all data volumes
+> **\*Note:** Run `make down` to stop Orchestrate and remove all data volumes\*
 
 ### Install CLI
 
@@ -95,9 +95,7 @@ To access details of each command:
 npm run orchestrate [cmd] help
 ```
 
-> Example: `npm run orchestrate contracts help`
-
-> To ease the use of this Quick start, some shortcut commands have been defined in `package.json`
+**_Example:_** `npm run orchestrate contracts help`
 
 ## Create an Ethereum account
 
@@ -109,9 +107,7 @@ npm run generate-account
 
 <img src="static/generate-account.png" width="900px" alt="Generate Account"/>
 
-> Note: save the address of the generated account for later usage.
-
-> See the `package.json` for reference
+> **\*Note:** Save generated account address for later usage\*
 
 ### Inspect Ethereum accounts in Hashicorp Vault
 
@@ -142,7 +138,7 @@ Use Orchestrate API to add a blockchain network, you should provide
 - `name` for the network
 - `urls` of at least one JSON-RPC endpoint of an Ethereum node in the network
 
-> Note: we will be connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same registration procedure
+> **\*Note:** We will be connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same procedure\*
 
 ```bash
 curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<INFURA_PROJECT_ID>"]}' localhost:8081/chains
@@ -150,9 +146,9 @@ curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<
 
 <img src="static/post-chain.png" width="900px" alt="Create Chain"/>
 
-> Note: In the response you will find the unique identifier `uuid` of the chain, save it for later usage
+> **\*Note:** Save chain unique identifier `uuid` for later usage\*
 
-You can verify JSON-RPC endpoint is now properly proxied by Orchestrate
+Verify that chain JSON-RPC is properly proxied by Orchestrate
 
 ```bash
 curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", false],"id":1}' localhost:8081/<CHAIN_UUID>
@@ -164,7 +160,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
 
 #### Add Faucet
 
-> Note: On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate
+> **\*Note:** On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate\*
 
 Use Orchestrate API to add a Faucet the network, you should provide
 
@@ -173,9 +169,9 @@ Use Orchestrate API to add a Faucet the network, you should provide
 - `chainRule` chain unique unique identifier
 - Faucet configuration (c.f. Orchestrate documentation for more details)
 
-> Note: set `creditorAccount` and `chainRule` to the value you created and change in earlier sections of this Quick Start
+> **\*Note:** Set `creditorAccount` and `chainRule` with values generated in prior Quick Start sections\*
 
-> Warning: you should make sure that the Faucet account has been credited with ETH. To do so, you can for example either use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a transaction using Metamask
+> **\*Warning:** Faucet account must own some ETH. To do so, you can either use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a transfer some ETH using Metamask\*
 
 ```bash
 curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUNT>","chainRule":"<CHAIN_UUID>","cooldown":"10s","amount":"60000000000000000","maxBalance":"100000000000000000"}' localhost:8081/faucets
@@ -185,7 +181,7 @@ curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUN
 
 ## Register a Smart Contract
 
-> Note: This Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract
+> **\*Note:** Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract\*
 
 1. Compile Smart Contract (it uses Truffle for compilation)
 
@@ -239,11 +235,11 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 ### Consume transaction receipts
 
-_Orchestrate allows to manage blockchain transactions that are by nature asynchronous due to blockchain mining time. Orchestrate SDK provides a consumer that allows to asynchronously process transaction receipts._
+> **\*Note:** Orchestrate allows to manage blockchain transactions that are by nature asynchronous due to blockchain mining time. Orchestrate SDK provides a consumer that allows to asynchronously process transaction receipts.\*
 
-> Note: Orchestrate uses Apache Kafka for asynchronous communications
+> **\*Note:** Orchestrate uses Apache Kafka for asynchronous communications\*
 
-To do so, open two tabs on your terminal. In first tab start the consumer
+Start consumer in a first terminal
 
 ```bash
 npm run consume
@@ -251,7 +247,7 @@ npm run consume
 
 <img src="static/npm-consume.png" width="900px" alt="Get catalog"/>
 
-> Have a look to [script](`src/consume/consume.ts`) for reference
+> **Reference script:** [consume.ts](`src/consume/consume.ts`)
 
 ### Deploy Smart Contract
 
@@ -271,9 +267,9 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 <img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
-> Have a look to [script](`src/deploy-contract/deploy.ts`) for reference
+> **Reference script:** [deploy.ts](`src/deploy-contract/deploy.ts`)
 
-> Important: set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt in consumer tab)
+> **\*Important:** Set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt)\*
 
 ### Send a transaction
 
@@ -283,8 +279,6 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 npm run send-tx
 ```
 
-> Have a look [script](`src/send-tx/send-tx.ts`) for reference
-
 After a few seconds (depending on blocktime) you you should see the transaction receipt appearing in the consumer tab
 
 <img src="static/npm-send-tx.png" width="900px" alt="Send Tx"/>
@@ -292,3 +286,5 @@ After a few seconds (depending on blocktime) you you should see the transaction 
 If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
 
 <img src="static/etherscan-send-tx.png" width="900px" alt="Get catalog"/>
+
+> **Reference script:** [send-tx.ts](`src/send-tx/send-tx.ts`)
