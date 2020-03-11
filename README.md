@@ -75,7 +75,7 @@ In particular it started
 - Orchestrate external dependencies (Kafka, Redis, Postgres, Hashicorp Vault). See `scripts/deps/docker-compose.yml`)
 - Orchestrate Microservices
 
-> **\*Note:** Run `make down` to stop Orchestrate and remove all data volumes\*
+> **Note:** _Run `make down` to stop Orchestrate and remove all data volumes_
 
 ### Install CLI
 
@@ -95,7 +95,7 @@ To access details of each command:
 npm run orchestrate [cmd] help
 ```
 
-**_Example:_** `npm run orchestrate contracts help`
+**Example:** `npm run orchestrate contracts help`
 
 ## Create an Ethereum account
 
@@ -107,7 +107,7 @@ npm run generate-account
 
 <img src="static/generate-account.png" width="900px" alt="Generate Account"/>
 
-> **\*Note:** Save generated account address for later usage\*
+> **Note:** _Save generated account address for later usage_
 
 ### Inspect Ethereum accounts in Hashicorp Vault
 
@@ -138,7 +138,7 @@ Use Orchestrate API to add a blockchain network, you should provide
 - `name` for the network
 - `urls` of at least one JSON-RPC endpoint of an Ethereum node in the network
 
-> **\*Note:** We will be connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same procedure\*
+> **Note:** _We will be connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same procedure_
 
 ```bash
 curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<INFURA_PROJECT_ID>"]}' localhost:8081/chains
@@ -146,7 +146,7 @@ curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<
 
 <img src="static/post-chain.png" width="900px" alt="Create Chain"/>
 
-> **\*Note:** Save chain unique identifier `uuid` for later usage\*
+> **Note:** _Save chain unique identifier `uuid` for later usage_
 
 Verify that chain JSON-RPC is properly proxied by Orchestrate
 
@@ -160,7 +160,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
 
 #### Add Faucet
 
-> **\*Note:** On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate\*
+> **Note:** _On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate_
 
 Use Orchestrate API to add a Faucet the network, you should provide
 
@@ -169,9 +169,9 @@ Use Orchestrate API to add a Faucet the network, you should provide
 - `chainRule` chain unique unique identifier
 - Faucet configuration (c.f. Orchestrate documentation for more details)
 
-> **\*Note:** Set `creditorAccount` and `chainRule` with values generated in prior Quick Start sections\*
+> **Note:** _Set `creditorAccount` and `chainRule` with values generated in prior Quick Start sections_
 
-> **\*Warning:** Faucet account must own some ETH. To do so, you can either use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a transfer some ETH using Metamask\*
+> **Warning:** _Faucet account must own some ETH. To do so, you can either use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a transfer some ETH using Metamask_
 
 ```bash
 curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUNT>","chainRule":"<CHAIN_UUID>","cooldown":"10s","amount":"60000000000000000","maxBalance":"100000000000000000"}' localhost:8081/faucets
@@ -181,7 +181,7 @@ curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUN
 
 ## Register a Smart Contract
 
-> **\*Note:** Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract\*
+> **Note:** _Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract_
 
 1. Compile Smart Contract (it uses Truffle for compilation)
 
@@ -235,9 +235,9 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 ### Consume transaction receipts
 
-> **\*Note:** Orchestrate allows to manage blockchain transactions that are by nature asynchronous due to blockchain mining time. Orchestrate SDK provides a consumer that allows to asynchronously process transaction receipts.\*
+> **Note:** _Orchestrate allows to manage blockchain transactions that are by nature asynchronous due to blockchain mining time. Orchestrate SDK provides a consumer that allows to asynchronously process transaction receipts._
 
-> **\*Note:** Orchestrate uses Apache Kafka for asynchronous communications\*
+> **Note:** _Orchestrate uses Apache Kafka for asynchronous communications_
 
 Start consumer in a first terminal
 
@@ -251,7 +251,7 @@ npm run consume
 
 ### Deploy Smart Contract
 
-> Important: before moving forward make sure that `FROM_ACCOUNT` in `.env` has been set
+> **Important:** _Before moving forward make sure that `FROM_ACCOUNT` in `.env` has been set_
 
 On the second tab, run:
 
@@ -269,11 +269,11 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 > **Reference script:** [deploy.ts](`src/deploy-contract/deploy.ts`)
 
-> **\*Important:** Set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt)\*
+> **Important:** _Set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt)_
 
 ### Send a transaction
 
-> Important: before moving forward make sure that `FROM_ACCOUNT` and `TO_ACCOUNT` in `.env` have been set
+> **Important:** _Before moving forward make sure that `FROM_ACCOUNT` and `TO_ACCOUNT` in `.env` have been set_
 
 ```bash
 npm run send-tx
