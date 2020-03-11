@@ -15,25 +15,28 @@ It provides all features to connect to blockchain networks
 
 # Quick-Start
 
-- [Requirements](#requirements)
-- [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
-  - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
-  - [Configure Orchestrate](#configure-orchestrate)
-  - [Run Orchestrate](#run-orchestrate)
-  - [Install CLI](#install-cli)
-- [Create an Ethereum account](#create-an-ethereum-account)
-  - [Create account using CLI](#create-account-using-cli)
-  - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
-- [Connect to a blockchain network](#connect-to-a-blockchain-network)
-  - [Register a blockchain network](#register-a-blockchain-network)
-  - [Configure network](#configure-network)
-    - [Add Faucet](#add-faucet)
-- [Register a Smart Contract](#register-a-smart-contract)
-- [Send Transactions](#send-transactions)
-  - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
-  - [Consume transaction receipts](#consume-transaction-receipts)
-  - [Deploy Smart Contract](#deploy-smart-contract)
-  - [Send a transaction](#send-a-transaction)
+- [PegaSys Orchestrate Quick Start](#pegasys-orchestrate-quick-start)
+- [Quick-Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
+    - [Configure Orchestrate](#configure-orchestrate)
+    - [Run Orchestrate](#run-orchestrate)
+    - [Install CLI](#install-cli)
+  - [Create an Ethereum account](#create-an-ethereum-account)
+    - [Create account using CLI](#create-account-using-cli)
+    - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
+  - [Connect to a blockchain network](#connect-to-a-blockchain-network)
+    - [Register a blockchain network](#register-a-blockchain-network)
+    - [Control network is properly registered](#control-network-is-properly-registered)
+    - [Configure network](#configure-network)
+      - [Add Faucet](#add-faucet)
+  - [Register a Smart Contract](#register-a-smart-contract)
+  - [Send Transactions](#send-transactions)
+    - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+    - [Consume transaction receipts](#consume-transaction-receipts)
+    - [Deploy Smart Contract](#deploy-smart-contract)
+    - [Send a transaction](#send-a-transaction)
 
 During the quick-start you will manipulate
 
@@ -146,6 +149,8 @@ curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<
 
 > **Note:** _Save chain unique identifier `uuid` for later usage_
 
+### Control network is properly registered
+
 Verify that chain JSON-RPC is properly proxied by Orchestrate
 
 ```bash
@@ -225,7 +230,7 @@ npm run generate-account --chain <CHAIN_NAME>
 
 <img src="static/generate-account-faucet.png" width="900px" alt="Get catalog"/>
 
-If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
+If using Rinkeby you can verify that the account has been properly pre-funded by Faucet on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
 
 <img src="static/etherscan-account.png" width="900px" alt="Get catalog"/>
 
@@ -261,7 +266,7 @@ After a few seconds (depending on blocktime) you you should see the transaction 
 
 <img src="static/npm-deploy.png" width="900px" alt="Get catalog"/>
 
-If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
+If using Rinkeby you can check transaction has been properly sent on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
 
 <img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
@@ -281,7 +286,7 @@ After a few seconds (depending on blocktime) you you should see the transaction 
 
 <img src="static/npm-send-tx.png" width="900px" alt="Send Tx"/>
 
-If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
+If using Rinkeby you can check transaction has been properly sent on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
 
 <img src="static/etherscan-send-tx.png" width="900px" alt="Get catalog"/>
 
