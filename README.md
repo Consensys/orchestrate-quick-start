@@ -247,7 +247,7 @@ npm run consume
 
 <img src="static/npm-consume.png" width="900px" alt="Get catalog"/>
 
-> **Reference script:** [consume.ts](`src/consume/consume.ts`)
+> **Reference script:** [consume.ts](src/consume/consume.ts)
 
 ### Deploy Smart Contract
 
@@ -267,7 +267,7 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 <img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
-> **Reference script:** [deploy.ts](`src/deploy-contract/deploy.ts`)
+> **Reference script:** [deploy.ts](src/deploy-contract/deploy.ts)
 
 > **Important:** _Set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt)_
 
@@ -287,4 +287,4 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 <img src="static/etherscan-send-tx.png" width="900px" alt="Get catalog"/>
 
-> **Reference script:** [send-tx.ts](`src/send-tx/send-tx.ts`)
+> **Reference script:** [send-tx.ts](src/send-tx/send-tx.ts)
