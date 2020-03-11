@@ -1,70 +1,89 @@
-# PegaSys Orchestrate Quickstart
+# PegaSys Orchestrate Quick Start
 
 <p align="center">
   <img src="static/orchestrate-logo.png" width="400px" alt="Orchestrate Logo"/>
 </p>
 
-PegaSys Orchestrate Quickstart
+PegaSys Orchestrate is a platform that enables enterprises to easily build secure and reliable applications on the Ethereum blockchain.
 
-During this quickstart you will:
+It provides all features to connect to blockchain networks
 
-1. Start PegaSys Orchestrate locally using `docker-compose`
-2. Manipulate PegaSys Orchestrate CLI (Account generator, contract registry)
-3. Manipulate Orchestrate SDK (Send a batch of transactions)
-4. Inspect Ethereum Accounts stored in Hashicorp Vault
+- Transaction Management (transaction generation, gas management, nonce management, transaction listening...)
+- Account-Management with private key storage in Hashicorp Vault
+- Smart Contract Registry
+- Multi-chain & Multi-protocol (public or private)
+
+# Quick-Start
+
+- [PegaSys Orchestrate Quick Start](#pegasys-orchestrate-quick-start)
+- [Quick-Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
+    - [Configure Orchestrate](#configure-orchestrate)
+    - [Run Orchestrate](#run-orchestrate)
+    - [Install CLI](#install-cli)
+  - [Create an Ethereum account](#create-an-ethereum-account)
+    - [Create account using CLI](#create-account-using-cli)
+    - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
+  - [Connect to a blockchain network](#connect-to-a-blockchain-network)
+    - [Register a blockchain network](#register-a-blockchain-network)
+    - [Configure network](#configure-network)
+      - [Add Faucet](#add-faucet)
+  - [Register a Smart Contract](#register-a-smart-contract)
+  - [Send Transactions](#send-transactions)
+    - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+    - [Consume transaction receipts](#consume-transaction-receipts)
+    - [Deploy Smart Contract](#deploy-smart-contract)
+    - [Send a transaction](#send-a-transaction)
+
+During the quick-start you will manipulate
+
+- Orchestrate Command Line Interface
+- Orchestrate REST API
+- Orchestrate SDK
 
 ## Requirements
 
 - Have [`docker`](https://www.docker.com/) and [`docker-compose`](https://docs.docker.com/compose/install/) installed
 - Have [`node` and `npm`](https://nodejs.org/en/) installed
 
-## Setup for Orchestrate
+## Set-up and run Orchestrate
 
-### Configure the ENV variables
+### Login on Orchestrate Docker registry
 
-Create a `.env` file based on the file `.env.example`
-
-#### Set the variables to pull the Orchestrate image
-
-> _Note_: If running Orchestrate for the 1st you will first need to login on Orchestrate Docker registry, base on the information provide by the Orchestrate team
+> _Note_: If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry in order to be able to pull Orchestrate docker images. If you do not have credentials, please contact support@pegasys.net.
 
 ```
 docker login -u <username> -p <password or API key> consensys-docker-pegasys-orchestrate.bintray.io
 ```
 
-```.env
-# Docker image and version
-DOCKER_REGISTRY=<DOCKER_REGISTRY>
-ORCHESTRATE_VERSION=<ORCHESTRATE_VERSION>
-```
+### Configure Orchestrate
 
-## Start Orchestrate
+Create a `.env` file following template and guidelines in `.env.example`.
 
-Run the following command:
+### Run Orchestrate
 
 ```
 make up
 ```
 
-> Run `make down` to kill all containers
+<img src="static/make-up.png" width="500px" alt="Make up"/>
 
-This will:
+In particular it started
 
-- start the dependencies (Kafka, Redis, Postgres, etc.). See `scripts/deps/docker-compose.yml`)
-- Create the Kafka topics with default names (see `scripts/kafka/initTopics.sh`)
-- Start Orchestrate Microservices
+- Orchestrate external dependencies (Kafka, Redis, Postgres, Hashicorp Vault). See `scripts/deps/docker-compose.yml`)
+- Orchestrate Microservices
 
-## Manipulate the PegaSys Orchestrate CLI
+> Note: Run `make down` to stop all Orchestrate containers and remove all data volumes
 
-Run the following command:
+### Install CLI
 
 ```bash
 npm install
 ```
 
-### List of commands of PegaSys Orchestrate CLI
-
-Run the following command:
+Verify CLI is properly installed and list all commands by running
 
 ```bash
 npm run orchestrate help
@@ -78,149 +97,31 @@ npm run orchestrate [cmd] help
 
 > Example: `npm run orchestrate contracts help`
 
-> To ease the use of this Quick start, some shortcut commands have been defined and can be seen in the `package.json` file.
+> To ease the use of this Quick start, some shortcut commands have been defined in `package.json`
 
-### Account generator
+## Create an Ethereum account
 
-To generate an Ethereum account, run the following command:
+### Create account using CLI
 
 ```bash
 npm run generate-account
 ```
+
+<img src="static/generate-account.png" width="500px" alt="Generate Account"/>
+
+> Note: save the address of the generated account for later usage.
 
 > See the `package.json` for reference
 
-Save the address of the generated account for the next step.
-
-### Registering a new chain and a faucet in the chain registry
-
-#### Set Ethereum client endpoints
-
-For the quickstart we will connect to Rinkeby through Infura
-
-- Replace the <INFURA_KEY> placeholders with your Infura key below:
-
-```.env
-CHAIN_DATA={"name":"rinkeby","urls":["https://rinkeby.infura.io/v3/<INFURA_KEY>"]}
-```
-
-- _When creating new Ethereum accounts, they won't have any ETH if not funded and they won't be able to send transactions as they need a minimum of ETH to be able to pay for transaction fees_. In order to add a new faucet to the chain registry, you will need an account that holds some ETH on the Rinkeby testnet. Add the address of the generated account to the `.env` file and make sure you send some ETH to it (you can use MetaMask do that that):
-
-```.env
-FAUCET_ACCOUNT=<FAUCET_ACCOUNT>
-```
-
-To add a new chain to the chain registry and start listening to transactions coming from that chain, run the following command:
-
-```bash
-npm run register-chain
-```
-
-by doing that, we connect Orchestrate to the Rinkeby tesnet though Infura and register a new faucet.
-
-> Have a look at the script `src/register-chain/register.ts` for reference
-
-### Smart Contract management
-
-Use Truffle (already installed) to compile your smart contracts into the `build` folder:
-
-```bash
-npm run compile
-```
-
-Register the generated artifacts into Orchestrate:
-
-```bash
-npm run register-contract
-```
-
-Verify that the contract has been successfully registered:
-
-```bash
-npm run get-catalog
-```
-
-You can also get the full details of the registered contract:
-
-```bash
-npm run get-contract
-```
-
-## Manipulate the SDK
-
-### Register a new account for transactions
-
-Generate a new account that will be used to send transactions by running the following command:
-
-```bash
-npm run generate-account
-```
-
-and add the address to the `.env` file:
-
-```.env
-ETH_ACCOUNT=<ETHEREUM_ACCOUNT_ADDRESS>
-```
-
-> We don't reuse the same address as the faucet address to showcase that the newly created account will be funded automatically.
-
-### Consuming transaction messages
-
-_PegaSys is a transaction orchestrator. Transactions on Ethereum being asynchronous, you will receive the result of a transaction by consuming messages coming from Orchestrate._
-
-To do so, open two tabs on your terminal. In one tab we will consume messages and check the transaction receipt. On the other, we will send transactions. On the first tab, run:
-
-```bash
-npm run consume
-```
-
-### Deploying a contract
-
-We will deploy a contract on the Rinkeby testnet. On the second tab, run:
-
-> Have a look at the script `src/deploy-contract/deploy.ts` for reference
-
-```bash
-npm run deploy
-```
-
-Verify in the first tab that you received the message successfully and copy-paste the value of the `contractAddress` in the `.env` file:
-
-```.env
-COUNTER_CONTRACT_ADDRESS=<COUNTER_CONTRACT_ADDRESS>
-```
-
-### Sending a transaction
-
-We will now send a transaction to the `Counter` contract we just deployed to increment the counter by 1.
-
-> Have a look at the script `src/send-tx/send-tx.ts` for reference
-
-```bash
-npm run send-tx
-```
-
-Check the receipt in the first tab.
-
-## Inspect Accounts stored in Hashicorp Vault
-
-1. You can inspect Ethereum accounts that have been stored in Hashicorp Vault by running
+### Inspect Ethereum accounts in Hashicorp Vault
 
 ```bash
 make hashicorp-accounts
 ```
 
-That will return list of addresses
+<img src="static/hashicorp-accounts.png" width="500px" alt="Hashicorp accounts"/>
 
-```bash
-Keys
-----
-0x05a34cE77Ea9fc49E4E5C7c4bC0E9aB2447AB6f0
-0x67689FDDecD92938932B21D566D089cc45A62769
-0x7E654d251Da770A068413677967F6d3Ea2FeA9E4
-```
-
-2. You can run any hashicorp Vault CLI command (c.f. https://www.vaultproject.io/docs/commands/) by running
+You can run any hashicorp Vault CLI command (c.f. https://www.vaultproject.io/docs/commands/) by running
 
 ```bash
 make hashicorp-vault COMMAND="<command>"
@@ -230,21 +131,164 @@ For example
 
 ```bash
 make hashicorp-vault COMMAND="token lookup"
-Key                 Value
----                 -----
-accessor            ZxDozUcdrwEFENpialO3AvWi
-creation_time       1578672722
-creation_ttl        0s
-display_name        root
-entity_id           n/a
-expire_time         <nil>
-explicit_max_ttl    0s
-id                  s.LjlIldnulzUvUgZpVnrPy6Qb
-meta                <nil>
-num_uses            0
-orphan              true
-path                auth/token/root
-policies            [root]
-ttl                 0s
-type                service
 ```
+
+## Connect to a blockchain network
+
+### Register a blockchain network
+
+Use Orchestrate API to add a blockchain network, you should provide
+
+- `name` for the network
+- `urls` of at least one JSON-RPC endpoint of an Ethereum node in the network
+
+> Note: we will be connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same registration procedure
+
+```bash
+curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<INFURA_PROJECT_ID>"]}' localhost:8081/chains
+```
+
+<img src="static/post-chain.png" width="500px" alt="Create Chain"/>
+
+> Note: In the response you will find the unique identifier `uuid` of the chain, save it for later usage
+
+You can verify JSON-RPC endpoint is now properly proxied by Orchestrate
+
+```bash
+curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest", false],"id":1}' localhost:8081/<CHAIN_UUID>
+```
+
+<img src="static/json-rpc-proxy.png" width="500px" alt="JSON-RPC Response"/>
+
+### Configure network
+
+#### Add Faucet
+
+> Note: On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate
+
+Use Orchestrate API to add a Faucet the network, you should provide
+
+- `name` for the Faucet
+- `creditorAccount` that will be used to credit other accounts (account should be managed by Orchestrate)
+- `chainRule` chain unique unique identifier
+- Faucet configuration (c.f. Orchestrate documentation for more details)
+
+> Note: set `creditorAccount` and `chainRule` to the value you created and change in earlier sections of this Quick Start
+
+> Warning: you should make sure that the Faucet account has been credited with ETH. To do so, you can for example either use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a transaction using Metamask
+
+```bash
+curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUNT>","chainRule":"<CHAIN_UUID>","cooldown":"10s","amount":"60000000000000000","maxBalance":"100000000000000000"}' localhost:8081/faucets
+```
+
+<img src="static/post-faucet.png" width="500px" alt="Create Faucet"/>
+
+## Register a Smart Contract
+
+> Note: This Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract
+
+1. Compile Smart Contract (it uses Truffle for compilation)
+
+```bash
+npm run compile
+```
+
+<img src="static/compile-contract.png" width="500px" alt="Compile contract"/>
+
+2. Register Smart Contract on Orchestrate
+
+```bash
+npm run register-contract
+```
+
+<img src="static/register-contract.png" width="500px" alt="Register contract"/>
+
+3. Verify that the contract has been successfully registered
+
+```bash
+npm run get-catalog
+```
+
+<img src="static/get-catalog.png" width="500px" alt="Get catalog"/>
+
+4. You can get details about the registered contract
+
+```bash
+npm run get-contract
+```
+
+<img src="static/get-contract.png" width="500px" alt="Get contract"/>
+
+## Send Transactions
+
+### Create an account pre-funded by Faucet
+
+Generate a new account passing name of the chain to prefund the account on
+
+```bash
+npm run generate-account --chain <CHAIN_NAME>
+```
+
+<img src="static/generate-account-faucet.png" width="500px" alt="Get catalog"/>
+
+If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
+
+<img src="static/etherscan-account.png" width="500px" alt="Get catalog"/>
+
+> Important: set `FROM_ACCOUNT` in `.env` with the address just created
+
+### Consume transaction receipts
+
+_Orchestrate allows to manage blockchain transactions that are by nature asynchronous due to blockchain mining time. Orchestrate SDK provides a consumer that allows to asynchronously process transaction receipts._
+
+> Note: Orchestrate uses Apache Kafka for asynchronous communications
+
+To do so, open two tabs on your terminal. In first tab start the consumer
+
+```bash
+npm run consume
+```
+
+<img src="static/npm-consume.png" width="500px" alt="Get catalog"/>
+
+> Have a look to [script](`src/consume/consume.ts`) for reference
+
+### Deploy Smart Contract
+
+> Important: before moving forward make sure that `FROM_ACCOUNT` in `.env` has been set
+
+On the second tab, run:
+
+```bash
+npm run deploy
+```
+
+After a few seconds (depending on blocktime) you you should see the transaction receipt appearing in the consumer tab
+
+<img src="static/npm-deploy.png" width="500px" alt="Get catalog"/>
+
+If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
+
+<img src="static/etherscan-deploy.png" width="500px" alt="Get catalog"/>
+
+> Have a look to [script](`src/deploy-contract/deploy.ts`) for reference
+
+> Important: set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt in consumer tab)
+
+### Send a transaction
+
+> Important: before moving forward make sure that `FROM_ACCOUNT` and `TO_ACCOUNT` in `.env` have been set
+
+```bash
+npm run send-tx
+```
+
+> Have a look [script](`src/send-tx/send-tx.ts`) for reference
+
+After a few seconds (depending on blocktime) you you should see the transaction receipt appearing in the consumer tab
+
+<img src="static/npm-send-tx.png" width="500px" alt="Send Tx"/>
+
+If using Rinkeby you can verify that the account has been properly pre-funded by visiting https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>
+
+<img src="static/etherscan-send-tx.png" width="500px" alt="Get catalog"/>

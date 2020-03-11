@@ -22,7 +22,7 @@ x-default-variables: &default-variables
 
 x-container-common: &container-common
   restart: ${CONTAINER_RESTART-on-failure}
-  image: ${DOCKER_REGISTRY}:${ORCHESTRATE_VERSION-latest}
+  image: consensys-docker-pegasys-orchestrate.bintray.io/orchestrate:v2.0.0
   networks:
     - orchestrate
 
@@ -146,12 +146,10 @@ services:
     environment:
       <<: *default-variables
       JAEGER_SERVICE_NAME: TX-SIGNER
-      TESSERA_URL: ${TESSERA_URL}
       SECRET_PKEY: ${SECRET_PKEY-}
       SECRET_STORE: ${SECRET_STORE-hashicorp}
     volumes:
       - vault-token:/vault/token:ro
-      - ./build/bin/orchestrate:/bin/main
     command: tx-signer run
 
   tx-sender:

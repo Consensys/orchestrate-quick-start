@@ -13,7 +13,7 @@ export const deploy = async () => {
     chainName: 'rinkeby',
     contractName: 'Counter',
     methodSignature: 'constructor()',
-    from: process.env.ETH_ACCOUNT!,
+    from: process.env.FROM_ACCOUNT!,
     gas: 2000000
   })
 
