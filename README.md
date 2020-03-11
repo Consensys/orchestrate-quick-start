@@ -1,5 +1,7 @@
 # PegaSys Orchestrate Quickstart
 
+![Image basic](./static/orchestrate-logo.png)
+
 PegaSys Orchestrate Quickstart
 
 During this quickstart you will:
