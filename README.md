@@ -21,6 +21,7 @@ For more information please refer to Orchestrate official [documentation](https:
 - [Quick-Start](#quick-start)
   - [Requirements](#requirements)
   - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Clone project](#clone-project)
     - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
     - [Run Orchestrate](#run-orchestrate)
     - [Install CLI](#install-cli)
@@ -51,17 +52,23 @@ During this quick-start you will manipulate
 
 ## Set-up and run Orchestrate
 
+### Clone project
+
+```bash
+git clone git@github.com:PegaSysEng/orchestrate-quick-start.git
+```
+
 ### Login on Orchestrate Docker registry
 
 If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry. If you do not have credentials, please contact support@pegasys.tech
 
-```
+```bash
 docker login -u <username> -p <password or API key> consensys-docker-pegasys-orchestrate.bintray.io
 ```
 
 ### Run Orchestrate
 
-```
+```bash
 make up
 ```
 
