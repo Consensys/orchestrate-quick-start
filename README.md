@@ -176,7 +176,7 @@ Use Orchestrate API to configure a Faucet, you should provide
 
 - `name` for the Faucet
 - `creditorAccount` that will be used to credit other accounts
-- `chainRule` chain unique unique identifier
+- `chainRule` chain unique unique identifier `uuid`
 - Faucet configuration (c.f. Orchestrate documentation for more details)
 
 Run next command by setting placeholder to the account and chain uuid previously saved
