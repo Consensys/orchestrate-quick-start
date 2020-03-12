@@ -70,18 +70,20 @@ docker login -u <username> -p <password or API key> consensys-docker-pegasys-orc
 
 ### Run Orchestrate
 
+Start
+
+- Orchestrate external dependencies (Kafka, Redis, Postgres, Hashicorp Vault). See [docker-compose.yml](scripts/deps/docker-compose.yml)
+- Orchestrate microservices. See [docker-compose.yml](docker-compose.yml)
+
+by running
+
 ```bash
 make up
 ```
 
 <img src="static/make-up.png" width="900px" alt="Make up"/>
 
-In particular it started
-
-- Orchestrate external dependencies (Kafka, Redis, Postgres, Hashicorp Vault). See [docker-compose.yml](scripts/deps/docker-compose.yml)
-- Orchestrate microservices. See [docker-compose.yml](docker-compose.yml)
-
-> **Note:** _Run `make down` to stop Orchestrate and remove all data volumes_
+> **Note:** _If you want to stop Orchestrate you can run `make down` it will stop all container and remove all data volumes_
 
 ### Install CLI
 
