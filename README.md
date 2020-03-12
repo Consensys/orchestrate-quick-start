@@ -154,7 +154,7 @@ curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<
 
 <img src="static/post-chain.png" width="900px" alt="Create Chain"/>
 
-> **Note:** _We are connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same procedure_
+> **Note:** _We are connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same procedure. If you are not familiar with Infura you can refer to [Infura Get-Started](https://blog.infura.io/getting-started-with-infura-28e41844cc89/)_
 
 ### Send JSON-RPC request through blockchain proxy
 
