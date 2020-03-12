@@ -41,7 +41,7 @@ For more information please refer to [PegaSys Orchestrate Official Documentation
   - [Deploy a Smart Contract](#deploy-a-smart-contract)
   - [Send a transaction](#send-a-transaction)
 
-During this quick-start you will manipulate
+During this quick-start you will manipulate:
 
 - Orchestrate Command Line Interface
 - Orchestrate REST API
