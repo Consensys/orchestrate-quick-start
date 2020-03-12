@@ -30,7 +30,7 @@ For more information please refer to [Orchestrate Official Documentation](https:
     - [Inspect accounts in Hashicorp Vault](#inspect-accounts-in-hashicorp-vault)
   - [Connect a blockchain network](#connect-a-blockchain-network)
     - [Register blockchain network](#register-blockchain-network)
-    - [Send JSON-RPC request through Orchestrate blockchain proxy](#send-json-rpc-request-through-orchestrate-blockchain-proxy)
+    - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
   - [Configure a Faucet](#configure-a-faucet)
   - [Register a Smart Contract](#register-a-smart-contract)
     - [Compile Smart Contract](#compile-smart-contract)
@@ -158,7 +158,7 @@ curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<
 
 > **Note:** _Save chain unique identifier `uuid` for later usage_
 
-### Send JSON-RPC request through Orchestrate blockchain proxy
+### Send JSON-RPC request through blockchain proxy
 
 Verify that chain JSON-RPC is properly proxied by Orchestrate
 
