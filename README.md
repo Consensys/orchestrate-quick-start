@@ -36,7 +36,7 @@ For more information please refer to [PegaSys Orchestrate Official Documentation
   - [List Smart Contracts stored in registry](#list-smart-contracts-stored-in-registry)
   - [Get details about a Smart Contract](#get-details-about-a-smart-contract)
 - [Send Transactions](#send-transactions)
-  - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+  - [Create an account to send transactions](#create-an-account-to-send-transactions)
   - [Consume transaction receipts](#consume-transaction-receipts)
   - [Deploy a Smart Contract](#deploy-a-smart-contract)
   - [Send a transaction](#send-a-transaction)
@@ -168,7 +168,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
 
 ## Configure a Faucet
 
-> **Note:** _On non zero gas price networks (e.g. public networks such as mainnet or Rinkeby), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate provides a Faucet that allows to automatically prefund accounts managed in Orchestrate_
+> **Note:** _On non zero gas price networks (e.g. public networks such as Ethereum mainnet or Rinkeby), an Ethereum account must have a positive ETH balance to pay fees for its transactions to be mined. Orchestrate provides a Faucet that allows to automatically prefund accounts managed by Orchestrate_
 
 ### Create Faucet
 
@@ -177,7 +177,7 @@ Use Orchestrate API to configure a Faucet, you should provide
 - `name` for the Faucet
 - `creditorAccount` that will be used to credit other accounts
 - `chainRule` chain unique unique identifier `uuid`
-- Faucet configuration (c.f. Orchestrate documentation for more details)
+- Faucet configuration (c.f. [Orchestrate documentation](https://docs.orchestrate.pegasys.tech) for more details)
 
 Run next command by setting placeholder to the account and chain uuid previously saved
 
@@ -207,9 +207,9 @@ npm run compile
 
 <img src="static/compile-contract.png" width="900px" alt="Compile contract"/>
 
-> **Note:** _We use Truffle for compilation_
+> **Note:** _It uses [Truffle Suites](https://www.trufflesuite.com/) for compilation_
 
-> **Note:** _Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract_
+> **Note:** _This Quick Start provides you with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity Smart Contract_
 
 ### Push artifacts to Smart Contract registry
 
@@ -241,9 +241,9 @@ npm run get-contract
 
 First create a `.env` file at the root of the project by copying `.env.example`
 
-### Create an account pre-funded by Faucet
+### Create an account to send transactions
 
-Generate a new account indicating name of the chain to be pre-funded on
+Generate a new account indicating name of the chain to be pre-funded on (Faucet will automatically credit the account after creation)
 
 ```bash
 npm run generate-account --chain rinkeby
