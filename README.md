@@ -243,7 +243,7 @@ First create a `.env` file at the root of the project by copying `.env.example`
 
 ### Create an account pre-funded by Faucet
 
-Generate a new accountn indicating name of a chain to be pre-funded on faucet to prefund the account
+Generate a new account indicating name of the chain to be pre-funded on
 
 ```bash
 npm run generate-account --chain rinkeby
@@ -253,13 +253,13 @@ npm run generate-account --chain rinkeby
 
 **Note:** _This account will be automatically funded by the Faucet service configured previously._
 
+If using Rinkeby you can verify that the account has been properly pre-funded by the Faucet using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
+
+<img src="static/etherscan-account.png" width="400px" alt="Get catalog"/>
+
 **Update `.env`**
 
 Set `FROM_ACCOUNT` value in `.env` to the address created (it will be used to send transactions)_
-
-If using Rinkeby you can verify that the account has been properly pre-funded by the Faucet using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
-
-<img src="static/etherscan-account.png" width="900px" alt="Get catalog"/>
 
 ### Consume transaction receipts
 
@@ -291,14 +291,13 @@ After a few seconds (depending on blocktime) you should see the transaction rece
 
 <img src="static/npm-deploy.png" width="900px" alt="Get catalog"/>
 
+If using Rinkeby you can verify that the account has been sent using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
+
+<img src="static/etherscan-deploy.png" width="400px" alt="Get catalog"/>
 
 **Update `.env`**
 
 Set `TO_ACCOUNT` value in `.env` with the address of the contract just deployed (you can find it in the receipt at `contractAddress`)
-
-If using Rinkeby you can verify that the account has been sent using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
-
-<img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
 ### Send a transaction
 
@@ -318,4 +317,4 @@ After a few seconds (depending on blocktime) you should see the transaction rece
 
 If using Rinkeby you can verify that the account has been sent using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
 
-<img src="static/etherscan-send-tx.png" width="900px" alt="Get catalog"/>
+<img src="static/etherscan-send-tx.png" width="400px" alt="Get catalog"/>
