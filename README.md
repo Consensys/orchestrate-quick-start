@@ -144,7 +144,7 @@ make hashicorp-vault COMMAND="token lookup"
 Use Orchestrate API to register a blockchain network, you should provide
 
 - `name` for the network
-- `urls` of at least one JSON-RPC endpoint of an Ethereum node in the network
+- `urls` of, at least, one JSON-RPC endpoint of an Ethereum node in the network
 
 Run next command and save chain unique identifier `uuid` for later usage
 
