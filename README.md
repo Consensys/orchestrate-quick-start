@@ -146,7 +146,7 @@ Use Orchestrate API to register a blockchain network, you should provide
 - `name` for the network
 - `urls` of at least one JSON-RPC endpoint of an Ethereum node in the network
 
-> **Note:** _We will be connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same procedure_
+Run next command and save chain unique identifier `uuid` for later usage
 
 ```bash
 curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<INFURA_PROJECT_ID>"]}' localhost:8081/chains
@@ -154,7 +154,7 @@ curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<
 
 <img src="static/post-chain.png" width="900px" alt="Create Chain"/>
 
-> **Note:** _Save chain unique identifier `uuid` for later usage_
+> **Note:** _We are connecting to Rinkeby through [Infura](https://infura.io/) but you can connect to any Ethereum network using same procedure_
 
 ### Send JSON-RPC request through blockchain proxy
 
@@ -175,11 +175,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
 Use Orchestrate API to configure a Faucet, you should provide
 
 - `name` for the Faucet
-- `creditorAccount` that will be used to credit other accounts (account should be managed by Orchestrate)
+- `creditorAccount` that will be used to credit other accounts
 - `chainRule` chain unique unique identifier
 - Faucet configuration (c.f. Orchestrate documentation for more details)
 
-> **Note:** _Set `creditorAccount` and `chainRule` with values you saved in prior sections of this Quick Start_
+Run next command by setting placeholder to the account and chain uuid previously saved
 
 ```bash
 curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUNT>","chainRule":"<CHAIN_UUID>","cooldown":"10s","amount":"60000000000000000","maxBalance":"100000000000000000"}' localhost:8081/faucets
@@ -199,8 +199,6 @@ If you do not have any ETH, you can request some from an official Faucet (e.g. h
 
 ## Register a Smart Contract
 
-> **Note:** _Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract_
-
 ### Compile Smart Contract
 
 ```bash
@@ -210,6 +208,8 @@ npm run compile
 <img src="static/compile-contract.png" width="900px" alt="Compile contract"/>
 
 > **Note:** _We use Truffle for compilation_
+
+> **Note:** _Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract_
 
 ### Push artifacts to Smart Contract registry
 
