@@ -17,24 +17,26 @@ For more information please refer to Orchestrate official [documentation](https:
 
 # Quick-Start
 
-- [Requirements](#requirements)
-- [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
-  - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
-  - [Run Orchestrate](#run-orchestrate)
-  - [Install CLI](#install-cli)
-- [Create an Ethereum account](#create-an-ethereum-account)
-  - [Create account using CLI](#create-account-using-cli)
-  - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
-- [Connect to a blockchain network](#connect-to-a-blockchain-network)
-  - [Register a blockchain network](#register-a-blockchain-network)
-  - [Control network is properly registered](#control-network-is-properly-registered)
-- [Configure a Faucet](#configure-a-faucet)
-- [Register a Smart Contract](#register-a-smart-contract)
-- [Send Transactions](#send-transactions)
-  - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
-  - [Consume transaction receipts](#consume-transaction-receipts)
-  - [Deploy Smart Contract](#deploy-smart-contract)
-  - [Send a transaction](#send-a-transaction)
+- [PegaSys Orchestrate Quick Start](#pegasys-orchestrate-quick-start)
+- [Quick-Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
+    - [Run Orchestrate](#run-orchestrate)
+    - [Install CLI](#install-cli)
+  - [Create an Ethereum account](#create-an-ethereum-account)
+    - [Create account using CLI](#create-account-using-cli)
+    - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
+  - [Connect to a blockchain network](#connect-to-a-blockchain-network)
+    - [Register a blockchain network](#register-a-blockchain-network)
+    - [Control network is properly registered](#control-network-is-properly-registered)
+  - [Configure a Faucet](#configure-a-faucet)
+  - [Register a Smart Contract](#register-a-smart-contract)
+  - [Send Transactions](#send-transactions)
+    - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+    - [Consume transaction receipts](#consume-transaction-receipts)
+    - [Deploy Smart Contract](#deploy-smart-contract)
+    - [Send a transaction](#send-a-transaction)
 
 During this quick-start you will manipulate
 
@@ -67,8 +69,8 @@ make up
 
 In particular it started
 
-- Orchestrate external dependencies (Kafka, Redis, Postgres, Hashicorp Vault). See `scripts/deps/docker-compose.yml`)
-- Orchestrate Microservices
+- Orchestrate external dependencies (Kafka, Redis, Postgres, Hashicorp Vault). See [docker-compose.yml](scripts/deps/docker-compose.yml)
+- Orchestrate microservices. See [docker-compose.yml](docker-compose.yml)
 
 > **Note:** _Run `make down` to stop Orchestrate and remove all data volumes_
 
