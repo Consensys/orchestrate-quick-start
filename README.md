@@ -32,6 +32,8 @@ For more information please refer to [PegaSys Orchestrate Official Documentation
     - [Register blockchain network](#register-blockchain-network)
     - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
   - [Configure a Faucet](#configure-a-faucet)
+    - [Create Faucet](#create-faucet)
+    - [Transfer Ether to Faucet Account](#transfer-ether-to-faucet-account)
   - [Register a Smart Contract](#register-a-smart-contract)
     - [Compile Smart Contract](#compile-smart-contract)
     - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
@@ -170,7 +172,9 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
 
 ## Configure a Faucet
 
-> **Note:** _On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate_
+> **Note:** _On non zero gas price networks (e.g. public networks such as mainnet or Rinkeby), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate provides a Faucet that allows to automatically prefund accounts managed in Orchestrate_
+
+### Create Faucet
 
 Use Orchestrate API to configure a Faucet, you should provide
 
@@ -181,13 +185,21 @@ Use Orchestrate API to configure a Faucet, you should provide
 
 > **Note:** _Set `creditorAccount` and `chainRule` with values you saved in prior sections of this Quick Start_
 
-> **Warning:** _Faucet account must be credited with some ETH. To do so, you can use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a ETH transfer transaction using Metamask_
-
 ```bash
 curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUNT>","chainRule":"<CHAIN_UUID>","cooldown":"10s","amount":"60000000000000000","maxBalance":"100000000000000000"}' localhost:8081/faucets
 ```
 
 <img src="static/post-faucet.png" width="900px" alt="Create Faucet"/>
+
+### Transfer Ether to Faucet Account
+
+> **Warning:** _In order to credit other addresses, Faucet account must be credited with some ETH_
+
+The recommended approach is to credit Faucet Account by transfering some ETH from one of your personnal Ethereum account using MetaMask (1 ETH is enough).
+
+<img src="static/metamask-credit-faucet.png" width="900px" alt="Credit Faucet with MetaMask"/>
+
+If you do not have any ETH, you can request some from an official Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network).
 
 ## Register a Smart Contract
 
