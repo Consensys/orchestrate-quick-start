@@ -17,29 +17,31 @@ For more information please refer to [Orchestrate Official Documentation](https:
 
 # Quick-Start
 
-- [Requirements](#requirements)
-- [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
-  - [Clone project](#clone-project)
-  - [Login on Docker registry](#login-on-docker-registry)
-  - [Run Orchestrate](#run-orchestrate)
-  - [Install CLI](#install-cli)
-- [Create an Ethereum account](#create-an-ethereum-account)
-  - [Create account](#create-account)
-  - [Inspect accounts in Hashicorp Vault](#inspect-accounts-in-hashicorp-vault)
-- [Connect a blockchain network](#connect-a-blockchain-network)
-  - [Register blockchain network](#register-blockchain-network)
-  - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
-- [Configure a Faucet](#configure-a-faucet)
-- [Register a Smart Contract](#register-a-smart-contract)
-  - [Compile Smart Contract](#compile-smart-contract)
-  - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
-  - [List Smart Contracts stored in registry](#list-smart-contracts-stored-in-registry)
-  - [Get details about a Smart Contract](#get-details-about-a-smart-contract)
-- [Send Transactions](#send-transactions)
-  - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
-  - [Consume transaction receipts](#consume-transaction-receipts)
-  - [Deploy Smart Contract](#deploy-smart-contract)
-  - [Send a transaction](#send-a-transaction)
+- [PegaSys Orchestrate Quick Start](#pegasys-orchestrate-quick-start)
+- [Quick-Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Clone project](#clone-project)
+    - [Login on Docker registry](#login-on-docker-registry)
+    - [Run Orchestrate](#run-orchestrate)
+    - [Install CLI](#install-cli)
+  - [Create an Ethereum account](#create-an-ethereum-account)
+    - [Create account](#create-account)
+    - [Inspect accounts in Hashicorp Vault](#inspect-accounts-in-hashicorp-vault)
+  - [Connect a blockchain network](#connect-a-blockchain-network)
+    - [Register blockchain network](#register-blockchain-network)
+    - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
+  - [Configure a Faucet](#configure-a-faucet)
+  - [Register a Smart Contract](#register-a-smart-contract)
+    - [Compile Smart Contract](#compile-smart-contract)
+    - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
+    - [List Smart Contracts stored in registry](#list-smart-contracts-stored-in-registry)
+    - [Get details about a Smart Contract](#get-details-about-a-smart-contract)
+  - [Send Transactions](#send-transactions)
+    - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+    - [Consume transaction receipts](#consume-transaction-receipts)
+    - [Deploy Smart Contract](#deploy-smart-contract)
+    - [Send a transaction](#send-a-transaction)
 
 During this quick-start you will manipulate
 
@@ -226,6 +228,8 @@ npm run get-contract
 <img src="static/get-contract.png" width="900px" alt="Get contract"/>
 
 ## Send Transactions
+
+> **Important:** _First create a `.env` file by copying `.env.example`_
 
 ### Create an account pre-funded by Faucet
 

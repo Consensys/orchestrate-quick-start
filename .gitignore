@@ -15,3 +15,6 @@ build
 
 # Compiled JS
 dist
+
+# Env variable
+.env
