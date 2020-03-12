@@ -309,7 +309,7 @@ npm run send-tx
 
 > **Reference script:** [send-tx.ts](src/send-tx/send-tx.ts)
 
-After a few seconds (depending on blocktime) you should see the transaction receipt appearing in the consumer tab
+After a few seconds (depending on blocktime) you should see the transaction receipt appearing in the consumer terminal
 
 <img src="static/npm-send-tx.png" width="900px" alt="Send Tx"/>
 
