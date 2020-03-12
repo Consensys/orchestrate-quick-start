@@ -4,7 +4,7 @@
   <img src="static/orchestrate-logo.png" width="400px" alt="Orchestrate Logo"/>
 </p>
 
-PegaSys Orchestrate is a platform that enables enterprises to easily build secure and reliable applications on the Ethereum blockchain.
+PegaSys Orchestrate is a platform that enables enterprises to easily build secure and reliable applications on Ethereum blockchains.
 
 It provides all features to connect to blockchain networks
 
