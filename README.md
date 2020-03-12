@@ -20,7 +20,7 @@ For more information please refer to [Orchestrate Official Documentation](https:
 - [Requirements](#requirements)
 - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
   - [Clone project](#clone-project)
-  - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
+  - [Login on Docker registry](#login-on-docker-registry)
   - [Run Orchestrate](#run-orchestrate)
   - [Install CLI](#install-cli)
 - [Create an Ethereum account](#create-an-ethereum-account)
@@ -60,7 +60,7 @@ During this quick-start you will manipulate
 git clone git@github.com:PegaSysEng/orchestrate-quick-start.git
 ```
 
-### Login on Orchestrate Docker registry
+### Login on Docker registry
 
 If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry. If you do not have credentials, please contact support@pegasys.tech
 
