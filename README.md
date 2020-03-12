@@ -31,7 +31,7 @@ For more information please refer to [PegaSys Orchestrate Official Documentation
   - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
 - [Configure a Faucet](#configure-a-faucet)
   - [Create Faucet](#create-faucet)
-  - [Transfer Ether to Faucet Account](#transfer-ether-to-faucet-account)
+  - [Send ETH to Faucet Account](#send-eth-to-faucet-account)
 - [Register a Smart Contract](#register-a-smart-contract)
   - [Compile Smart Contract](#compile-smart-contract)
   - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
@@ -189,11 +189,11 @@ curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUN
 
 <img src="static/post-faucet.png" width="900px" alt="Create Faucet"/>
 
-### Transfer Ether to Faucet Account
+### Send ETH to Faucet Account
 
 > **Warning:** _In order to credit other addresses, Faucet account must be credited with some ETH_
 
-The recommended approach is to credit Faucet Account by transfering some ETH from one of your personnal Ethereum account using MetaMask (1 ETH is enough).
+The recommended approach is to credit Faucet Account by sending some ETH from one of your personnal Ethereum account using MetaMask (1 ETH is enough).
 
 <img src="static/metamask-credit-faucet.png" width="400px" alt="Credit Faucet with MetaMask"/>
 
