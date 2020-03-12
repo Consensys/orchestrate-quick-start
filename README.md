@@ -107,15 +107,13 @@ npm run orchestrate [cmd] help
 
 ### Create account
 
-Use Orchestrate CLI to generate an account
+Use Orchestrate CLI to generate an account and save it (it will be used as Faucet account)
 
 ```bash
 npm run generate-account
 ```
 
 <img src="static/generate-account.png" width="900px" alt="Generate Account"/>
-
-> **Note:** _Save generated account address for later usage_
 
 ### Inspect accounts in Hashicorp Vault
 
