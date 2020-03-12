@@ -21,9 +21,9 @@ For more information please refer to [PegaSys Orchestrate Official Documentation
   - [Login on Docker registry](#login-on-docker-registry)
   - [Run Orchestrate](#run-orchestrate)
   - [Install CLI](#install-cli)
-- [Create an Ethereum account](#create-an-ethereum-account)
+- [Create a blockchain account](#create-a-blockchain-account)
   - [Create account](#create-account)
-  - [Inspect accounts in Hashicorp Vault](#inspect-accounts-in-hashicorp-vault)
+  - [List accounts stored in Hashicorp Vault](#list-accounts-stored-in-hashicorp-vault)
 - [Connect a blockchain network](#connect-a-blockchain-network)
   - [Register blockchain network](#register-blockchain-network)
   - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
@@ -62,7 +62,7 @@ git clone https://github.com/PegaSysEng/orchestrate-quick-start.git
 
 ### Login on Docker registry
 
-If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry. If you do not have credentials, please contact support@pegasys.tech
+If you are running Orchestrate for the first time you need to login on Orchestrate Docker registry. If you do not have credentials, please contact support@pegasys.tech
 
 ```bash
 docker login -u <username> -p <password or API key> consensys-docker-pegasys-orchestrate.bintray.io
@@ -91,7 +91,7 @@ make up
 npm install
 ```
 
-Verify CLI is properly installed and list all commands by running
+Verify CLI is properly installed and list all commands by running:
 
 ```bash
 npm run orchestrate help
@@ -105,7 +105,7 @@ npm run orchestrate [cmd] help
 
 **Example:** `npm run orchestrate contracts help`
 
-## Create an Ethereum account
+## Create a blockchain account
 
 ### Create account
 
@@ -117,7 +117,7 @@ npm run generate-account
 
 <img src="static/generate-account.png" width="900px" alt="Generate Account"/>
 
-### Inspect accounts in Hashicorp Vault
+### List accounts stored in Hashicorp Vault
 
 ```bash
 make hashicorp-accounts
