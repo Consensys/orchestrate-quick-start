@@ -191,7 +191,7 @@ curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUN
 
 > **Warning:** _In order to credit other addresses, Faucet account must be credited with some ETH_
 
-The recommended approach is to credit Faucet Account by sending some ETH from one of your personnal Ethereum account using MetaMask (1 ETH is enough).
+The recommended approach is to credit Faucet Account by sending some ETH from one of your personnal Ethereum account using [MetaMask](https://metamask.io/) (1 ETH is enough). If not familiar with MetaMask you can refer to this [Medium post](https://medium.com/openberry/getting-started-with-metamask-b9ac23a10c83).
 
 <img src="static/metamask-credit-faucet.png" width="400px" alt="Credit Faucet with MetaMask"/>
 
