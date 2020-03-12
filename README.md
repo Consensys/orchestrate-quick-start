@@ -13,28 +13,31 @@ It provides all features to connect to blockchain networks
 - Smart Contract Registry
 - Multi-chain & Multi-protocol (public or private)
 
+For more information please refer to Orchestrate official [documentation](https://docs.orchestrate.pegasys.tech/).
+
 # Quick-Start
 
-- [Requirements](#requirements)
-- [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
-  - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
-  - [Configure Orchestrate](#configure-orchestrate)
-  - [Run Orchestrate](#run-orchestrate)
-  - [Install CLI](#install-cli)
-- [Create an Ethereum account](#create-an-ethereum-account)
-  - [Create account using CLI](#create-account-using-cli)
-  - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
-- [Connect to a blockchain network](#connect-to-a-blockchain-network)
-  - [Register a blockchain network](#register-a-blockchain-network)
-  - [Control network is properly registered](#control-network-is-properly-registered)
-  - [Configure network](#configure-network)
-    - [Add Faucet](#add-faucet)
-- [Register a Smart Contract](#register-a-smart-contract)
-- [Send Transactions](#send-transactions)
-  - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
-  - [Consume transaction receipts](#consume-transaction-receipts)
-  - [Deploy Smart Contract](#deploy-smart-contract)
-  - [Send a transaction](#send-a-transaction)
+- [PegaSys Orchestrate Quick Start](#pegasys-orchestrate-quick-start)
+- [Quick-Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
+    - [Configure Orchestrate](#configure-orchestrate)
+    - [Run Orchestrate](#run-orchestrate)
+    - [Install CLI](#install-cli)
+  - [Create an Ethereum account](#create-an-ethereum-account)
+    - [Create account using CLI](#create-account-using-cli)
+    - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
+  - [Connect to a blockchain network](#connect-to-a-blockchain-network)
+    - [Register a blockchain network](#register-a-blockchain-network)
+    - [Control network is properly registered](#control-network-is-properly-registered)
+  - [Configure a Faucet](#configure-a-faucet)
+  - [Register a Smart Contract](#register-a-smart-contract)
+  - [Send Transactions](#send-transactions)
+    - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+    - [Consume transaction receipts](#consume-transaction-receipts)
+    - [Deploy Smart Contract](#deploy-smart-contract)
+    - [Send a transaction](#send-a-transaction)
 
 During the quick-start you will manipulate
 
@@ -58,8 +61,6 @@ docker login -u <username> -p <password or API key> consensys-docker-pegasys-orc
 ```
 
 ### Configure Orchestrate
-
-Create a `.env` file following template and guidelines in `.env.example`.
 
 ### Run Orchestrate
 
@@ -157,9 +158,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
 
 <img src="static/json-rpc-proxy.png" width="900px" alt="JSON-RPC Response"/>
 
-### Configure network
-
-#### Add Faucet
+## Configure a Faucet
 
 > **Note:** _On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate_
 
