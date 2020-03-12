@@ -253,7 +253,7 @@ npm run generate-account --chain rinkeby
 
 If using Rinkeby you can verify that the account has been properly pre-funded by the Faucet using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
 
-<img src="static/etherscan-account.png" width="400px" alt="Get catalog"/>
+<img src="static/etherscan-account.png" width="600px" alt="Get catalog"/>
 
 **Update `.env`**
 
@@ -291,7 +291,7 @@ After a few seconds (depending on blocktime) you should see the transaction rece
 
 If using Rinkeby you can verify that the account has been sent using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
 
-<img src="static/etherscan-deploy.png" width="400px" alt="Get catalog"/>
+<img src="static/etherscan-deploy.png" width="600px" alt="Get catalog"/>
 
 **Update `.env`**
 
@@ -315,4 +315,4 @@ After a few seconds (depending on blocktime) you should see the transaction rece
 
 If using Rinkeby you can verify that the account has been sent using Etherscan (following url: https://rinkeby.etherscan.io/address/<FROM_ACCOUNT> after replacing placeholder)
 
-<img src="static/etherscan-send-tx.png" width="400px" alt="Get catalog"/>
+<img src="static/etherscan-send-tx.png" width="600px" alt="Get catalog"/>
