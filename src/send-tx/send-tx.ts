@@ -13,8 +13,8 @@ export const sendTx = async () => {
     contractName: 'Counter',
     methodSignature: 'increment(uint256)',
     args: [1],
-    to: process.env.COUNTER_CONTRACT_ADDRESS,
-    from: process.env.ETH_ACCOUNT!
+    to: process.env.TO_ACCOUNT,
+    from: process.env.FROM_ACCOUNT!
   })
 
   console.log('Transaction request sent with id', requestId)

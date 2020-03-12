@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 /**
- * @dev Implementation of the Counter contract for demo
+ * @dev Counter contract for demo purposes
  *
  */
 contract Counter {
