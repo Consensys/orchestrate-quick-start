@@ -269,6 +269,8 @@ On the second terminal, run:
 npm run deploy
 ```
 
+> **Reference script:** [deploy.ts](src/deploy-contract/deploy.ts)
+
 After a few seconds (depending on blocktime) you should see the transaction receipt appearing in the consumer terminal
 
 <img src="static/npm-deploy.png" width="900px" alt="Get catalog"/>
@@ -279,8 +281,6 @@ If using Rinkeby you can check transaction has been properly sent on Etherscan (
 
 <img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
-> **Reference script:** [deploy.ts](src/deploy-contract/deploy.ts)
-
 ### Send a transaction
 
 > **Important:** _Before moving forward make sure that `FROM_ACCOUNT` and `TO_ACCOUNT` in `.env` have been set_
@@ -289,6 +289,8 @@ If using Rinkeby you can check transaction has been properly sent on Etherscan (
 npm run send-tx
 ```
 
+> **Reference script:** [send-tx.ts](src/send-tx/send-tx.ts)
+
 After a few seconds (depending on blocktime) you should see the transaction receipt appearing in the consumer tab
 
 <img src="static/npm-send-tx.png" width="900px" alt="Send Tx"/>
@@ -296,5 +298,3 @@ After a few seconds (depending on blocktime) you should see the transaction rece
 If using Rinkeby you can check transaction has been properly sent on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
 
 <img src="static/etherscan-send-tx.png" width="900px" alt="Get catalog"/>
-
-> **Reference script:** [send-tx.ts](src/send-tx/send-tx.ts)
