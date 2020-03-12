@@ -6,40 +6,42 @@
 
 PegaSys Orchestrate is a platform that enables enterprises to easily build secure and reliable applications on the Ethereum blockchain.
 
-It provides all features to connect to blockchain networks
+It provides extensive features to connect to blockchain networks:
 
-- Transaction Management (transaction generation, gas management, nonce management, transaction listening...)
-- Account-Management with private key storage in Hashicorp Vault
+- Transaction management (transaction crafting, gas management, nonce management, transaction listening...)
+- Account management with private key storage in Hashicorp Vault
 - Smart Contract Registry
 - Multi-chain & Multi-protocol (public or private)
 
-For more information please refer to [Orchestrate Official Documentation](https://docs.orchestrate.pegasys.tech/).
+For more information please refer to [PegaSys Orchestrate Official Documentation](https://docs.orchestrate.pegasys.tech/).
 
 # Quick-Start
 
-- [Requirements](#requirements)
-- [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
-  - [Clone project](#clone-project)
-  - [Login on Docker registry](#login-on-docker-registry)
-  - [Run Orchestrate](#run-orchestrate)
-  - [Install CLI](#install-cli)
-- [Create an Ethereum account](#create-an-ethereum-account)
-  - [Create account](#create-account)
-  - [Inspect accounts in Hashicorp Vault](#inspect-accounts-in-hashicorp-vault)
-- [Connect a blockchain network](#connect-a-blockchain-network)
-  - [Register blockchain network](#register-blockchain-network)
-  - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
-- [Configure a Faucet](#configure-a-faucet)
-- [Register a Smart Contract](#register-a-smart-contract)
-  - [Compile Smart Contract](#compile-smart-contract)
-  - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
-  - [List Smart Contracts stored in registry](#list-smart-contracts-stored-in-registry)
-  - [Get details about a Smart Contract](#get-details-about-a-smart-contract)
-- [Send Transactions](#send-transactions)
-  - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
-  - [Consume transaction receipts](#consume-transaction-receipts)
-  - [Deploy Smart Contract](#deploy-smart-contract)
-  - [Send a transaction](#send-a-transaction)
+- [PegaSys Orchestrate Quick Start](#pegasys-orchestrate-quick-start)
+- [Quick-Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Clone project](#clone-project)
+    - [Login on Docker registry](#login-on-docker-registry)
+    - [Run Orchestrate](#run-orchestrate)
+    - [Install CLI](#install-cli)
+  - [Create an Ethereum account](#create-an-ethereum-account)
+    - [Create account](#create-account)
+    - [Inspect accounts in Hashicorp Vault](#inspect-accounts-in-hashicorp-vault)
+  - [Connect a blockchain network](#connect-a-blockchain-network)
+    - [Register blockchain network](#register-blockchain-network)
+    - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
+  - [Configure a Faucet](#configure-a-faucet)
+  - [Register a Smart Contract](#register-a-smart-contract)
+    - [Compile Smart Contract](#compile-smart-contract)
+    - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
+    - [List Smart Contracts stored in registry](#list-smart-contracts-stored-in-registry)
+    - [Get details about a Smart Contract](#get-details-about-a-smart-contract)
+  - [Send Transactions](#send-transactions)
+    - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+    - [Consume transaction receipts](#consume-transaction-receipts)
+    - [Deploy a Smart Contract](#deploy-a-smart-contract)
+    - [Send a transaction](#send-a-transaction)
 
 During this quick-start you will manipulate
 
@@ -231,7 +233,7 @@ npm run get-contract
 
 ### Create an account pre-funded by Faucet
 
-Generate a new account passing name of the chain for faucet to prefund the account
+Generate a new accountn indicating name of a chain to be pre-funded on faucet to prefund the account
 
 ```bash
 npm run generate-account --chain <CHAIN_NAME>
@@ -239,9 +241,11 @@ npm run generate-account --chain <CHAIN_NAME>
 
 <img src="static/generate-account-faucet.png" width="900px" alt="Get catalog"/>
 
-> Important: set `FROM_ACCOUNT` in `.env` with the address just created
+**Note:** _This account will be automatically funded by the Faucet service configured previously._
 
-If using Rinkeby you can verify that the account has been properly pre-funded by Faucet on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
+> **Important:** _Set `FROM_ACCOUNT` value in `.env` to the address created (it will be used to send transactions)_
+
+If using Rinkeby you can verify that the account has been properly pre-funded by the Faucet using Etherscan (following url: https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS> after replacing placeholder)
 
 <img src="static/etherscan-account.png" width="900px" alt="Get catalog"/>
 
@@ -251,7 +255,7 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 > **Note:** _Orchestrate uses Apache Kafka for asynchronous communications_
 
-Start consumer in a first terminal
+On a first terminal window start the consumer:
 
 ```bash
 npm run consume
@@ -261,11 +265,13 @@ npm run consume
 
 > **Reference script:** [consume.ts](src/consume/consume.ts)
 
-### Deploy Smart Contract
+> **Important**: _Leave this terminal window open without interupting consumer_
+
+### Deploy a Smart Contract
 
 > **Important:** _Before moving forward make sure that `FROM_ACCOUNT` in `.env` has been set_
 
-On the second terminal, run:
+On a second terminal window, run deployment script:
 
 ```bash
 npm run deploy
@@ -277,9 +283,9 @@ After a few seconds (depending on blocktime) you should see the transaction rece
 
 <img src="static/npm-deploy.png" width="900px" alt="Get catalog"/>
 
-> **Important:** _Set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt)_
+> **Important:** _Set `TO_ACCOUNT` value in `.env` with the address of the contract just deployed (you can find it in the receipt at `contractAddress`)_
 
-If using Rinkeby you can check transaction has been properly sent on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
+If using Rinkeby you can verify that the account has been sent using Etherscan (following url: https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS> after replacing placeholder)
 
 <img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
@@ -297,6 +303,6 @@ After a few seconds (depending on blocktime) you should see the transaction rece
 
 <img src="static/npm-send-tx.png" width="900px" alt="Send Tx"/>
 
-If using Rinkeby you can check transaction has been properly sent on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
+If using Rinkeby you can verify that the account has been sent using Etherscan (following url: https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS> after replacing placeholder)
 
 <img src="static/etherscan-send-tx.png" width="900px" alt="Get catalog"/>
