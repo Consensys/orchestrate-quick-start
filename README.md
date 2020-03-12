@@ -195,7 +195,7 @@ curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUN
 
 The recommended approach is to credit Faucet Account by transfering some ETH from one of your personnal Ethereum account using MetaMask (1 ETH is enough).
 
-<img src="static/metamask-credit-faucet.png" width="900px" alt="Credit Faucet with MetaMask"/>
+<img src="static/metamask-credit-faucet.png" width="400px" alt="Credit Faucet with MetaMask"/>
 
 If you do not have any ETH, you can request some from an official Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network).
 
