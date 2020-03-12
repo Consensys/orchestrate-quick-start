@@ -20,7 +20,6 @@ For more information please refer to Orchestrate official [documentation](https:
 - [Requirements](#requirements)
 - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
   - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
-  - [Configure Orchestrate](#configure-orchestrate)
   - [Run Orchestrate](#run-orchestrate)
   - [Install CLI](#install-cli)
 - [Create an Ethereum account](#create-an-ethereum-account)
@@ -57,8 +56,6 @@ If you are running Orchestrate for the 1st time you need to login on Orchestrate
 ```
 docker login -u <username> -p <password or API key> consensys-docker-pegasys-orchestrate.bintray.io
 ```
-
-### Configure Orchestrate
 
 ### Run Orchestrate
 
