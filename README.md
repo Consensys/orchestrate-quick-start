@@ -170,14 +170,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":[
 
 > **Note:** _On non zero gas price networks (e.g. public networks such as mainnet), an Ethereum account must be pre-funded with ETH to be able to send transaction. Orchestrate Faucet allows to automatically prefund accounts managed in Orchestrate_
 
-Use Orchestrate API to add a Faucet the network, you should provide
+Use Orchestrate API to configure a Faucet, you should provide
 
 - `name` for the Faucet
 - `creditorAccount` that will be used to credit other accounts (account should be managed by Orchestrate)
 - `chainRule` chain unique unique identifier
 - Faucet configuration (c.f. Orchestrate documentation for more details)
 
-> **Note:** _Set `creditorAccount` and `chainRule` with values generated in prior Quick Start sections_
+> **Note:** _Set `creditorAccount` and `chainRule` with values you saved in prior sections of this Quick Start_
 
 > **Warning:** _Faucet account must be credited with some ETH. To do so, you can use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a ETH transfer transaction using Metamask_
 
@@ -229,7 +229,7 @@ npm run get-contract
 
 ### Create an account pre-funded by Faucet
 
-Generate a new account passing name of the chain to prefund the account on
+Generate a new account passing name of the chain for faucet to prefund the account
 
 ```bash
 npm run generate-account --chain <CHAIN_NAME>
@@ -237,11 +237,11 @@ npm run generate-account --chain <CHAIN_NAME>
 
 <img src="static/generate-account-faucet.png" width="900px" alt="Get catalog"/>
 
+> Important: set `FROM_ACCOUNT` in `.env` with the address just created
+
 If using Rinkeby you can verify that the account has been properly pre-funded by Faucet on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
 
 <img src="static/etherscan-account.png" width="900px" alt="Get catalog"/>
-
-> Important: set `FROM_ACCOUNT` in `.env` with the address just created
 
 ### Consume transaction receipts
 
@@ -263,23 +263,23 @@ npm run consume
 
 > **Important:** _Before moving forward make sure that `FROM_ACCOUNT` in `.env` has been set_
 
-On the second tab, run:
+On the second terminal, run:
 
 ```bash
 npm run deploy
 ```
 
-After a few seconds (depending on blocktime) you you should see the transaction receipt appearing in the consumer tab
+After a few seconds (depending on blocktime) you should see the transaction receipt appearing in the consumer terminal
 
 <img src="static/npm-deploy.png" width="900px" alt="Get catalog"/>
+
+> **Important:** _Set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt)_
 
 If using Rinkeby you can check transaction has been properly sent on Etherscan (https://rinkeby.etherscan.io/address/<ACCOUNT_ADDRESS>)
 
 <img src="static/etherscan-deploy.png" width="900px" alt="Get catalog"/>
 
 > **Reference script:** [deploy.ts](src/deploy-contract/deploy.ts)
-
-> **Important:** _Set `TO_ACCOUNT` in `.env` with the address of the contract just deployed (you can find it in the receipt)_
 
 ### Send a transaction
 
@@ -289,7 +289,7 @@ If using Rinkeby you can check transaction has been properly sent on Etherscan (
 npm run send-tx
 ```
 
-After a few seconds (depending on blocktime) you you should see the transaction receipt appearing in the consumer tab
+After a few seconds (depending on blocktime) you should see the transaction receipt appearing in the consumer tab
 
 <img src="static/npm-send-tx.png" width="900px" alt="Send Tx"/>
 
