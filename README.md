@@ -271,9 +271,9 @@ On a first terminal window start the consumer and leave terminal open without in
 npm run consume
 ```
 
-<img src="static/npm-consume.png" width="900px" alt="Get catalog"/>
-
 > **Reference script:** [consume.ts](src/consume/consume.ts)
+
+<img src="static/npm-consume.png" width="900px" alt="Get catalog"/>
 
 ### Deploy a Smart Contract
 
