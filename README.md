@@ -13,10 +13,9 @@ It provides all features to connect to blockchain networks
 - Smart Contract Registry
 - Multi-chain & Multi-protocol (public or private)
 
-For more information please refer to Orchestrate [official documentation](https://docs.orchestrate.pegasys.tech/).
+For more information please refer to [Orchestrate Official Documentation](https://docs.orchestrate.pegasys.tech/).
 
 # Quick-Start
-
 
 - [Requirements](#requirements)
 - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
@@ -46,8 +45,8 @@ During this quick-start you will manipulate
 
 ## Requirements
 
-- Have [`docker`](https://www.docker.com/) and [`docker-compose`](https://docs.docker.com/compose/install/) installed
-- Have [`node` and `npm`](https://nodejs.org/en/) installed
+- Have [`docker>=18`](https://www.docker.com/) and [`docker-compose`](https://docs.docker.com/compose/install/) installed
+- Have [`node>=10` and `npm`](https://nodejs.org/en/) installed
 
 ## Set-up and run Orchestrate
 
