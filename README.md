@@ -51,7 +51,7 @@ During this quick-start you will manipulate
 
 ### Login on Orchestrate Docker registry
 
-If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry. If you do not have credentials yet, please contact support@pegasys.tech
+If you are running Orchestrate for the 1st time you need to login on Orchestrate Docker registry. If you do not have credentials, please contact support@pegasys.tech
 
 ```
 docker login -u <username> -p <password or API key> consensys-docker-pegasys-orchestrate.bintray.io
