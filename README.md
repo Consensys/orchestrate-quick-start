@@ -17,25 +17,31 @@ For more information please refer to [Orchestrate Official Documentation](https:
 
 # Quick-Start
 
-- [Requirements](#requirements)
-- [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
-  - [Clone project](#clone-project)
-  - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
-  - [Run Orchestrate](#run-orchestrate)
-  - [Install CLI](#install-cli)
-- [Create an Ethereum account](#create-an-ethereum-account)
-  - [Create account using CLI](#create-account-using-cli)
-  - [Inspect Ethereum accounts in Hashicorp Vault](#inspect-ethereum-accounts-in-hashicorp-vault)
-- [Connect to a blockchain network](#connect-to-a-blockchain-network)
-  - [Register a blockchain network](#register-a-blockchain-network)
-  - [Control network is properly registered](#control-network-is-properly-registered)
-- [Configure a Faucet](#configure-a-faucet)
-- [Register a Smart Contract](#register-a-smart-contract)
-- [Send Transactions](#send-transactions)
-  - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
-  - [Consume transaction receipts](#consume-transaction-receipts)
-  - [Deploy Smart Contract](#deploy-smart-contract)
-  - [Send a transaction](#send-a-transaction)
+- [PegaSys Orchestrate Quick Start](#pegasys-orchestrate-quick-start)
+- [Quick-Start](#quick-start)
+  - [Requirements](#requirements)
+  - [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
+    - [Clone project](#clone-project)
+    - [Login on Orchestrate Docker registry](#login-on-orchestrate-docker-registry)
+    - [Run Orchestrate](#run-orchestrate)
+    - [Install CLI](#install-cli)
+  - [Create an Ethereum account](#create-an-ethereum-account)
+    - [Create account](#create-account)
+    - [Inspect accounts in Hashicorp Vault](#inspect-accounts-in-hashicorp-vault)
+  - [Connect a blockchain network](#connect-a-blockchain-network)
+    - [Register blockchain network](#register-blockchain-network)
+    - [Send JSON-RPC request through Orchestrate blockchain proxy](#send-json-rpc-request-through-orchestrate-blockchain-proxy)
+  - [Configure a Faucet](#configure-a-faucet)
+  - [Register a Smart Contract](#register-a-smart-contract)
+    - [Compile Smart Contract](#compile-smart-contract)
+    - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
+    - [List Smart Contracts stored in registry](#list-smart-contracts-stored-in-registry)
+    - [Get details about a Smart Contract](#get-details-about-a-smart-contract)
+  - [Send Transactions](#send-transactions)
+    - [Create an account pre-funded by Faucet](#create-an-account-pre-funded-by-faucet)
+    - [Consume transaction receipts](#consume-transaction-receipts)
+    - [Deploy Smart Contract](#deploy-smart-contract)
+    - [Send a transaction](#send-a-transaction)
 
 During this quick-start you will manipulate
 
@@ -101,7 +107,9 @@ npm run orchestrate [cmd] help
 
 ## Create an Ethereum account
 
-### Create account using CLI
+### Create account
+
+Use Orchestrate CLI to generate an account
 
 ```bash
 npm run generate-account
@@ -111,7 +119,7 @@ npm run generate-account
 
 > **Note:** _Save generated account address for later usage_
 
-### Inspect Ethereum accounts in Hashicorp Vault
+### Inspect accounts in Hashicorp Vault
 
 ```bash
 make hashicorp-accounts
@@ -131,11 +139,11 @@ For example
 make hashicorp-vault COMMAND="token lookup"
 ```
 
-## Connect to a blockchain network
+## Connect a blockchain network
 
-### Register a blockchain network
+### Register blockchain network
 
-Use Orchestrate API to add a blockchain network, you should provide
+Use Orchestrate API to register a blockchain network, you should provide
 
 - `name` for the network
 - `urls` of at least one JSON-RPC endpoint of an Ethereum node in the network
@@ -150,7 +158,7 @@ curl -X POST --data '{"name": "rinkeby", "urls":["https://rinkeby.infura.io/v3/<
 
 > **Note:** _Save chain unique identifier `uuid` for later usage_
 
-### Control network is properly registered
+### Send JSON-RPC request through Orchestrate blockchain proxy
 
 Verify that chain JSON-RPC is properly proxied by Orchestrate
 
@@ -173,7 +181,7 @@ Use Orchestrate API to add a Faucet the network, you should provide
 
 > **Note:** _Set `creditorAccount` and `chainRule` with values generated in prior Quick Start sections_
 
-> **Warning:** _Faucet account must own some ETH. To do so, you can either use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a transfer some ETH using Metamask_
+> **Warning:** _Faucet account must be credited with some ETH. To do so, you can use a Faucet (e.g. https://faucet.rinkeby.io/ if using Rinkeby network) or send a ETH transfer transaction using Metamask_
 
 ```bash
 curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUNT>","chainRule":"<CHAIN_UUID>","cooldown":"10s","amount":"60000000000000000","maxBalance":"100000000000000000"}' localhost:8081/faucets
@@ -185,7 +193,7 @@ curl -X POST --data '{"name":"rinkeby-faucet", "creditorAccount":"<FAUCET_ACCOUN
 
 > **Note:** _Quick Start comes with a simple Solidity Smart Contract [Counter.sol](smart-contracts/Counter.sol) but you could use any Solidity contract_
 
-1. Compile Smart Contract (it uses Truffle for compilation)
+### Compile Smart Contract
 
 ```bash
 npm run compile
@@ -193,7 +201,9 @@ npm run compile
 
 <img src="static/compile-contract.png" width="900px" alt="Compile contract"/>
 
-2. Register Smart Contract on Orchestrate
+> **Note:** _We use Truffle for compilation_
+
+### Push artifacts to Smart Contract registry
 
 ```bash
 npm run register-contract
@@ -201,7 +211,7 @@ npm run register-contract
 
 <img src="static/register-contract.png" width="900px" alt="Register contract"/>
 
-3. Verify that the contract has been successfully registered
+### List Smart Contracts stored in registry
 
 ```bash
 npm run get-catalog
@@ -209,7 +219,7 @@ npm run get-catalog
 
 <img src="static/get-catalog.png" width="900px" alt="Get catalog"/>
 
-4. You can get details about the registered contract
+### Get details about a Smart Contract
 
 ```bash
 npm run get-contract
