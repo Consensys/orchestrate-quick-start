@@ -2,6 +2,9 @@
   "name": "pegasys-orchestrate-quick-start",
   "version": "2.0.0",
   "description": "PegaSys Orchestrate Quick start",
+  "config": {
+    "chain": "rinkeby"
+  },
   "scripts": {
     "lint": "tslint -p . -c tslint.json",
     "lint:fix": "npm run lint -- --fix",
@@ -13,7 +16,7 @@
     "register-contract": "orchestrate contracts register -e localhost:8020 -n Counter -f build/contracts/Counter.json",
     "get-contract": "orchestrate contracts contract -e localhost:8020 -n Counter",
     "get-catalog": "orchestrate contracts catalog --endpoint localhost:8020",
-    "generate-account": "orchestrate accounts generate --endpoint localhost:9092 --chain rinkeby",
+    "generate-account": "orchestrate accounts generate --endpoint localhost:9092 --chain $npm_package_config_chain",
     "consume": "ts-node src/consume",
     "deploy": "ts-node src/deploy-contract",
     "send-tx": "ts-node src/send-tx",

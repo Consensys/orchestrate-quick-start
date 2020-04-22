@@ -9,7 +9,7 @@ export const sendTx = async () => {
   await producer.connect()
 
   const requestId = await producer.sendTransaction({
-    chainName: 'rinkeby',
+    chainName: process.env.npm_package_config_chain,
     contractName: 'Counter',
     methodSignature: 'increment(uint256)',
     args: [1],

@@ -1,6 +1,10 @@
-VAULT_TOKEN := 
+VAULT_TOKEN :=
 
 .PHONY: all
+
+ifneq ($(NODE),)
+NODE_COMPOSE_CONFIG = -f scripts/deps/docker-compose-$(NODE).yml
+endif
 
 orchestrate:
 	@docker-compose up -d $(CMD_RUN)
@@ -12,10 +16,10 @@ down-orchestrate:
 	@docker-compose down --volumes --timeout 0
 
 deps:
-	@docker-compose -f scripts/deps/docker-compose.yml up -d
+	@docker-compose -f scripts/deps/docker-compose.yml $(NODE_COMPOSE_CONFIG) up -d
 
 down-deps:
-	@docker-compose -f scripts/deps/docker-compose.yml down --volumes --timeout 0
+	@docker-compose -f scripts/deps/docker-compose.yml $(NODE_COMPOSE_CONFIG) down --volumes --timeout 0
 
 up: deps orchestrate
 

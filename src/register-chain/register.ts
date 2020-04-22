@@ -10,7 +10,7 @@ export const register = async () => {
   console.log('New chain registered', chainResponse.data)
 
   const faucetResponse = await Axios.post('http://localhost:8081/faucets', {
-    name: 'rinkeby-faucet',
+    name: chainResponse.data.name + '-faucet',
     amount: utils.parseEther('0.005').toString(),
     chainRule: chainResponse.data.uuid,
     cooldown: '10s',
