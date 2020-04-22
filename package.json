@@ -46,7 +46,7 @@
     "ethers": "~4.0.45",
     "husky": "~4.0.1",
     "lint-staged": "~9.5.0",
-    "pegasys-orchestrate": "~2.0.0",
+    "pegasys-orchestrate": "~2.1.0-rc2",
     "prettier": "~1.19.1",
     "rimraf": "^3.0.2",
     "truffle": "~5.1.13",
