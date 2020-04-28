@@ -78,7 +78,7 @@ Start
 by running
 
 ```bash
-make up
+npm run up
 ```
 
 <img src="static/make-up.png" width="900px" alt="Make up"/>
@@ -120,7 +120,7 @@ npm run generate-account
 ### List accounts stored in Hashicorp Vault
 
 ```bash
-make hashicorp-accounts
+npm run hashicorp-accounts
 ```
 
 <img src="static/hashicorp-accounts.png" width="900px" alt="Hashicorp accounts"/>
@@ -128,13 +128,13 @@ make hashicorp-accounts
 You can run any hashicorp Vault CLI command (c.f. https://www.vaultproject.io/docs/commands/) by running
 
 ```bash
-make hashicorp-vault COMMAND="<command>"
+npm run hashicorp-vault -- <command>
 ```
 
 For example
 
 ```bash
-make hashicorp-vault COMMAND="token lookup"
+npm run hashicorp-vault -- token lookup
 ```
 
 ## Connect a blockchain network
@@ -259,7 +259,7 @@ If using Rinkeby you can verify that the account has been properly pre-funded by
 
 **Update `.env`**
 
-Set `FROM_ACCOUNT` value in `.env` to the address created (it will be used to send transactions)_
+Set `FROM_ACCOUNT` value in `.env` to the address created (it will be used to send transactions)\_
 
 ### Consume transaction receipts
 
