@@ -23,7 +23,7 @@
     "up-orchestrate": "docker-compose up -d",
     "stop-orchestrate": "docker-compose stop",
     "down-orchestrate": "docker-compose down --volumes --timeout 0",
-    "up": "npm run deps && npm run orchestrate-up",
+    "up": "npm run deps && npm run up-orchestrate",
     "down": "npm run down-orchestrate && npm run down-deps",
     "hashicorp-accounts": "bash scripts/deps/config/hashicorp/vault.sh kv list secret/default",
     "hashicorp-token-lookup": "bash scripts/deps/config/hashicorp/vault.sh token lookup",
