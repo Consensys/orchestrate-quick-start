@@ -10,8 +10,6 @@ services:
     command: "--config-file=/config/config.toml"
     ports:
       - 8545:8545
-      - 8546:8546
-      - 8547:8547
     volumes:
       - ./config/besu/config.toml:/config/config.toml
       - ./config/besu/genesis.json:/config/genesis.json
