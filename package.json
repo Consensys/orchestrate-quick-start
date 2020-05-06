@@ -2,6 +2,13 @@
   "name": "pegasys-orchestrate-quick-start",
   "version": "2.0.0",
   "description": "PegaSys Orchestrate Quick start",
+  "config": {
+    "endpoints": {
+      "chain-registry": "localhost:8081",
+      "contract-registry": "localhost:8020",
+      "kafka": "localhost:9092"
+    }
+  },
   "scripts": {
     "lint": "tslint -p . -c tslint.json",
     "lint:fix": "npm run lint -- --fix",
@@ -9,13 +16,13 @@
     "check-formatting": "prettier --list-different 'src/**/*.{ts,js,json}'",
     "clean": "rimraf ./dist ./build",
     "compile": "truffle compile",
-    "register-chain": "dotenv -- cross-var curl -X POST --data '{\"name\": \"%CHAIN%\", \"urls\":[\"%NETWORK_ENDPOINT%\"]}' localhost:8081/chains",
-    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' localhost:8081/%CHAIN_UUID%",
-    "create-faucet": "dotenv -- cross-var curl -X POST --data '{\"name\":\"%CHAIN%-faucet\", \"creditorAccount\":\"%FAUCET_ACCOUNT%\",\"chainRule\":\"%CHAIN_UUID%\",\"cooldown\":\"10s\",\"amount\":\"60000000000000000\",\"maxBalance\":\"100000000000000000\"}' localhost:8081/faucets",
-    "register-contract": "orchestrate contracts register -e localhost:8020 -n Counter -f build/contracts/Counter.json",
-    "get-contract": "orchestrate contracts contract -e localhost:8020 -n Counter",
-    "get-catalog": "orchestrate contracts catalog --endpoint localhost:8020",
-    "generate-account": "dotenv -- cross-var orchestrate accounts generate --endpoint localhost:9092 --chain %CHAIN%",
+    "register-chain": "dotenv -- cross-var curl -X POST --data '{\"name\": \"%CHAIN%\", \"urls\":[\"%NETWORK_ENDPOINT%\"]}' ${npm_package_config_endpoints_chain-registry}/chains",
+    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' ${npm_package_config_endpoints_chain-registry}/%CHAIN_UUID%",
+    "create-faucet": "dotenv -- cross-var curl -X POST --data '{\"name\":\"%CHAIN%-faucet\", \"creditorAccount\":\"%FAUCET_ACCOUNT%\",\"chainRule\":\"%CHAIN_UUID%\",\"cooldown\":\"10s\",\"amount\":\"60000000000000000\",\"maxBalance\":\"100000000000000000\"}' ${npm_package_config_endpoints_chain-registry}/faucets",
+    "register-contract": "orchestrate contracts register -e ${npm_package_config_endpoints_contract-registry} -n Counter -f build/contracts/Counter.json",
+    "get-contract": "orchestrate contracts contract -e ${npm_package_config_endpoints_contract-registry} -n Counter",
+    "get-catalog": "orchestrate contracts catalog --endpoint ${npm_package_config_endpoints_contract-registry}",
+    "generate-account": "dotenv -- cross-var orchestrate accounts generate --endpoint ${npm_package_config_endpoints_kafka} --chain %CHAIN%",
     "consume": "ts-node src/consume",
     "deploy": "ts-node src/deploy-contract",
     "send-tx": "ts-node src/send-tx",
