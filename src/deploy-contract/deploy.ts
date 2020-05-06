@@ -10,7 +10,7 @@ export const deploy = async () => {
 
   // Deploy a new Counter contract and returns the ID of the request
   const requestId = await producer.sendTransaction({
-    chainName: process.env.npm_package_config_chain,
+    chainName: process.env.CHAIN,
     contractName: 'Counter',
     methodSignature: 'constructor()',
     from: process.env.FROM_ACCOUNT!,
