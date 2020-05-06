@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="static/orchestrate-logo.png" alt="Pegasys Orchestrate"/>
+  ![Pegasys Orchestrate](static/orchestrate-logo.png)
 </p>
 
 # PegaSys Orchestrate Quick-Start
@@ -15,34 +15,6 @@ It provides advanced features to connect to blockchain networks:
 - Multi-chain & Multi-protocol (public or private)
 
 For more information please refer to [PegaSys Orchestrate official Documentation](https://docs.orchestrate.pegasys.tech/).
-
-## Content of this quickstart
-
-- [Requirements](#requirements)
-- [Set-up and run Orchestrate](#set-up-and-run-orchestrate)
-  - [Clone project](#clone-project)
-  - [Login on Docker registry](#login-on-docker-registry)
-  - [Run Orchestrate](#run-orchestrate)
-  - [Install CLI](#install-cli)
-- [Create a blockchain account](#create-a-blockchain-account)
-  - [Create account](#create-account)
-  - [List accounts stored in Hashicorp Vault](#list-accounts-stored-in-hashicorp-vault)
-- [Connect a blockchain network](#connect-a-blockchain-network)
-  - [Register blockchain network](#register-blockchain-network)
-  - [Send JSON-RPC request through blockchain proxy](#send-json-rpc-request-through-blockchain-proxy)
-- [Configure a faucet](#configure-a-faucet)
-  - [Create faucet](#create-faucet)
-  - [Send ETH to faucet Account](#send-eth-to-faucet-account)
-- [Register a Smart Contract](#register-a-smart-contract)
-  - [Compile Smart Contract](#compile-smart-contract)
-  - [Push artifacts to Smart Contract registry](#push-artifacts-to-smart-contract-registry)
-  - [List Smart Contracts stored in registry](#list-smart-contracts-stored-in-registry)
-  - [Get details about a Smart Contract](#get-details-about-a-smart-contract)
-- [Send Transactions](#send-transactions)
-  - [Create an account to send transactions](#create-an-account-to-send-transactions)
-  - [Consume transaction receipts](#consume-transaction-receipts)
-  - [Deploy a Smart Contract](#deploy-a-smart-contract)
-  - [Send a transaction](#send-a-transaction)
 
 During this quick-start you will manipulate:
 
@@ -77,7 +49,7 @@ The requirements for an external network is to have the network RPC endpoint add
 You can use Infura with an [infura.io](https://infura.io/) account
 and a Rinkeby project ID. Refer to this ["Getting Started With Infura" blog post](https://blog.infura.io/getting-started-with-infura-28e41844cc89/) for more details.
 
-## Set-up and run Orchestrate
+## Step 1 - Set-up and run Orchestrate
 
 ### Clone project
 
@@ -113,8 +85,11 @@ Depending on the network that you want to use:
 **copy one of the example environment files `.env.besu.example`
 or `.env.infura-rinkeby.example` to a `.env` file at the root of the project.**
 
-You will have to define some variables in this `.env` file later. Using the same file all along
-this quickstart will help you to have a consistent experience.
+> **Important:** _if you used Infura example for your `.env` file, replace the `NETWORK_ENDPOINT` value by the correct
+> Infura endpoint, including your Infura network project ID._
+
+You will have to define some other variables in this `.env` file later. Using the same `.env`
+file all along this quickstart will help you to have a consistent experience.
 
 ### Run Orchestrate Quickstart
 
@@ -131,7 +106,7 @@ Run the quickstart with the following command:
 npm run up
 ```
 
-<img src="static/npm-run-up.png" width="900px" alt="npm run up console output"/>
+![npm run up console output](static/npm-run-up.png)
 
 > **Note:** _If you want to stop Orchestrate you can run `npm run down` it will stop all container and remove all data volumes_
 
@@ -155,7 +130,7 @@ npm run orchestrate [cmd] help
 
 **Example:** `npm run orchestrate contracts help`
 
-## Create a blockchain account
+## Step 2 - Create a blockchain account
 
 ### Create account
 
@@ -165,7 +140,7 @@ Use Orchestrate CLI to generate an account.
 npm run generate-account
 ```
 
-<img src="static/generate-account.png" width="900px" alt="Generate Account console output"/>
+![Generate account console output](static/generate-account.png)
 
 You will use this account as your network faucet.
 
@@ -182,7 +157,7 @@ your Orchestrate setup.
 npm run hashicorp-accounts
 ```
 
-<img src="static/hashicorp-accounts.png" width="900px" alt="Hashicorp accounts listing"/>
+![Hashicorp accounts listing](static/hashicorp-accounts.png)
 
 You can run any [Hashicorp Vault CLI command](https://www.vaultproject.io/docs/commands/) by running
 `npm run hashicorp-vault` followed by the command:
@@ -197,9 +172,9 @@ For example, to display the [vault token](https://www.vaultproject.io/docs/conce
 npm run hashicorp-vault -- token lookup
 ```
 
-## Connect a blockchain network
+## Step 3 - Connect a blockchain network
 
-### Register blockchain network
+### Register a blockchain network
 
 Now that you have Orchestrate up and running and a first account created,
 it's time to connect it to a blockchain network.
@@ -219,13 +194,13 @@ as the value for the `CHAIN_UUID` variable.**
 
 Example: `CHAIN_UUID=8a4d0093-c2b7-459b-af2a-8992aa145041`
 
-<img src="static/post-chain.png" width="900px" alt="Create Chain console output"/>
+![Create chain console output](static/post-chain.png)
 
 > **Note:** _Depending on the network environment file you chose in the previous steps, you will connect
 > Orchestrate to a private local Besu network or to Rinkeby through [Infura](https://infura.io/).
 > But you can connect Orchestrate to any Ethereum network using its RPC endpoint._
 
-### Send JSON-RPC request through blockchain proxy
+### Send a JSON-RPC request through blockchain proxy
 
 Verify that chain JSON-RPC is properly proxied by Orchestrate.
 
@@ -236,9 +211,9 @@ Verify that chain JSON-RPC is properly proxied by Orchestrate.
 npm run get-latest-block
 ```
 
-<img src="static/json-rpc-proxy.png" width="900px" alt="JSON-RPC test response"/>
+![JSON-RPC test response](static/json-rpc-proxy.png)
 
-## Configure a faucet
+## Step 4 - Configure a faucet
 
 > **Note:** _On non zero gas price networks (e.g. public networks such as Ethereum mainnet or Rinkeby
 > but also some private networks like the Besu one used in this quickstart),
@@ -259,9 +234,9 @@ called with the chain name suffixed by "-faucet".
 npm run create-faucet
 ```
 
-<img src="static/post-faucet.png" width="900px" alt="Create faucet console output"/>
+![Create faucet console output](static/post-faucet.png)
 
-### Send ETH to Rinkeby faucet account
+### Send ETH to the faucet account
 
 > **Warning:** _In order to credit other addresses, faucet account must be credited with some ETH_
 
@@ -269,7 +244,7 @@ The recommended approach is to credit faucet account by sending some ETH from on
 Rinkeby account using [MetaMask](https://metamask.io/) (1 ETH is enough).
 If not familiar with MetaMask you can refer to the following [article about using Metamask](https://medium.com/openberry/getting-started-with-metamask-b9ac23a10c83).
 
-<img src="static/metamask-credit-faucet.png" width="400px" alt="Credit faucet with MetaMask"/>
+![Credit faucet with MetaMask](static/metamask-credit-faucet.png)
 
 If you do not have any Rinkeby test ETH, you can request some for free from an [official faucet](https://faucet.rinkeby.io/).
 
@@ -281,7 +256,7 @@ the [Hyperledger Besu "accounts for testing" documentation](https://besu.hyperle
 Connect Metamask to `http://localhost:8545` and transfer 1 or 2 ETH from one of these test addresses to
 your `FAUCET_ACCOUNT` address.
 
-## Register a smart contract
+## Step 5 - Register a smart contract
 
 Orchestrate provides a contract registry.
 
@@ -295,20 +270,20 @@ But first you have to create, compile and add your contract to the registry.
 npm run compile
 ```
 
-<img src="static/compile-contract.png" width="900px" alt="Compile contract console output"/>
+![Compile contract console output](static/compile-contract.png)
 
 _Quickstart uses [Truffle Suites](https://www.trufflesuite.com/) for compilation._
 
 > **Note:** _This Quick Start provides a simple Solidity smart contract [Counter.sol](smart-contracts/Counter.sol)
 > which is only for demonstration purpose. It simply increments an integer value._
 
-### Push compiled smart contract to Orchestrate Contract Registry
+### Push the smart contract to Orchestrate Contract Registry
 
 ```bash
 npm run register-contract
 ```
 
-<img src="static/register-contract.png" width="900px" alt="Register contract console output"/>
+![Register contract console output](static/register-contract.png)
 
 ### List smart contracts stored in Orchestrate Contract Registry
 
@@ -316,7 +291,7 @@ npm run register-contract
 npm run get-catalog
 ```
 
-<img src="static/get-catalog.png" width="900px" alt="Get catalog console output"/>
+![Get catalog console output](static/get-catalog.png)
 
 ### Get details about a smart contract
 
@@ -324,19 +299,17 @@ npm run get-catalog
 npm run get-contract
 ```
 
-<img src="static/get-contract.png" width="900px" alt="Get contract console output"/>
+![Get contract console output](static/get-contract.png)
 
-## Send Transactions
+## Step 6 - Create an account to send transactions
 
-### Create a sender account
-
-Generate a new account that will be used to send transactions to the smart contact. ThiS account will be generated and stored by the Hashicorp Vault service.
+Generate a new account that will be used to send transactions to the smart contact. This account will be generated and stored by the Hashicorp Vault service.
 
 ```bash
 npm run generate-account
 ```
 
-<img src="static/generate-account-faucet.png" width="900px" alt="Generate account console output"/>
+![Generate account console output](static/generate-account-faucet.png)
 
 **Copy the generated account address and set the `FROM_ACCOUNT` value with this address in `.env` file.**
 
@@ -344,13 +317,22 @@ npm run generate-account
 
 If using Rinkeby, you can verify that the account has been properly funded by the faucet using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io/). Search for the account address in the main search field.
 
-<img src="static/etherscan-account.png" width="600px" alt="Etherscan display of generated account"/>
+![Etherscan display of generated account](static/etherscan-account.png)
 
-### Consume transaction receipts
+## Step 7 - Deploy a smart contract and send transactions
 
-Orchestrate manages blockchain transactions that are asynchronous by nature due to blockchain mining time and then provides an event consumer to allows to process transaction when the blocks are created.
+### Listen to transaction receipts events
+
+Orchestrate manages blockchain transactions that are asynchronous by nature due to blockchain mining time. Orchestrate provides an event consumer to process transaction receipts when they are generated.
 
 Orchestrate uses [Apache Kafka](https://kafka.apache.org/) to handle these asynchronous communications.
+
+In the next steps, we are going to send two kinds of transactions:
+
+- One transaction to create the contract on the chain,
+- another to interact with this contract.
+
+You have to run a consumer script to listen to these transactions receipts events and see them happen on the network.
 
 On your current terminal, start the consumer and let the consumer run on foreground by keeping the terminal opened:
 
@@ -360,28 +342,28 @@ npm run consume
 
 > **Reference script:** [consume.ts](src/consume/consume.ts)
 
-<img src="static/npm-consume.png" width="900px" alt="Consumer console output"/>
+![Consumer console output](static/npm-consume.png)
 
-### Deploy a Smart Contract
+### Deploy the Smart Contract
 
-On a second terminal, in the same project directory, run the deploy command:
+On a second terminal, in the same project directory, run the smart contract deploy command:
 
 ```bash
 npm run deploy
 ```
 
-After a few seconds (depending on blocktime) you should see the transaction receipt appearing in the consumer terminal.
+After a few seconds (depending on blocktime) you should see the receipt related to the contract creation transaction in the consumer terminal.
 
-<img src="static/npm-deploy.png" width="900px" alt="Contract deployment transaction receipt"/>
+![Contract deployment transaction receipt](static/npm-deploy.png)
 
 If using Rinkeby, you can verify that the contract was deployed by using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io) and searching for the sender address.
 
-<img src="static/etherscan-deploy.png" width="600px" alt="Etherscan display of deployed contract on Rinkeby"/>
+![Etherscan display of deployed contract on Rinkeby](static/etherscan-deploy.png)
 
-\*\*Set the `TO_ACCOUNT` value in `.env` file with the address of the deployed contract.
-The value to copy is displayed in the receipt as `contractAddress`.
+**Set the `TO_ACCOUNT` value in `.env` file with the address of the deployed contract.
+The value to copy is displayed in the receipt as `contractAddress`.**
 
-### Send a transaction
+### Send a transaction to the smart contract
 
 > **Important:** _Before moving forward make sure that `FROM_ACCOUNT` and `TO_ACCOUNT` are set in `.env` file._
 
@@ -393,8 +375,14 @@ npm run send-tx
 
 After a few seconds (depending on blocktime) the transaction receipt will appear in the consumer output on the first terminal.
 
-<img src="static/npm-send-tx.png" width="900px" alt="Receipt for transaction sent to the contract"/>
+![Receipt for transaction sent to the contract](static/npm-send-tx.png)
 
 If using Rinkeby, you can verify that the transaction was been sent using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io) and searching for the sender address.
 
-<img src="static/etherscan-send-tx.png" width="600px" alt="Etherscan display of transaction on Rinkeby"/>
+![Etherscan display of transaction on Rinkeby](static/etherscan-send-tx.png)
+
+## Last step - Shut down the quickstart and remove data
+
+Stop the consumer script by using `ctrl+C` in the terminal window where this script runs.
+
+Stop the quickstart services and network by running the `npm run down` command.
