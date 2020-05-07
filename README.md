@@ -12,7 +12,7 @@ Orchestrate provides advanced features when connected to blockchain networks:
 - Transaction management (transaction crafting, gas management, nonce management, and transaction listening)
 - Account management with private key storage in Hashicorp Vault
 - Smart contract registry
-- Public and private transactions 
+- Public and private transactions
 - Multi-chain.
 
 For more information, refer to the [PegaSys Orchestrate official Documentation](https://docs.orchestrate.pegasys.tech/).
@@ -31,12 +31,12 @@ During this quick-start you use:
 - [Node.js version >=10 and NPM](https://nodejs.org/en/) installed.
 - [Curl](https://curl.haxx.se/download.html) installed.
 
-> **Tip:** _To avoid port conflicets, stop other Ethereum clients on your computer before starting
-this quickstart._
+> **Tip:** _To avoid port conflicts, stop other Ethereum clients on your computer before starting
+> this quickstart._
 
 ### Network requirement
 
-The quickstart connects to a blockchain network. You can use the default local Hyperledger Besu network 
+The quickstart connects to a blockchain network. You can use the default local Hyperledger Besu network
 provided by this quickstart or provide an external one, such as an Infura project.
 
 #### Local Besu network
@@ -48,7 +48,7 @@ If using the local Besu network, there are no specific requirements to run this 
 
 To use an external network, you must have the network RPC endpoint address.
 
-You can use Infura with an [infura.io](https://infura.io/) account and a Rinkeby project ID. 
+You can use Infura with an [infura.io](https://infura.io/) account and a Rinkeby project ID.
 For more details, refer to [_Getting Started With Infura_](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
 
 ## Step 1. Set up and run Orchestrate
@@ -64,7 +64,7 @@ git clone https://github.com/PegaSysEng/orchestrate-quick-start.git
 If you are running Orchestrate for the first time, you must login to the Orchestrate Docker registry.
 
 Request access on [Pegasys Zendesk support site](http://pegasys.zendesk.com/)
-(create an account with your email address or login with an existing one) or by sending an email to 
+(create an account with your email address or login with an existing one) or by sending an email to
 [support@pegasys.tech](mailto:support@pegasys.tech).
 
 > **Important:** _When you receive these credentials from Pegasys, you can continue this Quickstart
@@ -87,7 +87,7 @@ Copy the example environment files (`.env.besu.example`
 or `.env.infura-rinkeby.example`) to a `.env` file at the root of the project.
 
 > **Important:** _If using Infura, replace the `NETWORK_ENDPOINT` value in your `.env` file with the
->  correct Infura endpoint, including your Infura network project ID._
+> correct Infura endpoint, including your Infura network project ID._
 
 You will define some other variables in this `.env` file later. Using the same `.env`
 file throughout enables a consistent experience.
@@ -145,7 +145,7 @@ npm run generate-account
 
 We use this account as your network faucet.
 
-### Copy account address 
+### Copy account address
 
 Copy the address and include it in the `.env` files as the `FAUCET_ACCOUNT` variable.
 
@@ -161,7 +161,7 @@ npm run hashicorp-accounts
 
 ![Hashicorp accounts listing](static/hashicorp-accounts.png)
 
-### Run Hashicorp Vault commands 
+### Run Hashicorp Vault commands
 
 Run any [Hashicorp Vault CLI command](https://www.vaultproject.io/docs/commands/) by running
 `npm run hashicorp-vault` followed by the command:
@@ -191,20 +191,20 @@ npm run register-chain
 
 ![Create chain console output](static/post-chain.png)
 
-The chain uniqe identifier (`uuid`) is displayed in the JSON result. 
+The chain unique identifier (`uuid`) is displayed in the JSON result.
 
 > **Note:** _To make this quickstart easy, we provide an NPM command to register the network using the variables in the `.env` file.
 > Under the hood, it's a Curl post request to Orchestrate REST API.
 > Have a look at the `package.json` file for details on this command._
 
-### Copy chain unique identifier 
+### Copy chain unique identifier
 
 Copy the chain unique identifier `uuid` and paste it into your `.env` file
 as the value for the `CHAIN_UUID` variable.
 
 Example: `CHAIN_UUID=8a4d0093-c2b7-459b-af2a-8992aa145041`
 
-> **Note:** _Depending on the network environment file you chose earlier, you connect your Orchestrate 
+> **Note:** _Depending on the network environment file you chose earlier, you connect your Orchestrate
 > instance to a private local Besu network or to Rinkeby through [Infura](https://infura.io/).
 > You can connect Orchestrate to any Ethereum network using the network RPC endpoint._
 
@@ -218,7 +218,7 @@ npm run get-latest-block
 
 ![JSON-RPC test response](static/json-rpc-proxy.png)
 
-> **Note:** _As with creating a chain, we provide an NPM command to make the request. 
+> **Note:** _As with creating a chain, we provide an NPM command to make the request.
 > Have a look at the `package.json` file for details on this command._
 
 ## Step 4 - Configure a faucet
@@ -236,7 +236,7 @@ to credit other accounts, and a chain identified by its UUID.
 The following command uses the `CHAIN`, `CHAIN_UUID` and `FAUCET_ACCOUNT` values from the `.env` file to create a faucet.
 The faucet is called with the chain name suffixed by `-faucet`.
 
-Use the Orchestrate API to configure a faucet: 
+Use the Orchestrate API to configure a faucet:
 
 ```bash
 npm run create-faucet
@@ -250,14 +250,14 @@ npm run create-faucet
 
 If you're not familiar with MetaMask, refer to this [article about getting started with Metamask](https://medium.com/openberry/getting-started-with-metamask-b9ac23a10c83).
 
-#### Local Besu network 
+#### Local Besu network
 
 On the quickstart Besu local network, some [pre-defined accounts are configured with an ETH balance](https://besu.hyperledger.org/en/stable/Reference/Accounts-for-Testing/).
 
 Connect Metamask to `http://localhost:8545` and transfer 1 or 2 ETH from one of the test accounts to
 your `FAUCET_ACCOUNT` address.
 
-#### Rinkeby 
+#### Rinkeby
 
 If connected to Rinkeby, the recommended approach is to credit the faucet account by transferring 1 or 2 ETH from one of your personal
 Rinkeby accounts using [MetaMask](https://metamask.io/).
@@ -283,8 +283,8 @@ npm run compile
 
 _The Orchestrate Quickstart uses [Truffle](https://www.trufflesuite.com/) for compiling._
 
-> **Note:** _Th Quickstart provides a simple Solidity smart contract [Counter.sol](smart-contracts/Counter.sol)
-> for demonstration purpose. The contract simply increments an integer value._
+> **Note:** _The Quickstart provides a basic Solidity smart contract [Counter.sol](smart-contracts/Counter.sol)
+> for demonstration purpose. The contract only increments an integer value._
 
 ### Push the smart contract to the Contract Registry
 
@@ -322,11 +322,11 @@ npm run generate-account
 
 **Note:** _The generated account is automatically funded by the faucet service configured previously._
 
-### Copy account addresss 
+### Copy account addresss
 
 Copy the generated account address and set the `FROM_ACCOUNT` value with this address in `.env` file.
 
-### Verify Rinkeby account funded 
+### Verify Rinkeby account funded
 
 If using Rinkeby, you can verify that the account has been properly funded by the faucet using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io/). Search for the account address in the main search field.
 
@@ -369,11 +369,11 @@ After a few seconds (depending on block time), you see the receipt related to th
 
 ![Contract deployment transaction receipt](static/npm-deploy.png)
 
-### Copy contract address 
+### Copy contract address
 
 Copy the `contractAddress` in the receipt and set the `TO_ACCOUNT` value with this address in `.env` file.
 
-### Verify Rinkeby contract deployed 
+### Verify Rinkeby contract deployed
 
 If using Rinkeby, you can verify that the contract was deployed by using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io) and searching for the sender address.
 
@@ -404,7 +404,7 @@ If using Rinkeby, you can verify the transaction was sent using [Etherscan Rinke
 Stop the consumer script by using `ctrl+C` in the terminal window where the script is running.
 
 Stop the quickstart services and network:
- 
+
 ```bash
 npm run down
 ```
