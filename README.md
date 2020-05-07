@@ -1,5 +1,5 @@
 <p align="center">
-  ![Pegasys Orchestrate](static/orchestrate-logo.png)
+  <img src="static/orchestrate-logo.png" alt="Pegasys Orchestrate"/>
 </p>
 
 # PegaSys Orchestrate Quickstart
