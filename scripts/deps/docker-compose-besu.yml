@@ -1,0 +1,19 @@
+---
+version: '3.7'
+
+services:
+  besu:
+    restart: ${CONTAINER_RESTART-on-failure}
+    networks:
+      - orchestrate
+    image: hyperledger/besu:latest
+    command: "--config-file=/config/config.toml"
+    ports:
+      - 8545:8545
+    volumes:
+      - ./config/besu/config.toml:/config/config.toml
+      - ./config/besu/genesis.json:/config/genesis.json
+      - ./config/besu/key:/config/key
+volumes:
+  besu:
+    driver: local

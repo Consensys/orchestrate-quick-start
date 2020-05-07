@@ -5,11 +5,11 @@ import { Producer } from 'pegasys-orchestrate'
 config()
 
 export const sendTx = async () => {
-  const producer = new Producer(['localhost:9092'])
+  const producer = new Producer([process.env.npm_package_config_endpoints_kafka || ''])
   await producer.connect()
 
   const requestId = await producer.sendTransaction({
-    chainName: 'rinkeby',
+    chainName: process.env.CHAIN,
     contractName: 'Counter',
     methodSignature: 'increment(uint256)',
     args: [1],
