@@ -9,16 +9,18 @@ export const consume = async () => {
   console.error(STOP_MSG)
 
   consumer.on(EventType.Response, async (responseMessage: ResponseMessage) => {
-    const { value } = responseMessage.content()
+    const { offset, topic, value } = responseMessage.content()
+
+    console.log('Message received !', { envelopeId: value.id, offset, topic, chain: value.chain })
     if (value.errors && value.errors.length > 0) {
       console.error('Transaction failed with error: ', value.errors)
-      return
     } else {
-      await responseMessage.commit()
-      console.log('Transaction ID:', value.id)
-      console.log('Transaction receipt: ', value.receipt)
+      console.log('RequestId:', value.id)
+      console.log('Receipt: ', value.receipt)
     }
-    console.error(STOP_MSG)
+
+    await responseMessage.commit()
+  console.error(STOP_MSG)
   })
 
   await consumer.consume()
