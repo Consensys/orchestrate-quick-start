@@ -4,7 +4,7 @@ const STOP_MSG =
   '\n\n---------------------------------------------\nStop consumer by pressing ctrl+c at the end of the quickstart.\n---------------------------------------------\n'
 
 export const consume = async () => {
-  const consumer = new Consumer([process.env.npm_package_config_endpoints_kafka || ''])
+  const consumer = new Consumer([process.env.npm_package_config_endpoints_kafka!])
   await consumer.connect()
   console.error(STOP_MSG)
 
@@ -20,7 +20,7 @@ export const consume = async () => {
     }
 
     await responseMessage.commit()
-  console.error(STOP_MSG)
+    console.error(STOP_MSG)
   })
 
   await consumer.consume()
