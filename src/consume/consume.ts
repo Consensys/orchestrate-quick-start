@@ -4,20 +4,22 @@ const STOP_MSG =
   '\n\n---------------------------------------------\nStop consumer by pressing ctrl+c at the end of the quickstart.\n---------------------------------------------\n'
 
 export const consume = async () => {
-  const consumer = new Consumer([process.env.npm_package_config_endpoints_kafka || ''])
+  const consumer = new Consumer([process.env.npm_package_config_endpoints_kafka!])
   await consumer.connect()
   console.error(STOP_MSG)
 
   consumer.on(EventType.Response, async (responseMessage: ResponseMessage) => {
-    const { value } = responseMessage.content()
+    const { offset, topic, value } = responseMessage.content()
+
+    console.log('Message received !', { envelopeId: value.id, offset, topic, chain: value.chain })
     if (value.errors && value.errors.length > 0) {
       console.error('Transaction failed with error: ', value.errors)
-      return
     } else {
-      await responseMessage.commit()
-      console.log('Transaction ID:', value.id)
-      console.log('Transaction receipt: ', value.receipt)
+      console.log('RequestId:', value.id)
+      console.log('Receipt: ', value.receipt)
     }
+
+    await responseMessage.commit()
     console.error(STOP_MSG)
   })
 
