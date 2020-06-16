@@ -170,6 +170,14 @@ services:
       - chain-registry
     command: tx-listener run
 
+  generate-jwt:
+    <<: *container-common
+    environment:
+      <<: *default-variables
+      TENANT_ID: ${TENANT_ID-}
+    command: "utils generate-jwt tenant ${TENANT_ID}"
+    restart: "no"
+
 volumes:
   vault-token:
     external:

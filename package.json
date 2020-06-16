@@ -27,6 +27,7 @@
     "deploy": "ts-node src/deploy-contract",
     "send-tx": "ts-node src/send-tx",
     "orchestrate": "orchestrate",
+    "generate-jwt": "docker-compose run generate-jwt",
     "deps": "docker-compose -f scripts/deps/docker-compose.yml -f scripts/deps/docker-compose-besu.yml up -d",
     "down-deps": "docker-compose -f scripts/deps/docker-compose.yml -f scripts/deps/docker-compose-besu.yml down --volumes --timeout 0",
     "up-orchestrate": "docker-compose up -d",
