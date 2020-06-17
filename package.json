@@ -7,7 +7,8 @@
       "chainregistry": "localhost:8081",
       "contractregistry": "localhost:8020",
       "kafka": "localhost:9092"
-    }
+    },
+    "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry envelope-store"
   },
   "scripts": {
     "lint": "tslint -p . -c tslint.json",
@@ -30,8 +31,8 @@
     "generate-jwt": "docker-compose run generate-jwt",
     "deps": "docker-compose -f scripts/deps/docker-compose.yml -f scripts/deps/docker-compose-besu.yml up -d",
     "down-deps": "docker-compose -f scripts/deps/docker-compose.yml -f scripts/deps/docker-compose-besu.yml down --volumes --timeout 0",
-    "up-orchestrate": "docker-compose up -d",
-    "stop-orchestrate": "docker-compose stop",
+    "up-orchestrate": "docker-compose up -d ${npm_package_config_services}",
+    "stop-orchestrate": "docker-compose stop ${npm_package_config_services}",
     "down-orchestrate": "docker-compose down --volumes --timeout 0",
     "up": "npm run deps && npm run up-orchestrate",
     "down": "npm run down-orchestrate && npm run down-deps",
