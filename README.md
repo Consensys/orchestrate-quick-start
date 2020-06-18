@@ -7,6 +7,19 @@
 PegaSys Orchestrate is a platform that enables enterprises to easily build secure
 and reliable applications on Ethereum blockchains.
 
+> **Important:** Pegasys Orchestrate Quickstart is only available for Orchestrate customers and
+> PegaSys partners.
+>
+> [Contact PegaSys](https://pegasys.tech/contact/) if you want to purchase Orchestrate or are interested in our partner program.
+>
+> If you are already a partner or customer but we did not provide the credentials to access the Docker registry, request access on [Pegasys Zendesk support site](http://pegasys.zendesk.com/)
+> (create an account with your company email address or login with an existing one) or by sending an email from your work email to
+> [support@pegasys.tech](mailto:support@pegasys.tech).
+>
+> You can use this Quickstart only if you received these credentials from Pegasys to connect to the registry.
+>
+> **YOU CANNOT CONTINUE WITHOUT THE REGISTRY CREDENTIALS.**
+
 Orchestrate provides advanced features when connected to blockchain networks:
 
 - Transaction management (transaction crafting, gas management, nonce management, and transaction listening)
@@ -61,16 +74,7 @@ git clone https://github.com/PegaSysEng/orchestrate-quick-start.git
 
 ### Login on Docker registry
 
-If you are running Orchestrate for the first time, you must login to the Orchestrate Docker registry.
-
-Request access on [Pegasys Zendesk support site](http://pegasys.zendesk.com/)
-(create an account with your email address or login with an existing one) or by sending an email to
-[support@pegasys.tech](mailto:support@pegasys.tech).
-
-> **Important:** _When you receive these credentials from Pegasys, you can continue this Quickstart
-> and connect to the registry from your terminal._
->
-> **You cannot continue without the registry credentials.**
+If you are running Orchestrate for the first time, you must login to the Orchestrate Docker registry using the credentials that you received as a partner or customer.
 
 ```bash
 docker login -u <username> -p <password> consensys-docker-pegasys-orchestrate.bintray.io
