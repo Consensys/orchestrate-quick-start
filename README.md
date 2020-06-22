@@ -7,6 +7,20 @@
 PegaSys Orchestrate is a platform that enables enterprises to easily build secure
 and reliable applications on Ethereum blockchains.
 
+> **Important:** Pegasys Orchestrate Quickstart is only available for Orchestrate customers and
+> PegaSys partners.
+>
+> [Contact PegaSys](https://pegasys.tech/contact/) if you want to purchase Orchestrate or are interested in our partner program.
+>
+> If you are already a partner or customer but we did not provide the credentials to access the
+> Docker registry, request access on [Pegasys Zendesk support site](http://pegasys.zendesk.com/)
+> To access Pegasys Zendesk, create an account with your company email or login using an existing Pegasys Zendesk account.
+> Alternatively, send an email from your company email to [support@pegasys.tech](mailto:support@pegasys.tech).
+>
+> You can use this Quickstart only if you have received these credentials from Pegasys to connect to the registry.
+>
+> **You cannot continue without the registry credentials.**
+
 Orchestrate provides advanced features when connected to blockchain networks:
 
 - Transaction management (transaction crafting, gas management, nonce management, and transaction listening)
@@ -61,16 +75,8 @@ git clone https://github.com/PegaSysEng/orchestrate-quick-start.git
 
 ### Login on Docker registry
 
-If you are running Orchestrate for the first time, you must login to the Orchestrate Docker registry.
-
-Request access on [Pegasys Zendesk support site](http://pegasys.zendesk.com/)
-(create an account with your email address or login with an existing one) or by sending an email to
-[support@pegasys.tech](mailto:support@pegasys.tech).
-
-> **Important:** _When you receive these credentials from Pegasys, you can continue this Quickstart
-> and connect to the registry from your terminal._
->
-> **You cannot continue without the registry credentials.**
+If you are running Orchestrate for the first time, you must login to the Orchestrate Docker registry
+using the credentials that you received as a partner or customer.
 
 ```bash
 docker login -u <username> -p <password> consensys-docker-pegasys-orchestrate.bintray.io
@@ -109,7 +115,7 @@ npm run up
 
 ![npm run up console output](static/npm-run-up.png)
 
-> **Note:** _To stop Orchestrate, run `npm run down`. `npm run down` stops all containers and removes all data volumes._
+> **Note:** _To stop Orchestrate, run `npm run down`._ > _`npm run down` stops all containers and removes all data volumes._
 
 ### Install Orchestrate command line interface (CLI)
 
@@ -193,7 +199,8 @@ npm run register-chain
 
 The chain unique identifier (`uuid`) is displayed in the JSON result.
 
-> **Note:** _To make this quickstart easy, we provide an NPM command to register the network using the variables in the `.env` file.
+> **Note:** _To make this quickstart easy, we provide an NPM command to register the network using
+> the variables in the `.env` file.
 > Under the hood, it's a Curl post request to Orchestrate REST API.
 > Have a look at the `package.json` file for details on this command._
 
@@ -226,7 +233,8 @@ npm run get-latest-block
 > **Note:** _On paid gas networks (for example, public networks such as Ethereum mainnet or Rinkeby
 > and also some private networks, such as the Besu one used in this quickstart),
 > an Ethereum account must have a positive ETH balance to pay transactions fees for mining.
-> Orchestrate provides a faucet to enable automatically providing the required ETH to accounts managed by Orchestrate_
+> Orchestrate provides a faucet to enable automatically providing the required ETH to accounts
+> managed by Orchestrate_
 
 ### Create the faucet on Orchestrate
 
@@ -312,7 +320,8 @@ npm run get-contract
 
 ## Step 6 - Create an account to send transactions
 
-Generate an account to be used for sending transactions to the smart contact. The generated account is stored by the Hashicorp Vault service.
+Generate an account to be used for sending transactions to the smart contact.
+The generated account is stored by the Hashicorp Vault service.
 
 ```bash
 npm run generate-account
@@ -328,7 +337,9 @@ Copy the generated account address and set the `FROM_ACCOUNT` value with this ad
 
 ### Verify Rinkeby account funded
 
-If using Rinkeby, you can verify that the account has been properly funded by the faucet using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io/). Search for the account address in the main search field.
+If using Rinkeby, you can verify that the account has been properly funded by the faucet using
+[Etherscan Rinkeby explorer](https://rinkeby.etherscan.io/).
+Search for the account address in the main search field.
 
 ![Etherscan display of generated account](static/etherscan-account.png)
 
@@ -336,7 +347,8 @@ If using Rinkeby, you can verify that the account has been properly funded by th
 
 ### Listen to transaction receipts events
 
-Orchestrate manages blockchain transactions that are asynchronous by nature due to blockchain mining time. Orchestrate provides an event consumer to process transaction receipts when they are generated.
+Orchestrate manages blockchain transactions that are asynchronous by nature due to blockchain mining time.
+Orchestrate provides an event consumer to process transaction receipts when they are generated.
 
 Orchestrate uses [Apache Kafka](https://kafka.apache.org/) to handle these asynchronous communications.
 
@@ -365,7 +377,8 @@ On another terminal, in the same project directory, deploy the smart contract:
 npm run deploy
 ```
 
-After a few seconds (depending on block time), you see the receipt related to the contract creation transaction in the consumer terminal.
+After a few seconds (depending on block time), you see the receipt related to the contract creation
+transaction in the consumer terminal.
 
 ![Contract deployment transaction receipt](static/npm-deploy.png)
 
@@ -375,7 +388,8 @@ Copy the `contractAddress` in the receipt and set the `TO_ACCOUNT` value with th
 
 ### Verify Rinkeby contract deployed
 
-If using Rinkeby, you can verify that the contract was deployed by using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io) and searching for the sender address.
+If using Rinkeby, you can verify that the contract was deployed by using
+[Etherscan Rinkeby explorer](https://rinkeby.etherscan.io) and searching for the sender address.
 
 ![Etherscan display of deployed contract on Rinkeby](static/etherscan-deploy.png)
 
@@ -389,13 +403,15 @@ On the second terminal, send the transaction:
 npm run send-tx
 ```
 
-After a few seconds (depending on block time), you see the transaction receipt in the consumer output on the first terminal.
+After a few seconds (depending on block time), you see the transaction receipt in the consumer
+output on the first terminal.
 
 ![Receipt for transaction sent to the contract](static/npm-send-tx.png)
 
 ### Verify Rinkeby transaction
 
-If using Rinkeby, you can verify the transaction was sent using [Etherscan Rinkeby explorer](https://rinkeby.etherscan.io) and searching for the sender address.
+If using Rinkeby, you can verify the transaction was sent using
+[Etherscan Rinkeby explorer](https://rinkeby.etherscan.io) and searching for the sender address.
 
 ![Etherscan display of transaction on Rinkeby](static/etherscan-send-tx.png)
 
@@ -411,9 +427,13 @@ npm run down
 
 ## Multitenancy
 
-Multi-tenancy enables serving of multiple blockchain applications with a single Orchestrate instance. Resources including transaction streams, access to the blockchain network, private keys, and smart contracts are isolated to the tenant that owns them. [See more](https://docs.orchestrate.pegasys.tech/en/latest/Concepts/Multi-Tenancy/)
+Multi-tenancy enables serving of multiple blockchain applications with a single Orchestrate instance.
+Resources including transaction streams, access to the blockchain network, private keys,
+and smart contracts are isolated to the tenant that owns them.
+[See more](https://docs.orchestrate.pegasys.tech/en/latest/Concepts/Multi-Tenancy/)
 
-Orchestrate uses the OpenID Connect(OIDC) authentication protocol. JSON Web Tokens (JWTs) with custom claims control access to tenant resources.
+Orchestrate uses the OpenID Connect(OIDC) authentication protocol. JSON Web Tokens (JWTs) with custom
+claims control access to tenant resources.
 
 ### Enabling multi-tenancy
 
@@ -432,7 +452,8 @@ Then, we need to start Orchestrate again:
 npm run up
 ```
 
-> IMPORTANT: In case of running in a production environment, please ensure you generate your own certificate and private keys, using for instance `openssl`
+> IMPORTANT: In case of running in a production environment, please ensure you generate your own
+> certificate and private keys, using for instance `openssl`.
 
 ### Generate JWT token
 
