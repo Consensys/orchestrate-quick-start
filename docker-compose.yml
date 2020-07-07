@@ -14,8 +14,8 @@ x-default-variables: &default-variables
   NONCE_MANAGER_TYPE: ${NONCE_MANAGER_TYPE-redis}
   REDIS_URL: ${REDIS_URL-redis:6379}
   VAULT_ADDR: ${VAULT_ADDR-http://vault:8200}
-  MULTI_TENANCY_ENABLED: ${MULTI_TENANCY_ENABLED-false}
-  AUTH_JWT_CLAIMS_NAMESPACE: ${AUTH_JWT_CLAIMS_NAMESPACE-http://tenant.info/}
+  MULTI_TENANCY_ENABLED: ${MULTI_TENANCY_ENABLED-}
+  AUTH_JWT_CLAIMS_NAMESPACE: ${AUTH_JWT_CLAIMS_NAMESPACE-}
   AUTH_JWT_CERTIFICATE: ${AUTH_JWT_CERTIFICATE-}
   AUTH_JWT_PRIVATE_KEY: ${AUTH_JWT_PRIVATE_KEY-}
   AUTH_API_KEY: ${AUTH_API_KEY-}
@@ -175,7 +175,7 @@ services:
     environment:
       <<: *default-variables
       TENANT_ID: ${TENANT_ID-}
-    command: "utils generate-jwt tenant ${TENANT_ID}"
+    command: "utils generate-jwt --tenant=${TENANT_ID}"
     restart: "no"
 
 volumes:

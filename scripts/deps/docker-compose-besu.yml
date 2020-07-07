@@ -17,3 +17,7 @@ services:
 volumes:
   besu:
     driver: local
+networks:
+  orchestrate:
+    external:
+      name: deps_orchestrate
