@@ -3,9 +3,6 @@
   "version": "2.0.0",
   "description": "PegaSys Orchestrate Quick start",
   "config": {
-    "endpoints": {
-      "chainregistry": "localhost:8081"
-    },
     "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry envelope-store"
   },
   "scripts": {
@@ -16,9 +13,9 @@
     "clean": "rimraf ./dist ./build",
     "compile": "truffle compile",
     "generate-account": "dotenv ts-node src/generate-account",
-    "register-chain": "dotenv -- cross-var curl -X POST --data '{\"name\": \"%CHAIN%\", \"urls\":[\"%NETWORK_ENDPOINT%\"]}' ${npm_package_config_endpoints_chainregistry}/chains",
-    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' %CHAIN_REGISTRY_URL%/%CHAIN_UUID%",
-    "create-faucet": "dotenv -- cross-var curl -X POST --data '{\"name\":\"%CHAIN%-faucet\", \"creditorAccount\":\"%FAUCET_ACCOUNT%\",\"chainRule\":\"%CHAIN_UUID%\",\"cooldown\":\"10s\",\"amount\":\"60000000000000000\",\"maxBalance\":\"100000000000000000\"}' ${npm_package_config_endpoints_chainregistry}/faucets",
+    "register-chain": "dotenv ts-node src/register-chain",
+    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' %CHAIN_REGISTRY_HOST%/%CHAIN_UUID%",
+    "create-faucet": "dotenv ts-node src/create-faucet",
     "register-contract": "dotenv ts-node src/register-contract",
     "get-catalog": "dotenv ts-node src/get-catalog",
     "consume": "dotenv ts-node src/consume",
