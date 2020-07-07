@@ -1,7 +1,7 @@
 import { Producer } from 'pegasys-orchestrate'
 
 export const deploy = async () => {
-  const producer = new Producer([process.env.KAFKA_HOST!])
+  const producer = new Producer([process.env.KAFKA_URL!])
   await producer.connect()
 
   // Deploy a new Counter contract and returns the ID of the request

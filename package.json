@@ -17,7 +17,7 @@
     "compile": "truffle compile",
     "generate-account": "dotenv ts-node src/generate-account",
     "register-chain": "dotenv -- cross-var curl -X POST --data '{\"name\": \"%CHAIN%\", \"urls\":[\"%NETWORK_ENDPOINT%\"]}' ${npm_package_config_endpoints_chainregistry}/chains",
-    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' %CHAIN_REGISTRY_HOST%/%CHAIN_UUID%",
+    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' %CHAIN_REGISTRY_URL%/%CHAIN_UUID%",
     "create-faucet": "dotenv -- cross-var curl -X POST --data '{\"name\":\"%CHAIN%-faucet\", \"creditorAccount\":\"%FAUCET_ACCOUNT%\",\"chainRule\":\"%CHAIN_UUID%\",\"cooldown\":\"10s\",\"amount\":\"60000000000000000\",\"maxBalance\":\"100000000000000000\"}' ${npm_package_config_endpoints_chainregistry}/faucets",
     "register-contract": "dotenv ts-node src/register-contract",
     "get-catalog": "dotenv ts-node src/get-catalog",
@@ -34,7 +34,7 @@
     "down-deps": "docker-compose -f scripts/deps/docker-compose.yml down --volumes --timeout 0",
     "down-besu": "docker-compose -f scripts/deps/docker-compose-besu.yml down --volumes --timeout 0",
     "up": "npm run up-deps && npm run up-orchestrate",
-    "down": "npm run down-orchestrate ; npm run down-deps",
+    "down": "npm run down-orchestrate ; npm run down-besu ; npm run down-deps",
     "hashicorp-accounts": "bash scripts/deps/config/hashicorp/vault.sh kv list secret/default",
     "hashicorp-token-lookup": "bash scripts/deps/config/hashicorp/vault.sh token lookup",
     "hashicorp-vault": "bash -x scripts/deps/config/hashicorp/vault.sh"

@@ -6,7 +6,7 @@ import * as Counter from '../../build/contracts/Counter.json'
 
 export const start = async () => {
   try {
-    const contractRegistry = new ContractRegistry(process.env.CONTRACT_REGISTRY_HOST!)
+    const contractRegistry = new ContractRegistry(process.env.CONTRACT_REGISTRY_URL!)
 
     await contractRegistry.register({
       name: 'Counter',
