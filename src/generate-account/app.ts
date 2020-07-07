@@ -3,7 +3,7 @@ import { AccountGenerator } from 'pegasys-orchestrate'
 
 export const start = async () => {
   try {
-    const accountGenerator = new AccountGenerator([process.env.KAFKA_URL!])
+    const accountGenerator = new AccountGenerator([process.env.KAFKA_HOST!])
 
     await accountGenerator.connect()
     const address = await accountGenerator.generateAccount()
