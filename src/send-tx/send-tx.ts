@@ -1,7 +1,7 @@
 import { Producer } from 'pegasys-orchestrate'
 
 export const sendTx = async () => {
-  const producer = new Producer([process.env.KAFKA_URL!])
+  const producer = new Producer([process.env.KAFKA_HOST!])
   await producer.connect()
 
   const requestId = await producer.sendTransaction({
