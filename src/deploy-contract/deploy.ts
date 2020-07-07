@@ -1,11 +1,7 @@
-import { config } from 'dotenv'
 import { Producer } from 'pegasys-orchestrate'
 
-// Load ENV variables
-config()
-
 export const deploy = async () => {
-  const producer = new Producer([process.env.npm_package_config_endpoints_kafka!])
+  const producer = new Producer([process.env.KAFKA_URL!])
   await producer.connect()
 
   // Deploy a new Counter contract and returns the ID of the request

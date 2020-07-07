@@ -65,7 +65,7 @@ To use an external network, you must have the network RPC endpoint address.
 You can use Infura with an [infura.io](https://infura.io/) account and a Rinkeby project ID.
 For more details, refer to [_Getting Started With Infura_](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
 
-## Step 1. Set up and run Orchestrate
+## Set up and run Orchestrate
 
 ### Clone project
 
@@ -73,14 +73,63 @@ For more details, refer to [_Getting Started With Infura_](https://blog.infura.i
 git clone https://github.com/PegaSysEng/orchestrate-quick-start.git
 ```
 
+### Install project dependencies
+
+```bash
+npm install
+```
+
 ### Login on Docker registry
 
-If you are running Orchestrate for the first time, you must login to the Orchestrate Docker registry
-using the credentials that you received as a partner or customer.
+If you are running Orchestrate for the first time, you must login to the Orchestrate Docker registry using the credentials that you received as a partner or customer.
 
 ```bash
 docker login -u <username> -p <password> consensys-docker-pegasys-orchestrate.bintray.io
 ```
+
+### Initialize Orchestrate services
+
+The Orchestrate Quickstart uses a Docker compose setup and includes Orchestrate services, as well as other services including Kafka, Redis, Postgres and Hashicorp Vault, and an Hyperledger Besu node.
+
+- Orchestrate's dependent services are configured in the [dependencies docker-compose.yml file](scripts/deps/docker-compose.yml).
+- Orchestrate services are configured in [main docker-compose.yml file](docker-compose.yml).
+- The Besu node is configured in the [Besu docker-compose-besu.yml file](scripts/deps/docker-compose-besu.yml).
+
+To initialize Orchestrate execute:
+
+```bash
+npm run up
+```
+
+![npm run up console output](static/npm-run-up.png)
+
+> **Note:** _To stop Orchestrate, run `npm run down`._ > _stops all containers and removes all data volumes._
+
+Optionally to initialize a Besu node you have to execute:
+
+```bash
+npm run up-besu
+```
+
+![npm run up console output](static/npm-run-up-besu.png)
+
+> **Note:** _To stop Besu, run `npm run down-besu`._ > _stops besu containers and removes all data volumes._
+
+### Install Orchestrate command line interface (CLI)
+
+Verify that the CLI is properly installed and list all commands:
+
+```bash
+npm run orchestrate help
+```
+
+To access details of each command:
+
+```bash
+npm run orchestrate [cmd] help
+```
+
+**Example:** `npm run orchestrate contracts help`
 
 ### Copy the environment file
 
@@ -98,46 +147,9 @@ or `.env.infura-rinkeby.example`) to a `.env` file at the root of the project.
 You will define some other variables in this `.env` file later. Using the same `.env`
 file throughout enables a consistent experience.
 
-### Run Orchestrate Quickstart
+## Examples
 
-The Orchestrate Quickstart uses a Docker compose setup and includes Orchestrate services,
-as well as other services including Kafka, Redis, Postgres and Hashicorp Vault, and an Hyperledger Besu node.
-
-- Dependent services are configured in the [dependencies docker-compose.yml file](scripts/deps/docker-compose.yml).
-- The Besu node is configured in the [Besu docker-compose-besu.yml file](scripts/deps/docker-compose-besu.yml).
-- Orchestrate microservices are configured in [main docker-compose.yml file](docker-compose.yml).
-
-Run the quickstart:
-
-```bash
-npm run up
-```
-
-![npm run up console output](static/npm-run-up.png)
-
-> **Note:** _To stop Orchestrate, run `npm run down`._ > _`npm run down` stops all containers and removes all data volumes._
-
-### Install Orchestrate command line interface (CLI)
-
-```bash
-npm install
-```
-
-Verify that the CLI is properly installed and list all commands:
-
-```bash
-npm run orchestrate help
-```
-
-To access details of each command:
-
-```bash
-npm run orchestrate [cmd] help
-```
-
-**Example:** `npm run orchestrate contracts help`
-
-## Step 2 - Create an Ethereum account
+## Step 1 - Create an Ethereum account
 
 ### Create account
 
@@ -165,6 +177,8 @@ To view available accounts, run the `hashicorp-accounts` command:
 npm run hashicorp-accounts
 ```
 
+> **Note:** Each account is prefix by its corresponding tenantID, by default is '\_'
+
 ![Hashicorp accounts listing](static/hashicorp-accounts.png)
 
 ### Run Hashicorp Vault commands
@@ -182,7 +196,7 @@ For example, to display the [vault token](https://www.vaultproject.io/docs/conce
 npm run hashicorp-vault -- token lookup
 ```
 
-## Step 3 - Connect to a blockchain network
+## Step 2 - Connect to a blockchain network
 
 ### Register a blockchain network
 
@@ -228,7 +242,7 @@ npm run get-latest-block
 > **Note:** _As with creating a chain, we provide an NPM command to make the request.
 > Have a look at the `package.json` file for details on this command._
 
-## Step 4 - Configure a faucet
+## Step 3 - Configure a faucet
 
 > **Note:** _On paid gas networks (for example, public networks such as Ethereum mainnet or Rinkeby
 > and also some private networks, such as the Besu one used in this quickstart),
@@ -260,9 +274,9 @@ If you're not familiar with MetaMask, refer to this [article about getting start
 
 #### Local Besu network
 
-On the quickstart Besu local network, some [pre-defined accounts are configured with an ETH balance](https://besu.hyperledger.org/en/stable/Reference/Accounts-for-Testing/).
+On the quickstart Besu local network, some [pre-defined accounts are configured with an ETH balance](scripts/deps/config/besu/genesis.json).
 
-Connect Metamask to `http://localhost:8545` and transfer 1 or 2 ETH from one of the test accounts to
+Connect Metamask to `http://localhost:8545` and import one of the genesis account privatekeys and transfer 1 or 2 ETH from one of the test accounts to
 your `FAUCET_ACCOUNT` address.
 
 #### Rinkeby
@@ -274,7 +288,7 @@ Rinkeby accounts using [MetaMask](https://metamask.io/).
 
 If you do not have any Rinkeby test ETH, you can request some for free from an [official Rinkeby faucet](https://faucet.rinkeby.io/).
 
-## Step 5 - Register a smart contract
+## Step 4 - Register a smart contract
 
 Orchestrate provides a contract registry.
 
@@ -318,7 +332,7 @@ npm run get-contract
 
 ![Get contract console output](static/get-contract.png)
 
-## Step 6 - Create an account to send transactions
+## Step 5 - Create an account to send transactions
 
 Generate an account to be used for sending transactions to the smart contact.
 The generated account is stored by the Hashicorp Vault service.
@@ -343,7 +357,7 @@ Search for the account address in the main search field.
 
 ![Etherscan display of generated account](static/etherscan-account.png)
 
-## Step 7 - Deploy a smart contract and send transactions
+## Step 6 - Deploy a smart contract and send transactions
 
 ### Listen to transaction receipts events
 
@@ -377,8 +391,7 @@ On another terminal, in the same project directory, deploy the smart contract:
 npm run deploy
 ```
 
-After a few seconds (depending on block time), you see the receipt related to the contract creation
-transaction in the consumer terminal.
+After a few seconds (depending on block time), you see the receipt related to the contract creation transaction in the consumer terminal.
 
 ![Contract deployment transaction receipt](static/npm-deploy.png)
 
@@ -415,16 +428,6 @@ If using Rinkeby, you can verify the transaction was sent using
 
 ![Etherscan display of transaction on Rinkeby](static/etherscan-send-tx.png)
 
-## Last step - Shut down the quickstart and remove data
-
-Stop the consumer script by using `ctrl+C` in the terminal window where the script is running.
-
-Stop the quickstart services and network:
-
-```bash
-npm run down
-```
-
 ## Multitenancy
 
 Multi-tenancy enables serving of multiple blockchain applications with a single Orchestrate instance.
@@ -441,7 +444,7 @@ To enable multi-tenancy we need to modify the following variable from our local 
 
 ```bash
 MULTI_TENANCY_ENABLED=true
-AUTH_JWT_CLAIMS_NAMESPACE=http://tenant.info/
+AUTH_JWT_CLAIMS_NAMESPACE=orchestrate.info
 AUTH_JWT_CERTIFICATE=MIIDYjCCAkoCCQC9pJWk7qdipjANBgkqhkiG9w0BAQsFADBzMQswCQYDVQQGEwJGUjEOMAwGA1UEBwwFUGFyaXMxEjAQBgNVBAoMCUNvbnNlblN5czEQMA4GA1UECwwHUGVnYVN5czEuMCwGA1UEAwwlZTJlLXRlc3RzLm9yY2hlc3RyYXRlLmNvbnNlbnN5cy5wYXJpczAeFw0xOTEyMjcxNjI5MTdaFw0yMDEyMjYxNjI5MTdaMHMxCzAJBgNVBAYTAkZSMQ4wDAYDVQQHDAVQYXJpczESMBAGA1UECgwJQ29uc2VuU3lzMRAwDgYDVQQLDAdQZWdhU3lzMS4wLAYDVQQDDCVlMmUtdGVzdHMub3JjaGVzdHJhdGUuY29uc2Vuc3lzLnBhcmlzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo0NqWqI3TSi1uOBvCUquclWo4LcsYT21tNUXQ8YyqVYRSsiBv+ZKZBCjD8XklLPih40kFSe+r6DNca5/LH/okQIdc8nsQg+BLCkXeH2NFv+QYtPczAw4YhS6GVxJk3u9sfp8NavWBcQbD3MMDpehMOvhSl0zoP/ZlH6ErKHNtoQgUpPNVQGysNU21KpClmIDD/L1drsbq+rFiDrcVWaOLwGxr8SBd/0b4ngtcwH16RJaxcIXXT5AVia1CNdzmU5/AIg3OfgzvKn5AGrMZBsmGAiCyn4/P3PnuF81/WHukk5ETLnzOH+vC2elSmZ8y80HCGeqOiQ1rs66L936wX8cDwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCNcTs3n/Ps+yIZDH7utxTOaqpDTCB10MzPmb22UAal89couIT6R0fAu14p/LTkxdb2STDySsQY2/Lv6rPdFToHGUI9ZYOTYW1GOWkt1EAao9BzdsoJVwmTON6QnOBKy/9RxlhWP+XSWVsY0te6KYzS7rQyzQoJQeeBNMpUnjiQji9kKi5j9rbVMdjIb4HlmYrcE95ps+oFkyJoA1HLVytAeOjJPXGToNlv3k2UPJzOFUM0ujWWeBTyHMCmZ4RhlrfzDNffY5dlW82USjc5dBlzRyZalXSjhcVhK4asUodomVntrvCShp/8C9LpbQZ+ugFNE8J6neStWrhpRU9/sBJx
 AUTH_JWT_PRIVATE_KEY=MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCjQ2paojdNKLW44G8JSq5yVajgtyxhPbW01RdDxjKpVhFKyIG/5kpkEKMPxeSUs+KHjSQVJ76voM1xrn8sf+iRAh1zyexCD4EsKRd4fY0W/5Bi09zMDDhiFLoZXEmTe72x+nw1q9YFxBsPcwwOl6Ew6+FKXTOg/9mUfoSsoc22hCBSk81VAbKw1TbUqkKWYgMP8vV2uxur6sWIOtxVZo4vAbGvxIF3/RvieC1zAfXpElrFwhddPkBWJrUI13OZTn8AiDc5+DO8qfkAasxkGyYYCILKfj8/c+e4XzX9Ye6STkRMufM4f68LZ6VKZnzLzQcIZ6o6JDWuzrov3frBfxwPAgMBAAECggEARNLHg7t8SoeNy4i45hbYYRRhI5G0IK3t6nQl4YkslBvXIEpT//xpgbNNufl3OYR3SyMhgdWGWe0Ujga8T5sABBj7J3OIp/R3RJFx9nYewwIq8K5VFqNUJWyNYuF3lreEKQHp2Io+p6GasrGR9JjQ95mIGFwfxo/0Pdfzv/5ZhMWTmSTcOi504Vger5TaPobPFOnULq4y1A4eX4puiHDtvx09DUAWbAjGHpCYZjDGRdSXQArYQmUOKy7R46qKT/ollGOWivnEOgsFmXuUWs/shmcrDG4cGBkRrkxyIZhpnpNEEF5TYgulMMzwM+314e8W0lj9iiSB2nXzt8JhEwTz8QKBgQDSCouFj2lNSJDg+kz70eWBF9SQLrBTZ8JcMte3Q+CjCL1FpSVYYBRzwJNvWFyNNv7kHhYefqfcxUVSUnQ1eZIqTXtm9BsLXnTY+uEkV92spjVmfzBKZvtN3zzip97sfMT9qeyagHEHwpP+KaR0nyffAK+VPhlwNMKgQ9rzP4je+QKBgQDG/JwVaL2b53vi9CNh2XI8KNUd6rx6NGC6YTZ/xKVIgczGKTVex/w1DRWFTb0neUsdus5ITqaxQJtJDw/pOwoIag7Q0ttlLNpYsurx3mgMxpYY12/wurvp1NoU3Dq6ob7igfowP+ahUBchRwt1tlezn3TYxVoZpu9dZHtoynOtRwKBgB9vFJJYdBns0kHZM8w8DWzUdCtf0WOqE5xYv4/dyLCdjjXuETi4qFbqayYuwysfH+Zj2kuWCOkxXL6FOH8IQqeyENXHkoSRDkuqwCcAP1ynQzajskZwQwvUbPg+x039Hj4YQCCfOEtBA4T2Fnadmwn0wFJFiOkR/E6f2RSuXX2BAoGALvVqODsxk9s7B0IqH2tbZAsW0CqXNBesRA+w9tIHV2caViFfcPCs+jAORhkkbG5ZZbix+apl+CqQ+trNHHNMWNP+jxVTpTrChHAktdOQpoMu5MnipuLKedI7bPTT/zsweu/FhSFvYd4utzG26J6Rb9hPkOBx9N/KWTXfUcmFJv0CgYAUYVUvPe7MHSd5m8MulxRnVirWzUIUL9Pf1RKWOUq7Ue4oMxzE8CZCJstunCPWgyyxYXgj480PdIuL92eTR+LyaUESb6szZQTxaJfu0mEJS0KYWlONz+jKM4oC06dgJcCMvhgjta2KpXCm3qL1pmKwfFbOLWYBe5uMoHIn9FdJFQ==
 ```
@@ -449,7 +452,7 @@ AUTH_JWT_PRIVATE_KEY=MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCjQ2paojd
 Then, we need to start Orchestrate again:
 
 ```bash
-npm run up
+npm run down && npm run up
 ```
 
 > IMPORTANT: In case of running in a production environment, please ensure you generate your own

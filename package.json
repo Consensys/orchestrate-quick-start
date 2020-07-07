@@ -4,9 +4,7 @@
   "description": "PegaSys Orchestrate Quick start",
   "config": {
     "endpoints": {
-      "chainregistry": "localhost:8081",
-      "contractregistry": "localhost:8020",
-      "kafka": "localhost:9092"
+      "chainregistry": "localhost:8081"
     },
     "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry envelope-store"
   },
@@ -17,25 +15,26 @@
     "check-formatting": "prettier --list-different 'src/**/*.{ts,js,json}'",
     "clean": "rimraf ./dist ./build",
     "compile": "truffle compile",
+    "generate-account": "dotenv ts-node src/generate-account",
     "register-chain": "dotenv -- cross-var curl -X POST --data '{\"name\": \"%CHAIN%\", \"urls\":[\"%NETWORK_ENDPOINT%\"]}' ${npm_package_config_endpoints_chainregistry}/chains",
-    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' ${npm_package_config_endpoints_chainregistry}/%CHAIN_UUID%",
+    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' %CHAIN_REGISTRY_URL%/%CHAIN_UUID%",
     "create-faucet": "dotenv -- cross-var curl -X POST --data '{\"name\":\"%CHAIN%-faucet\", \"creditorAccount\":\"%FAUCET_ACCOUNT%\",\"chainRule\":\"%CHAIN_UUID%\",\"cooldown\":\"10s\",\"amount\":\"60000000000000000\",\"maxBalance\":\"100000000000000000\"}' ${npm_package_config_endpoints_chainregistry}/faucets",
-    "register-contract": "orchestrate contracts register -e ${npm_package_config_endpoints_contractregistry} -n Counter -f build/contracts/Counter.json",
-    "get-contract": "orchestrate contracts contract -e ${npm_package_config_endpoints_contractregistry} -n Counter",
-    "get-catalog": "orchestrate contracts catalog --endpoint ${npm_package_config_endpoints_contractregistry}",
-    "generate-account": "dotenv -- cross-var orchestrate accounts generate --endpoint ${npm_package_config_endpoints_kafka} --chain %CHAIN%",
-    "consume": "ts-node src/consume",
-    "deploy": "ts-node src/deploy-contract",
-    "send-tx": "ts-node src/send-tx",
+    "register-contract": "dotenv ts-node src/register-contract",
+    "get-catalog": "dotenv ts-node src/get-catalog",
+    "consume": "dotenv ts-node src/consume",
+    "deploy": "dotenv ts-node src/deploy-contract",
+    "send-tx": "dotenv ts-node src/send-tx",
     "orchestrate": "orchestrate",
     "generate-jwt": "docker-compose run generate-jwt",
-    "deps": "docker-compose -f scripts/deps/docker-compose.yml -f scripts/deps/docker-compose-besu.yml up -d",
-    "down-deps": "docker-compose -f scripts/deps/docker-compose.yml -f scripts/deps/docker-compose-besu.yml down --volumes --timeout 0",
+    "up-deps": "docker-compose -f scripts/deps/docker-compose.yml up -d",
+    "up-besu": "docker-compose -f scripts/deps/docker-compose-besu.yml up -d",
     "up-orchestrate": "docker-compose up -d ${npm_package_config_services}",
     "stop-orchestrate": "docker-compose stop ${npm_package_config_services}",
     "down-orchestrate": "docker-compose down --volumes --timeout 0",
-    "up": "npm run deps && npm run up-orchestrate",
-    "down": "npm run down-orchestrate && npm run down-deps",
+    "down-deps": "docker-compose -f scripts/deps/docker-compose.yml down --volumes --timeout 0",
+    "down-besu": "docker-compose -f scripts/deps/docker-compose-besu.yml down --volumes --timeout 0",
+    "up": "npm run up-deps && npm run up-orchestrate",
+    "down": "npm run down-orchestrate ; npm run down-besu ; npm run down-deps",
     "hashicorp-accounts": "bash scripts/deps/config/hashicorp/vault.sh kv list secret/default",
     "hashicorp-token-lookup": "bash scripts/deps/config/hashicorp/vault.sh token lookup",
     "hashicorp-vault": "bash -x scripts/deps/config/hashicorp/vault.sh"
@@ -54,7 +53,8 @@
   "author": "ConsenSys PegaSys Engineering",
   "contributors": [
     "Dario Anongba Varela <dario.varela@consensys.net>",
-    "Nicolas Maurice <nicolas.maurice@consensys.net>"
+    "Nicolas Maurice <nicolas.maurice@consensys.net>",
+    "Gabriel Garrido Calvo <gabriel.garrido@consensys.net>"
   ],
   "license": "Apache-2.0",
   "bugs": {
