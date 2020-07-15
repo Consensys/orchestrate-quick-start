@@ -3,10 +3,7 @@
   "version": "2.0.0",
   "description": "PegaSys Orchestrate Quick start",
   "config": {
-    "endpoints": {
-      "chainregistry": "localhost:8081"
-    },
-    "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry envelope-store"
+    "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry transaction-scheduler"
   },
   "scripts": {
     "lint": "tslint -p . -c tslint.json",
@@ -16,9 +13,9 @@
     "clean": "rimraf ./dist ./build",
     "compile": "truffle compile",
     "generate-account": "dotenv ts-node src/generate-account",
-    "register-chain": "dotenv -- cross-var curl -X POST --data '{\"name\": \"%CHAIN%\", \"urls\":[\"%NETWORK_ENDPOINT%\"]}' ${npm_package_config_endpoints_chainregistry}/chains",
-    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' %CHAIN_REGISTRY_URL%/%CHAIN_UUID%",
-    "create-faucet": "dotenv -- cross-var curl -X POST --data '{\"name\":\"%CHAIN%-faucet\", \"creditorAccount\":\"%FAUCET_ACCOUNT%\",\"chainRule\":\"%CHAIN_UUID%\",\"cooldown\":\"10s\",\"amount\":\"60000000000000000\",\"maxBalance\":\"100000000000000000\"}' ${npm_package_config_endpoints_chainregistry}/faucets",
+    "register-chain": "dotenv -- cross-var curl -X POST --data '{\"name\": \"%CHAIN%\", \"urls\":[\"%NETWORK_ENDPOINT%\"]}' %CHAIN_REGISTRY_HOST%/chains",
+    "get-latest-block": "dotenv -- cross-var curl -X POST --data '{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\", false],\"id\":1}' %CHAIN_REGISTRY_HOST%/%CHAIN_UUID%",
+    "create-faucet": "dotenv -- cross-var curl -X POST --data '{\"name\":\"%CHAIN%-faucet\", \"creditorAccount\":\"%FAUCET_ACCOUNT%\",\"chainRule\":\"%CHAIN_UUID%\",\"cooldown\":\"10s\",\"amount\":\"60000000000000000\",\"maxBalance\":\"100000000000000000\"}' %CHAIN_REGISTRY_HOST%/faucets",
     "register-contract": "dotenv ts-node src/register-contract",
     "get-catalog": "dotenv ts-node src/get-catalog",
     "consume": "dotenv ts-node src/consume",
@@ -62,21 +59,22 @@
   },
   "homepage": "https://gitlab.com/ConsenSys/client/fr/core-stack/quick-start",
   "devDependencies": {
+    "@types/uuid": "^8.0.0",
     "axios": "~0.19.2",
+    "cross-var": "~1.1.0",
     "dotenv": "~8.2.0",
-    "ethers": "^4.0.47",
+    "dotenv-cli": "~3.1.0",
+    "ethers": "~4.0.47",
     "husky": "~4.2.5",
     "lint-staged": "~10.2.2",
-    "pegasys-orchestrate": "^2.2.0",
+    "pegasys-orchestrate": "~2.4.0",
     "prettier": "~2.0.5",
-    "rimraf": "^3.0.2",
-    "truffle": "^5.1.24",
+    "rimraf": "~3.0.2",
+    "truffle": "~5.1.24",
     "ts-node": "~8.10.1",
     "tslint": "~6.1.2",
     "tslint-config-prettier": "~1.18.0",
-    "typescript": "~3.8.3",
-    "cross-var": "1.1.0",
-    "dotenv-cli": "3.1.0"
+    "typescript": "~3.8.3"
   },
   "husky": {
     "hooks": {
@@ -93,5 +91,8 @@
       "tslint",
       "git add"
     ]
+  },
+  "dependencies": {
+    "uuid": "^8.2.0"
   }
 }
