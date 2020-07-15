@@ -147,7 +147,7 @@ or `.env.infura-rinkeby.example`) to a `.env` file at the root of the project.
 You will define some other variables in this `.env` file later. Using the same `.env`
 file throughout enables a consistent experience.
 
-## Examples
+## Tutorial
 
 ## Step 1 - Create an Ethereum account
 
@@ -324,14 +324,6 @@ npm run get-catalog
 
 ![Get catalog console output](static/get-catalog.png)
 
-### Get details about a smart contract
-
-```bash
-npm run get-contract
-```
-
-![Get contract console output](static/get-contract.png)
-
 ## Step 5 - Create an account to send transactions
 
 Generate an account to be used for sending transactions to the smart contact.
@@ -395,6 +387,8 @@ After a few seconds (depending on block time), you see the receipt related to th
 
 ![Contract deployment transaction receipt](static/npm-deploy.png)
 
+> **Note:**: You will be required to execute this command twice, first to fund your sender account with enough tokens, then another one to send the actual deploy contract transaction.
+
 ### Copy contract address
 
 Copy the `contractAddress` in the receipt and set the `TO_ACCOUNT` value with this address in `.env` file.
@@ -428,15 +422,14 @@ If using Rinkeby, you can verify the transaction was sent using
 
 ![Etherscan display of transaction on Rinkeby](static/etherscan-send-tx.png)
 
-## Multitenancy
+## Advanced Tutorial
 
-Multi-tenancy enables serving of multiple blockchain applications with a single Orchestrate instance.
-Resources including transaction streams, access to the blockchain network, private keys,
-and smart contracts are isolated to the tenant that owns them.
+### Multitenancy
+
+Multi-tenancy enables serving multiple blockchain applications with a single Orchestrate instance. Resources including transaction streams, access to the blockchain network, private keys, and smart contracts are isolated to the tenant that owns them.
 [See more](https://docs.orchestrate.pegasys.tech/en/latest/Concepts/Multi-Tenancy/)
 
-Orchestrate uses the OpenID Connect(OIDC) authentication protocol. JSON Web Tokens (JWTs) with custom
-claims control access to tenant resources.
+Orchestrate uses the OpenID Connect(OIDC) authentication protocol. JSON Web Tokens (JWTs) with custom claims control access to tenant resources.
 
 ### Enabling multi-tenancy
 
@@ -444,9 +437,7 @@ To enable multi-tenancy we need to modify the following variable from our local 
 
 ```bash
 MULTI_TENANCY_ENABLED=true
-AUTH_JWT_CLAIMS_NAMESPACE=orchestrate.info
-AUTH_JWT_CERTIFICATE=MIIDYjCCAkoCCQC9pJWk7qdipjANBgkqhkiG9w0BAQsFADBzMQswCQYDVQQGEwJGUjEOMAwGA1UEBwwFUGFyaXMxEjAQBgNVBAoMCUNvbnNlblN5czEQMA4GA1UECwwHUGVnYVN5czEuMCwGA1UEAwwlZTJlLXRlc3RzLm9yY2hlc3RyYXRlLmNvbnNlbnN5cy5wYXJpczAeFw0xOTEyMjcxNjI5MTdaFw0yMDEyMjYxNjI5MTdaMHMxCzAJBgNVBAYTAkZSMQ4wDAYDVQQHDAVQYXJpczESMBAGA1UECgwJQ29uc2VuU3lzMRAwDgYDVQQLDAdQZWdhU3lzMS4wLAYDVQQDDCVlMmUtdGVzdHMub3JjaGVzdHJhdGUuY29uc2Vuc3lzLnBhcmlzMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo0NqWqI3TSi1uOBvCUquclWo4LcsYT21tNUXQ8YyqVYRSsiBv+ZKZBCjD8XklLPih40kFSe+r6DNca5/LH/okQIdc8nsQg+BLCkXeH2NFv+QYtPczAw4YhS6GVxJk3u9sfp8NavWBcQbD3MMDpehMOvhSl0zoP/ZlH6ErKHNtoQgUpPNVQGysNU21KpClmIDD/L1drsbq+rFiDrcVWaOLwGxr8SBd/0b4ngtcwH16RJaxcIXXT5AVia1CNdzmU5/AIg3OfgzvKn5AGrMZBsmGAiCyn4/P3PnuF81/WHukk5ETLnzOH+vC2elSmZ8y80HCGeqOiQ1rs66L936wX8cDwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCNcTs3n/Ps+yIZDH7utxTOaqpDTCB10MzPmb22UAal89couIT6R0fAu14p/LTkxdb2STDySsQY2/Lv6rPdFToHGUI9ZYOTYW1GOWkt1EAao9BzdsoJVwmTON6QnOBKy/9RxlhWP+XSWVsY0te6KYzS7rQyzQoJQeeBNMpUnjiQji9kKi5j9rbVMdjIb4HlmYrcE95ps+oFkyJoA1HLVytAeOjJPXGToNlv3k2UPJzOFUM0ujWWeBTyHMCmZ4RhlrfzDNffY5dlW82USjc5dBlzRyZalXSjhcVhK4asUodomVntrvCShp/8C9LpbQZ+ugFNE8J6neStWrhpRU9/sBJx
-AUTH_JWT_PRIVATE_KEY=MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCjQ2paojdNKLW44G8JSq5yVajgtyxhPbW01RdDxjKpVhFKyIG/5kpkEKMPxeSUs+KHjSQVJ76voM1xrn8sf+iRAh1zyexCD4EsKRd4fY0W/5Bi09zMDDhiFLoZXEmTe72x+nw1q9YFxBsPcwwOl6Ew6+FKXTOg/9mUfoSsoc22hCBSk81VAbKw1TbUqkKWYgMP8vV2uxur6sWIOtxVZo4vAbGvxIF3/RvieC1zAfXpElrFwhddPkBWJrUI13OZTn8AiDc5+DO8qfkAasxkGyYYCILKfj8/c+e4XzX9Ye6STkRMufM4f68LZ6VKZnzLzQcIZ6o6JDWuzrov3frBfxwPAgMBAAECggEARNLHg7t8SoeNy4i45hbYYRRhI5G0IK3t6nQl4YkslBvXIEpT//xpgbNNufl3OYR3SyMhgdWGWe0Ujga8T5sABBj7J3OIp/R3RJFx9nYewwIq8K5VFqNUJWyNYuF3lreEKQHp2Io+p6GasrGR9JjQ95mIGFwfxo/0Pdfzv/5ZhMWTmSTcOi504Vger5TaPobPFOnULq4y1A4eX4puiHDtvx09DUAWbAjGHpCYZjDGRdSXQArYQmUOKy7R46qKT/ollGOWivnEOgsFmXuUWs/shmcrDG4cGBkRrkxyIZhpnpNEEF5TYgulMMzwM+314e8W0lj9iiSB2nXzt8JhEwTz8QKBgQDSCouFj2lNSJDg+kz70eWBF9SQLrBTZ8JcMte3Q+CjCL1FpSVYYBRzwJNvWFyNNv7kHhYefqfcxUVSUnQ1eZIqTXtm9BsLXnTY+uEkV92spjVmfzBKZvtN3zzip97sfMT9qeyagHEHwpP+KaR0nyffAK+VPhlwNMKgQ9rzP4je+QKBgQDG/JwVaL2b53vi9CNh2XI8KNUd6rx6NGC6YTZ/xKVIgczGKTVex/w1DRWFTb0neUsdus5ITqaxQJtJDw/pOwoIag7Q0ttlLNpYsurx3mgMxpYY12/wurvp1NoU3Dq6ob7igfowP+ahUBchRwt1tlezn3TYxVoZpu9dZHtoynOtRwKBgB9vFJJYdBns0kHZM8w8DWzUdCtf0WOqE5xYv4/dyLCdjjXuETi4qFbqayYuwysfH+Zj2kuWCOkxXL6FOH8IQqeyENXHkoSRDkuqwCcAP1ynQzajskZwQwvUbPg+x039Hj4YQCCfOEtBA4T2Fnadmwn0wFJFiOkR/E6f2RSuXX2BAoGALvVqODsxk9s7B0IqH2tbZAsW0CqXNBesRA+w9tIHV2caViFfcPCs+jAORhkkbG5ZZbix+apl+CqQ+trNHHNMWNP+jxVTpTrChHAktdOQpoMu5MnipuLKedI7bPTT/zsweu/FhSFvYd4utzG26J6Rb9hPkOBx9N/KWTXfUcmFJv0CgYAUYVUvPe7MHSd5m8MulxRnVirWzUIUL9Pf1RKWOUq7Ue4oMxzE8CZCJstunCPWgyyxYXgj480PdIuL92eTR+LyaUESb6szZQTxaJfu0mEJS0KYWlONz+jKM4oC06dgJcCMvhgjta2KpXCm3qL1pmKwfFbOLWYBe5uMoHIn9FdJFQ==
+AUTH_TOKEN=
 ```
 
 Then, we need to start Orchestrate again:
@@ -455,33 +446,36 @@ Then, we need to start Orchestrate again:
 npm run down && npm run up
 ```
 
-> IMPORTANT: In case of running in a production environment, please ensure you generate your own
-> certificate and private keys, using for instance `openssl`.
+#### Using self-generated certificates
+
+For the sake of simplicity Orchestrate team has provided a dev certificate
+to encode and decode the generated JWT. In case you want to use your own certificates, generated for instance with `openssl`, you need to fill up the following two ENV vars:
+
+```
+AUTH_JWT_CERTIFICATE=
+AUTH_JWT_PRIVATE_KEY=
+```
 
 ### Generate JWT token
 
-To generate a valid JWT we need to run the following command, where `TENANT_ID=` indicate the tenant id
-included in our token
+To generate a valid JWT we need to run the following command, where `TENANT_ID=` indicate the tenant id included in our token.
 
 ```
 TENANT_ID=foo npm run generate-jwt
 ```
 
-### How to test it
+By default the _expiration time is 1h_, in case you want to modify you can use the ENV variable _EXPIRATION_. For instance, to make it 5 hours you execute:
 
-Now we need to append the obtained token into every request we do to Orchestrate, as follow:
-
-```js
-  const requestId = await producer.sendTransaction({
-    chain: process.env.CHAIN!,
-    contractName: 'Counter',
-    methodSignature: 'increment(uint256)',
-    args: [1],
-    authToken: 'Bearer {{GENERATED_TOKEN}}',
-    to: process.env.TO_ACCOUNT,
-    from: process.env.FROM_ACCOUNT!
-  })
-}
+```
+EXPIRATION=5h TENANT_ID=foo npm run generate-jwt
 ```
 
-Notice we have prefixed our generate token by `Bearer`.
+![Output of the generate-jwt command](static/generate-jwt.png)
+
+> **Note:** Decode the generated token using _[https://jwt.io/](https://jwt.io/)_ and verify the correct tenant is included within the selected namespace.
+
+### How to test it
+
+Once we obtain a valid token we just need to update _AUTH_TOKEN=_ from `.env` file. Going back to [tutorial](/#tutorial), if we follow the steps again, every request will be sent using the generated JWT.
+
+> **Note:**: In some sample cases we need to prefix the token by `Bearer` to be correctly decoded by the Orchestrate services.

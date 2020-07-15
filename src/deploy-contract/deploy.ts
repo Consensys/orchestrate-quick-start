@@ -18,5 +18,4 @@ export const deploy = async () => {
   )
 
   console.log('Transaction request sent successfully', txResponse)
-  console.log(txResponse.schedule.jobs)
 }

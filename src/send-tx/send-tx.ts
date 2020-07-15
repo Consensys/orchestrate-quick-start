@@ -10,7 +10,8 @@ export const sendTx = async () => {
     methodSignature: 'increment(uint256)',
     args: [1],
     to: process.env.TO_ACCOUNT,
-    from: process.env.FROM_ACCOUNT!
+    from: process.env.FROM_ACCOUNT!,
+    authToken: process.env.AUTH_TOKEN ? `Bearer ${process.env.AUTH_TOKEN}` : ''
   })
 
   console.log('Transaction request sent with id', requestId)
