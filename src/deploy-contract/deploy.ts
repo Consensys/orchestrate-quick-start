@@ -10,7 +10,8 @@ export const deploy = async () => {
     contractName: 'Counter',
     methodSignature: 'constructor()',
     from: process.env.FROM_ACCOUNT!,
-    gas: 2000000
+    gas: 2000000,
+    authToken: process.env.AUTH_TOKEN ? `Bearer ${process.env.AUTH_TOKEN}` : ''
   })
 
   console.log('Transaction request sent with id: ', requestId)
