@@ -387,7 +387,7 @@ After a few seconds (depending on block time), you see the receipt related to th
 
 ![Contract deployment transaction receipt](static/npm-deploy.png)
 
-> **Note:**: It will required to execute this command twice, first to pre-funded your sender account with enough tokens, then another one to send the actual deploy contract transaction.
+> **Note:**: You will be required to execute this command twice, first to fund your sender account with enough tokens, then another one to send the actual deploy contract transaction.
 
 ### Copy contract address
 
@@ -422,11 +422,11 @@ If using Rinkeby, you can verify the transaction was sent using
 
 ![Etherscan display of transaction on Rinkeby](static/etherscan-send-tx.png)
 
-## Advance Tutorial
+## Advanced Tutorial
 
 ### Multitenancy
 
-Multi-tenancy enables serving of multiple blockchain applications with a single Orchestrate instance. Resources including transaction streams, access to the blockchain network, private keys, and smart contracts are isolated to the tenant that owns them.
+Multi-tenancy enables serving multiple blockchain applications with a single Orchestrate instance. Resources including transaction streams, access to the blockchain network, private keys, and smart contracts are isolated to the tenant that owns them.
 [See more](https://docs.orchestrate.pegasys.tech/en/latest/Concepts/Multi-Tenancy/)
 
 Orchestrate uses the OpenID Connect(OIDC) authentication protocol. JSON Web Tokens (JWTs) with custom claims control access to tenant resources.
@@ -472,10 +472,10 @@ EXPIRATION=5h TENANT_ID=foo npm run generate-jwt
 
 ![Output of the generate-jwt command](static/generate-jwt.png)
 
-> **Note:** decode the generate token using _[https://jwt.io/](https://jwt.io/)_ and verify the correct tenant is included within selected namespace.
+> **Note:** Decode the generated token using _[https://jwt.io/](https://jwt.io/)_ and verify the correct tenant is included within the selected namespace.
 
 ### How to test it
 
 Once we obtain a valid token we just need to update _AUTH_TOKEN=_ from `.env` file. Going back to [tutorial](/#tutorial), if we follow the steps again, every request will be sent using the generated JWT.
 
-> **Note:**: In same of the sample cases we need to prefix the token by `Bearer` to be correctly decoded by the Orchestrate services.
+> **Note:**: In some sample cases we need to prefix the token by `Bearer` to be correctly decoded by the Orchestrate services.
