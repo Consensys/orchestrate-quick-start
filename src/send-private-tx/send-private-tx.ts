@@ -1,25 +1,26 @@
-import { config } from 'dotenv'
-import { Producer, ProtocolType } from 'pegasys-orchestrate'
-
-// Load ENV variables
-config()
+import { ProtocolType, TransactionClient } from 'pegasys-orchestrate'
+import * as uuid from 'uuid'
 
 export const sendPrivateTx = async () => {
-  const producer = new Producer(['localhost:9092'])
-  await producer.connect()
+  const txClient = new TransactionClient(process.env.TX_SCHEDULER_HOST!)
+  const idempotencyKey = uuid.v4()
+  const authToken = process.env.AUTH_TOKEN ? `Bearer ${process.env.AUTH_TOKEN}` : undefined
 
   // Deploy a new Counter contract and returns the ID of the request
-  const requestId = await producer.sendTransaction({
-    chain: process.env.CHAIN!,
-    contractName: 'Counter',
-    methodSignature: 'constructor()',
-    from: process.env.FROM_ACCOUNT!,
-    protocol: ProtocolType.BesuOrion,
-    privateFor: ['A1aVtMxLCUHmBVHXoZzzBgPbW/wj5axDpW9X8l91SGo='],
-    privateFrom: 'Ko2bVqD+nNlNYL5EE7y3IdOnviftjiizpjRt+HTuFBs='
-  })
+  const txResponse = await txClient.deployContract(
+    {
+      chain: process.env.CHAIN!,
+      params: {
+        contractName: 'Counter',
+        from: process.env.FROM_ACCOUNT!,
+        protocol: ProtocolType.Orion,
+        privateFor: ['A1aVtMxLCUHmBVHXoZzzBgPbW/wj5axDpW9X8l91SGo='],
+        privateFrom: 'Ko2bVqD+nNlNYL5EE7y3IdOnviftjiizpjRt+HTuFBs='
+      }
+    },
+    idempotencyKey,
+    authToken
+  )
 
-  console.log('Transaction request sent with id: ', requestId)
-
-  await producer.disconnect()
+  console.log('Transaction request sent successfully', txResponse)
 }
