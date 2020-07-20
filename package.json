@@ -1,6 +1,6 @@
 {
   "name": "pegasys-orchestrate-quick-start",
-  "version": "2.0.0",
+  "version": "2.3.0",
   "description": "PegaSys Orchestrate Quick start",
   "config": {
     "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry transaction-scheduler"
