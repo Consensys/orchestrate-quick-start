@@ -4,7 +4,6 @@ x-default-variables: &default-variables
   CONTRACT_REGISTRY_URL: ${CONTRACT_REGISTRY_URL-contract-registry:8080}
   CHAIN_REGISTRY_URL: ${CHAIN_REGISTRY_URL-http://chain-registry:8081}
   TRANSACTION_SCHEDULER_URL: ${TRANSACTION_SCHEDULER_URL-http://transaction-scheduler:8081}
-  ENVELOPE_STORE_URL: ${ENVELOPE_STORE_URL-envelope-store:8080}
   KAFKA_URL: ${KAFKA_URL-kafka:29092}
   CHAIN_REGISTRY_INIT: ${CHAIN_REGISTRY_INIT-}
   ETH_CLIENT_RETRY_MAX_ELAPSED_TIME: 5s
@@ -21,10 +20,11 @@ x-default-variables: &default-variables
   AUTH_JWT_PRIVATE_KEY: ${AUTH_JWT_PRIVATE_KEY-}
   AUTH_API_KEY: ${AUTH_API_KEY-}
   TX_SCHEDULER_ENABLED: ${TX_SCHEDULER_ENABLED-true}
+  ENVELOPE_STORE_ENABLED: ${ENVELOPE_STORE_ENABLED-false}
 
 x-container-common: &container-common
   restart: ${CONTAINER_RESTART-on-failure}
-  image: registry.gitlab.com/consensys/client/fr/core-stack/orchestrate:c81ad0c6
+  image: registry.gitlab.com/consensys/client/fr/core-stack/orchestrate:f763b724
   networks:
     - orchestrate
 
@@ -35,10 +35,6 @@ x-contract-registry-common: &contract-registry-common
 x-transaction-scheduler-common: &transaction-scheduler-common
   TRANSACTION_SCHEDULER_TYPE: ${TRANSACTION_SCHEDULER_TYPE-}
   DB_HOST: postgres-transaction-scheduler
-
-x-envelope-store-common: &envelope-store-common
-  ENVELOPE_STORE_TYPE: ${ENVELOPE_STORE_TYPE-}
-  DB_HOST: postgres-envelope-store
 
 x-chain-registry-common: &chain-registry-common
   CHAIN_REGISTRY_TYPE: ${CHAIN_REGISTRY_TYPE-}
@@ -114,7 +110,7 @@ services:
     environment:
       <<: *default-variables
       <<: *transaction-scheduler-common
-    restart: "no"
+    restart: 'no'
     command: transaction-scheduler migrate init
 
   transaction-scheduler-migration:
@@ -122,7 +118,7 @@ services:
     environment:
       <<: *default-variables
       <<: *transaction-scheduler-common
-    restart: "no"
+    restart: 'no'
     depends_on:
       - transaction-scheduler-migration-init
     command: transaction-scheduler migrate up
@@ -139,37 +135,6 @@ services:
     depends_on:
       - transaction-scheduler-migration
     command: transaction-scheduler run
-
-  envelope-store-migration-init:
-    <<: *container-common
-    environment:
-      <<: *default-variables
-      <<: *envelope-store-common
-    restart: "no"
-    command: envelope-store migrate init
-
-  envelope-store-migration:
-    <<: *container-common
-    environment:
-      <<: *default-variables
-      <<: *envelope-store-common
-    restart: "no"
-    depends_on:
-      - envelope-store-migration-init
-    command: envelope-store migrate up
-
-  envelope-store:
-    <<: *container-common
-    ports:
-      - 8040:8080
-      - 8041:8081
-      - 8042:8082
-    environment:
-      <<: *default-variables
-      <<: *envelope-store-common
-    depends_on:
-      - envelope-store-migration
-    command: envelope-store run
 
   tx-crafter:
     <<: *container-common
@@ -196,7 +161,7 @@ services:
     environment:
       <<: *default-variables
       JAEGER_SERVICE_NAME: TX-SENDER
-    depends_on: 
+    depends_on:
       - transaction-scheduler
     command: tx-sender run
 
@@ -216,8 +181,8 @@ services:
     environment:
       <<: *default-variables
       TENANT_ID: ${TENANT_ID-}
-    command: "utils generate-jwt --tenant=${TENANT_ID}"
-    restart: "no"
+    command: 'utils generate-jwt --tenant=${TENANT_ID}'
+    restart: 'no'
 
 volumes:
   vault-token:

@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "PegaSys Orchestrate Quick start",
   "config": {
-    "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry transaction-scheduler envelope-store"
+    "services": "tx-crafter tx-signer tx-sender tx-listener contract-registry chain-registry transaction-scheduler"
   },
   "scripts": {
     "lint": "tslint -p . -c tslint.json",
@@ -67,7 +67,7 @@
     "ethers": "~4.0.47",
     "husky": "~4.2.5",
     "lint-staged": "~10.2.2",
-    "pegasys-orchestrate": "~3.0.0",
+    "pegasys-orchestrate": "~2.3.0",
     "prettier": "~2.0.5",
     "rimraf": "~3.0.2",
     "truffle": "~5.1.24",
