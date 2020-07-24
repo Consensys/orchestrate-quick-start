@@ -424,6 +424,25 @@ If using Rinkeby, you can verify the transaction was sent using
 
 ## Advanced Tutorial
 
+### Send private transactions
+
+> **Important:** _Before moving forward, ensure the `FROM_ACCOUNT` and is set in the `.env` file._
+
+PegaSys Orchestrate is compatible with Quorum Tessera and Besu Orion protocols for private transactions. Private transactions are only available in private networks.
+
+On the second terminal, send the transaction:
+
+```bash
+npm run send-private-tx
+```
+
+After a few seconds (depending on block time), you see the transaction receipt in the consumer
+output on the first terminal.
+
+![Receipt for private transaction](static/npm-send-private-tx.png)
+
+> For more information about private transactions, please refer to the [Orion documentation](https://docs.orion.pegasys.tech/en/stable/)
+
 ### Multitenancy
 
 Multi-tenancy enables serving multiple blockchain applications with a single Orchestrate instance. Resources including transaction streams, access to the blockchain network, private keys, and smart contracts are isolated to the tenant that owns them.
