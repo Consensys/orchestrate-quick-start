@@ -1,20 +1,24 @@
-import { Producer } from 'pegasys-orchestrate'
+import { TransactionClient } from 'pegasys-orchestrate'
+import * as uuid from 'uuid'
 
 export const sendTx = async () => {
-  const producer = new Producer([process.env.KAFKA_HOST!])
-  await producer.connect()
+  const txClient = new TransactionClient(process.env.TX_SCHEDULER_HOST!)
+  const idempotencyKey = uuid.v4()
+  const authToken = process.env.AUTH_TOKEN ? `Bearer ${process.env.AUTH_TOKEN}` : undefined
 
-  const requestId = await producer.sendTransaction({
-    chain: process.env.CHAIN!,
-    contractName: 'Counter',
-    methodSignature: 'increment(uint256)',
-    args: [1],
-    to: process.env.TO_ACCOUNT,
-    from: process.env.FROM_ACCOUNT!,
-    authToken: process.env.AUTH_TOKEN ? `Bearer ${process.env.AUTH_TOKEN}` : ''
-  })
+  const txResponse = await txClient.send(
+    {
+      chain: process.env.CHAIN!,
+      params: {
+        methodSignature: 'increment(uint256)',
+        args: [1],
+        to: process.env.TO_ACCOUNT,
+        from: process.env.FROM_ACCOUNT!
+      }
+    },
+    idempotencyKey,
+    authToken
+  )
 
-  console.log('Transaction request sent with id', requestId)
-
-  await producer.disconnect()
+  console.log('Transaction request sent successfully', txResponse)
 }

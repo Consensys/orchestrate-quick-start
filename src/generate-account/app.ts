@@ -9,7 +9,8 @@ export const start = async () => {
 
     await accountGenerator.connect()
     const address = await accountGenerator.generateAccount({
-      authToken: process.env.AUTH_TOKEN ? `Bearer ${process.env.AUTH_TOKEN}` : ''
+      authToken: process.env.AUTH_TOKEN ? `Bearer ${process.env.AUTH_TOKEN}` : '',
+      chain: process.env.CHAIN!
     })
     await accountGenerator.disconnect()
 
