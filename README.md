@@ -1,25 +1,22 @@
-<p align="center">
-  <img src="static/orchestrate-logo.png" alt="Pegasys Orchestrate"/>
-</p>
+# Codefi Orchestrate Quickstart
 
-# PegaSys Orchestrate Quickstart
-
-PegaSys Orchestrate is a platform that enables enterprises to easily build secure
+[Orchestrate](https://codefi.consensys.net) is a platform that enables enterprises to easily build secure
 and reliable applications on Ethereum blockchains.
 
-> **Important:** Pegasys Orchestrate Quickstart is only available for Orchestrate customers and
-> PegaSys partners.
+> **Important:** The Orchestrate Quickstart is only available for Orchestrate customers and
+> [ConsenSys partners](https://consensys.net/solutions/partnerships/).
 >
-> [Contact PegaSys](https://pegasys.tech/contact/) if you want to purchase Orchestrate or are interested in our partner program.
+> [Contact ConsenSys](https://codefi.consensys.net/orchestrate-get-in-touch) if you want to purchase Orchestrate
+> or are interested in our [partner program](https://consensys.net/solutions/partnerships/).
 >
 > If you are already a partner or customer but we did not provide the credentials to access the
-> Docker registry, request access on [Pegasys Zendesk support site](http://pegasys.zendesk.com/)
-> To access Pegasys Zendesk, create an account with your company email or login using an existing Pegasys Zendesk account.
-> Alternatively, send an email from your company email to [support@pegasys.tech](mailto:support@pegasys.tech).
+> Docker registry, send an email from your company email to [orchestrate@consensys.net](mailto:orchestrate@consensys.net).
 >
-> You can use this Quickstart only if you have received these credentials from Pegasys to connect to the registry.
+> You can use this Quickstart only if you have received these credentials from ConsenSys to connect to the registry.
 >
-> **You cannot continue without the registry credentials.**
+> **You cannot continue this Quickstart without the registry credentials.**
+
+> **Tip** Try a free trial of Orchestrate with the [Quorum Dev Quickstart](https://github.com/PegaSysEng/quorum-dev-quickstart/tree/master/files/orchestrate). 
 
 Orchestrate provides advanced features when connected to blockchain networks:
 
@@ -29,7 +26,7 @@ Orchestrate provides advanced features when connected to blockchain networks:
 - Public and private transactions
 - Multi-chain.
 
-For more information, refer to the [PegaSys Orchestrate official Documentation](https://docs.orchestrate.pegasys.tech/).
+For more information, refer to the [Orchestrate documentation](https://docs.orchestrate.consensys.net/).
 
 During this quick-start you use:
 
@@ -252,7 +249,7 @@ npm run get-latest-block
 
 ### Create the faucet on Orchestrate
 
-A [faucet](https://docs.orchestrate.pegasys.tech) is defined using a name, a creditor account used
+A [faucet](https://docs.orchestrate.consensys.net) is defined using a name, a creditor account used
 to credit other accounts, and a chain identified by its UUID.
 
 The following command uses the `CHAIN`, `CHAIN_UUID` and `FAUCET_ACCOUNT` values from the `.env` file to create a faucet.
@@ -441,12 +438,12 @@ output on the first terminal.
 
 ![Receipt for private transaction](static/npm-send-private-tx.png)
 
-> For more information about private transactions, please refer to the [Orion documentation](https://docs.orion.pegasys.tech/en/stable/)
+> For more information about private transactions, refer to the [Besu privacy documentation](https://besu.hyperledger.org/Concepts/Privacy/Privacy-Overview/).
 
 ### Multitenancy
 
 Multi-tenancy enables serving multiple blockchain applications with a single Orchestrate instance. Resources including transaction streams, access to the blockchain network, private keys, and smart contracts are isolated to the tenant that owns them.
-[See more](https://docs.orchestrate.pegasys.tech/en/latest/Concepts/Multi-Tenancy/)
+[See more](https://docs.orchestrate.consensys.net/Concepts/Multi-Tenancy/)
 
 Orchestrate uses the OpenID Connect(OIDC) authentication protocol. JSON Web Tokens (JWTs) with custom claims control access to tenant resources.
 
