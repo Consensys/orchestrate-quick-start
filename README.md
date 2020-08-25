@@ -16,7 +16,7 @@ and reliable applications on Ethereum blockchains.
 >
 > **You cannot continue this Quickstart without the registry credentials.**
 
-> **Tip** Try a free trial of Orchestrate with the [Quorum Dev Quickstart](https://github.com/PegaSysEng/quorum-dev-quickstart#iv-orchestrate-network-). 
+> **Tip** Try a free trial of Orchestrate with the [Quorum Dev Quickstart](https://github.com/PegaSysEng/quorum-dev-quickstart/tree/master/files/orchestrate). 
 
 Orchestrate provides advanced features when connected to blockchain networks:
 
