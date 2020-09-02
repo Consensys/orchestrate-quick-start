@@ -31,7 +31,7 @@
     "down-orchestrate": "docker-compose down --volumes --timeout 0",
     "down-deps": "docker-compose -f scripts/deps/docker-compose.yml down --volumes --timeout 0",
     "down-besu": "docker-compose -f scripts/besu/docker-compose.yml down --volumes --timeout 0",
-    "up": "npm run up-deps && npm run up-orchestrate",
+    "up": "npm run up-deps && sleep 5 &&npm run up-orchestrate",
     "down": "npm run down-orchestrate ; npm run down-besu ; npm run down-deps",
     "hashicorp-accounts": "bash scripts/deps/config/hashicorp/vault.sh kv list secret/default",
     "hashicorp-token-lookup": "bash scripts/deps/config/hashicorp/vault.sh token lookup",
