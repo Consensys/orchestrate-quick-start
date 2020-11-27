@@ -12,7 +12,8 @@ x-default-variables: &default-variables
   JAEGER_AGENT_HOST: ${JAEGER_AGENT_HOST-jaeger}
   JAEGER_AGENT_PORT: ${JAEGER_AGENT_PORT-6831}
   NONCE_MANAGER_TYPE: ${NONCE_MANAGER_TYPE-redis}
-  REDIS_URL: ${REDIS_URL-redis:6379}
+  REDIS_HOST: ${REDIS_HOST-redis}
+  REDIS_PORT: ${REDIS_PORT-6379}
   VAULT_ADDR: ${VAULT_ADDR-http://vault:8200}
   MULTI_TENANCY_ENABLED: ${MULTI_TENANCY_ENABLED-}
   AUTH_JWT_CLAIMS_NAMESPACE: ${AUTH_JWT_CLAIMS_NAMESPACE-}
@@ -24,7 +25,7 @@ x-default-variables: &default-variables
 
 x-container-common: &container-common
   restart: ${CONTAINER_RESTART-on-failure}
-  image: consensys-docker-pegasys-orchestrate.bintray.io/orchestrate:v2.3.2
+  image: consensys-docker-pegasys-orchestrate.bintray.io/orchestrate:v2.5.3
   networks:
     - orchestrate
 
